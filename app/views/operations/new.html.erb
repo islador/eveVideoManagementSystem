@@ -1,2 +1,35 @@
 <h1>Operations#new</h1>
 <p>Find me in app/views/operations/new.html.erb</p>
+
+<%= form_for(@operation) do |f| %>
+      <%#= render 'shared/error_messages', object: f.object%>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :eve_date %>
+      <%= f.text_field :eve_date %>
+
+      <%= f.label :ships %>
+      <%= f.text_field :ships %>
+
+      <%= f.label :doctrine %>
+      <%= f.text_field :doctrine %>
+
+      <%= f.label :eve_time %>
+      <%= f.text_field :eve_time %>
+
+      <%= f.label :voice_coms_server %>
+      <%= f.text_field :voice_coms_server %>
+
+      <%= f.label :voice_coms_server_channel %>
+      <%= f.text_field :voice_coms_server_channel %>
+
+      <%= f.label :rally_point %>
+      <%= f.text_field :rally_point %>
+
+      <%= f.label :specialty_roles %>
+      <%= f.text_field :specialty_roles %>
+
+      <%= f.submit "Create Operation", class: "btn btn-large btn-primary" %>
+    <% end %>

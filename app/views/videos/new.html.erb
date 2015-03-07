@@ -1,6 +1,36 @@
-<h1>Videos#new</h1>
-<p>Find me in app/views/videos/new.html.erb</p>
-<%= select_tag 'operation_id', options_for_select(@operations.collect{ |op| [op.name, op.id] }) %>
-<%= s3_uploader_form callback_url: videos_path, callback_param: "video[s3_url]", key: "{timestamp}-{unique_id}-#{SecureRandom.hex}${filename}",key_starts_with: "videos", id: "s3-uploader" do %>
+<%= form_for(@video) do |f| %>
+  <div class="form-group">
+    All Fields Required
+  </div>
+  <div class="form-group">
+    <%= f.label :filmed_on, "Date of Filming" %>
+    <%= f.text_field :filmed_on, placeholder: "Click for Calendar" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :kind, "Type of Video" %>
+    <%= f.select :kind, @kind_options %>
+  </div>
+  <div class="form-group operation_id">
+    <%= f.label :operation_id, "Operation Filmed During" %>
+    <%= f.select :operation_id, @operation_id_options, prompt: "Select an Operation"%>
+  </div>
+  <div class="form-group">
+    <%= f.hidden_field(:s3_url) %>
+  </div>
+  <div class="form-group">
+    <%= f.hidden_field(:name) %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Create Video", class: "hidden", id: "video_submit" %>
+  </div>
+<% end %>
+<%= s3_uploader_form key: "{timestamp}-{unique_id}-#{SecureRandom.hex}${filename}",key_starts_with: "videos", max_file_size: 2.gigabytes, id: "s3-uploader" do %>
   <%= file_field_tag :file, multiple: true %>
 <% end %>
+
+<div class="upload js-progress-bars hidden">
+  File Uploading...
+  <div class="progress">
+    <div class="bar"> </div>
+  </div>
+</div>

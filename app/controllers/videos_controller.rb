@@ -3,6 +3,7 @@ class VideosController < ApplicationController
 
   def show
     # Returns a given video's page
+    @video = Video.find(params[:id])
   end
 
   def index
@@ -29,7 +30,10 @@ class VideosController < ApplicationController
   end
 
   def create
-    # Creates a video
+    #Has no error handling
+    video = Operation.find(params[:video][:operation_id]).videos.create(create_video_params)
+
+    redirect_to video_path(video)
   end
 
   def edit
@@ -44,4 +48,9 @@ class VideosController < ApplicationController
   def destroy
     # Destroys the target
   end
+
+  private
+    def create_video_params
+      params.require(:video).permit(:filmed_on, :operation_id, :s3_url, :kind)
+    end
 end

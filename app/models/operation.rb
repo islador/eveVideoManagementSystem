@@ -20,4 +20,33 @@
 #
 
 class Operation < ActiveRecord::Base
+
+  def format_specialty_role_list
+    specialty_role_list = ""
+    specialty_roles.each do | specialty_role |
+      specialty_role_list = specialty_role_list + "#{specialty_role}, "
+    end
+    specialty_role_list.chop.chop
+  end
+
+  def format_ship_list
+    ship_list = ""
+    ships.each do | ship|
+      ship_list = ship_list + "#{ship} >"
+    end
+    ship_list.chop.chop
+  end
+
+  def pst(time)
+    Time.at(time).in_time_zone("Pacific Time (US & Canada)")
+  end
+
+  def cst(time)
+    Time.at(time).in_time_zone("Central Time (US & Canada)")
+
+  end
+
+  def est(time)
+    Time.at(time).in_time_zone("Eastern Time (US & Canada)")
+  end
 end

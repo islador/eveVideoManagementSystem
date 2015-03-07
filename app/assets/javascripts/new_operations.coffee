@@ -10,7 +10,6 @@ jQuery ->
       8
   # Calculate op prep start in PST, CST and EST
   $("#operation_op_prep_start_4i").on('change', ->
-    console.log("pst_time: ", pst_time())
     # Retrieve the raw time number from the select
     raw_time_number = parseInt($("#operation_op_prep_start_4i").val())
 

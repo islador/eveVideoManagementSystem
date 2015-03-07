@@ -7,7 +7,6 @@ class OperationsController < ApplicationController
     params[:operation][:ships] = params[:operation][:ships].split(",")
     params[:operation][:specialty_roles] = params[:operation][:specialty_roles].split(",")
 
-
     @operation = Operation.create(create_params)
 
     redirect_to operation_path(@operation)
@@ -23,6 +22,9 @@ class OperationsController < ApplicationController
 
   def show
     @operation = Operation.find(params[:id])
+
+    date_ordinal = @operation.op_date.strftime("%-d").to_i.ordinal
+    @formatted_op_date = "#{@operation.op_date.strftime("%A the #{@operation.op_date.strftime("%-d")}#{date_ordinal} of %B")}"
   end
 
   def update
@@ -33,6 +35,6 @@ class OperationsController < ApplicationController
 
   private
     def create_params
-      params.require(:operation).permit(:name, :eve_date, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, {specialty_roles: []}, {ships: []})
+      params.require(:operation).permit(:name, :op_date, :op_prep_start, :op_departure, :op_completion, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, {specialty_roles: []}, {ships: []})
     end
 end

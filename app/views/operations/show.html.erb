@@ -1,33 +1,47 @@
-<h1>Operations#show</h1>
-<p>Find me in app/views/operations/show.html.erb</p>
-
+<h1><%= @operation.name %></h1>
 <div class="operation">
   <% operation = @operation %>
     <div class="operation__detail">
-      <%= operation.name %> - <%= operation.eve_date %>
+      <%= operation.name %> - <%= @formatted_op_date %>
     </div>
     <div class="operation__detail">
-      <%= operation.eve_date %>
+      Form Up Begins at <%= operation.op_prep_start.strftime("%H:%M") %> EVE Time
+      (PST: <%= operation.pst(operation.op_prep_start).strftime("%H:%M") %>
+      CST: <%= operation.cst(operation.op_prep_start).strftime("%H:%M") %>
+      EST: <%= operation.est(operation.op_prep_start).strftime("%H:%M") %>)
     </div>
     <div class="operation__detail">
-      <%= operation.ships %>
+      Fleet Departs at <%= operation.op_departure.strftime("%H:%M") %> EVE Time
+      (PST: <%= operation.pst(operation.op_departure).strftime("%H:%M") %>
+      CST: <%= operation.cst(operation.op_departure).strftime("%H:%M") %>
+      EST: <%= operation.est(operation.op_departure).strftime("%H:%M") %>)
     </div>
     <div class="operation__detail">
-      <%= operation.doctrine %>
+      Fleet Returns at <%= operation.op_completion.strftime("%H:%M") %> EVE Time
+      (PST: <%= operation.pst(operation.op_completion).strftime("%H:%M") %>
+      CST: <%= operation.cst(operation.op_completion).strftime("%H:%M") %>
+      EST: <%= operation.est(operation.op_completion).strftime("%H:%M") %>)
+    </div>
+    <br/>
+    <div class="operation__detail">
+      Preferred Ships: <%= operation.format_ship_list %>
     </div>
     <div class="operation__detail">
-      <%= operation.fleet_commander %>
+      Doctrine: <%= operation.doctrine %>
     </div>
     <div class="operation__detail">
-      <%= operation.voice_coms_server %>
+      FC: <%= operation.fleet_commander %>
     </div>
     <div class="operation__detail">
-      <%= operation.voice_coms_server_channel %>
+      Coms Server: <%= operation.voice_coms_server %>
     </div>
     <div class="operation__detail">
-      <%= operation.rally_point %>
+      Coms Channel: <%= operation.voice_coms_server_channel %>
     </div>
     <div class="operation__detail">
-      <%= operation.specialty_roles %>
+      Rally Point: <%= operation.rally_point %>
+    </div>
+    <div class="operation__detail">
+      Specialty Roles: <%= operation.format_specialty_role_list %>
     </div>
 </div>

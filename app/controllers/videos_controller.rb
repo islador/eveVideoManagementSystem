@@ -14,10 +14,18 @@ class VideosController < ApplicationController
   def new
     @video = Video.new()
 
-    # The last returned operation should always be 'No Operation', or something like that so there is a catch basin for solo PVP
-    @operations = Operation.last(10).reverse
-    # Returns the new video upload page
-    # Needs to be async upload direct to S3
+    @kind_options = [["Raw", "raw"],["Edited", "edited"]]
+    @operation_id_options = []
+
+    operations = Operation.last(10).reverse
+    no_operation = Operation.find_by(name: "No Operation")
+    operations.each do |operation|
+      unless operation.name == "No Operation"
+        option = ["#{operation.name}", "#{operation.id}"]
+        @operation_id_options.push(option)
+      end
+    end
+    @operation_id_options.push(["#{no_operation.name}", "#{no_operation.id}"])
   end
 
   def create

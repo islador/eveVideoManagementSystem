@@ -1,0 +1,34 @@
+.time-preview {
+  display: block;
+  width: 400px;
+  height: 20px;
+  .time-preview__pst-container {
+    display: block;
+    width: 100px;
+    height: 18px;
+    position: relative;
+    bottom: 18px;
+    left: 100px;
+  }
+  .time-preview__cst-container {
+    display: block;
+    width: 100px;
+    height: 18px;
+    position: relative;
+    bottom: 36px;
+    left: 200px;
+  }
+  .time-preview__est-container {
+    display: block;
+    width: 100px;
+    height: 18px;
+    position: relative;
+    bottom: 54px;
+    left: 300px;
+  }
+  .time {
+    position: relative;
+    bottom: 18px;
+    left: 40px;
+  }
+}

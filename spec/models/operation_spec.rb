@@ -4,11 +4,10 @@
 #
 #  id                        :integer          not null, primary key
 #  name                      :string
-#  eve_date                  :date
+#  eve_date                  :datetime
 #  ships                     :text             default("{}"), is an Array
 #  doctrine                  :string
 #  fleet_commander           :string
-#  eve_time                  :datetime
 #  voice_coms_server         :string
 #  voice_coms_server_channel :string
 #  rally_point               :string

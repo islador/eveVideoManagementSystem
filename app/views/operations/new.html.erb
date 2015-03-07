@@ -1,35 +1,77 @@
-<h1>Operations#new</h1>
-<p>Find me in app/views/operations/new.html.erb</p>
-
+<h1>Create a New Operation</h1>
 <%= form_for(@operation) do |f| %>
-      <%#= render 'shared/error_messages', object: f.object%>
+  <%#= render 'shared/error_messages', object: f.object%>
+  <div>All fields required</div>
+  <div class="form-group">
+    <%= f.label :name, "Op Name" %>
+    <%= f.text_field :name, placeholder: "Operation Testy" %>
+  </div>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+  <div class="form-group">
+    <div class="time-preview">
+      Time Preview
+      <div class="time-preview__pst-container">
+        <div class="time-preview__name">
+          PST:
+        </div>
+        <div class="time">
+          16:00
+        </div>
+      </div>
+      <div class="time-preview__cst-container">
+        <div class="time-preview__name">
+          CST:
+        </div>
+        <div class="time">
+          18:00
+        </div>
+      </div>
+      <div class="time-preview__est-container">
+        <div class="time-preview__name">
+          EST:
+        </div>
+        <div class="time">
+          19:00
+        </div>
+      </div>
+    </div>
+    <%= f.label :eve_time, "EVE Time" %>
+    <%= f.datetime_select :eve_date, :minute_step => 15, default: Date.today%>
+  </div>
 
-      <%= f.label :eve_date %>
-      <%= f.text_field :eve_date %>
+  <div class="form-group">
+    <%= f.label :ships %>
+    <%= f.text_field :ships, value: "", placeholder: "Ship 1, Ship 2, Ship 3" %>
+  </div>
 
-      <%= f.label :ships %>
-      <%= f.text_field :ships %>
+  <div class="form-group">
+    <%= f.label :doctrine %>
+    <%= f.text_field :doctrine, placeholder: "We don't have these yet?" %>
+  </div>
 
-      <%= f.label :doctrine %>
-      <%= f.text_field :doctrine %>
+  <div class="form-group">
+    <%= f.label :voice_coms_server, "Voice Coms Server" %>
+    <%= f.text_field :voice_coms_server, placeholder: "Corp TS" %>
+  </div>
 
-      <%= f.label :eve_time %>
-      <%= f.text_field :eve_time %>
+  <div class="form-group">
+    <%= f.label :voice_coms_server_channel, "Voice Coms Channel" %>
+    <%= f.text_field :voice_coms_server_channel, placeholder: "Ops 1" %>
+  </div>
 
-      <%= f.label :voice_coms_server %>
-      <%= f.text_field :voice_coms_server %>
+  <div class="form-group">
+    <%= f.label :rally_point %>
+    <%= f.text_field :rally_point, placeholder: "Tama @ Sun" %>
+  </div>
 
-      <%= f.label :voice_coms_server_channel %>
-      <%= f.text_field :voice_coms_server_channel %>
+  <div class="form-group">
+    <%= f.label :specialty_roles %>
+    <%= f.text_field :specialty_roles, value: "", placeholder: "Scout, Bait, Cyno" %>
+  </div>
 
-      <%= f.label :rally_point %>
-      <%= f.text_field :rally_point %>
+  <div class="form-group">
+    <%= f.submit "Create Operation", class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>
 
-      <%= f.label :specialty_roles %>
-      <%= f.text_field :specialty_roles %>
 
-      <%= f.submit "Create Operation", class: "btn btn-large btn-primary" %>
-    <% end %>

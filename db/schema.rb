@@ -18,11 +18,10 @@ ActiveRecord::Schema.define(version: 20150306064605) do
 
   create_table "operations", force: :cascade do |t|
     t.string   "name"
-    t.date     "eve_date"
+    t.datetime "eve_date"
     t.text     "ships",                     default: [],              array: true
     t.string   "doctrine"
     t.string   "fleet_commander"
-    t.datetime "eve_time"
     t.string   "voice_coms_server"
     t.string   "voice_coms_server_channel"
     t.string   "rally_point"

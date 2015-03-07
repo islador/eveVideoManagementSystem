@@ -1,2 +1,33 @@
 <h1>Operations#show</h1>
 <p>Find me in app/views/operations/show.html.erb</p>
+
+<div class="operation">
+  <% operation = @operation %>
+    <div class="operation__detail">
+      <%= operation.name %> - <%= operation.eve_date %>
+    </div>
+    <div class="operation__detail">
+      <%= operation.eve_date %>
+    </div>
+    <div class="operation__detail">
+      <%= operation.ships %>
+    </div>
+    <div class="operation__detail">
+      <%= operation.doctrine %>
+    </div>
+    <div class="operation__detail">
+      <%= operation.fleet_commander %>
+    </div>
+    <div class="operation__detail">
+      <%= operation.voice_coms_server %>
+    </div>
+    <div class="operation__detail">
+      <%= operation.voice_coms_server_channel %>
+    </div>
+    <div class="operation__detail">
+      <%= operation.rally_point %>
+    </div>
+    <div class="operation__detail">
+      <%= operation.specialty_roles %>
+    </div>
+</div>

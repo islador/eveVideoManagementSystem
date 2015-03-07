@@ -4,12 +4,13 @@ class OperationsController < ApplicationController
 
   def create
     # Ships && Specialty Roles accept CSV and turns them into arrays
-    ships_array = params[:operation][:ships].split(",")
-    specialty_roles_array = params[:operation][:specialty_roles].split(",")
+    params[:operation][:ships] = params[:operation][:ships].split(",")
+    params[:operation][:specialty_roles] = params[:operation][:specialty_roles].split(",")
 
 
     @operation = Operation.create(create_params)
 
+    redirect_to operation_path(@operation)
   end
 
   def new
@@ -31,7 +32,6 @@ class OperationsController < ApplicationController
 
   private
     def create_params
-      params.require(:operation).permit(:name, :eve_date, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point)
-      #params.require(:operation).permit(:name, :eve_date, :ships, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, :specialty_roles)
+      params.require(:operation).permit(:name, :eve_date, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, {specialty_roles: []}, {ships: []})
     end
 end

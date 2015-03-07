@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 
 # S3 Uploads
+gem 'aws-sdk'
 gem 's3_direct_upload'
 
 # Use ActiveModel has_secure_password

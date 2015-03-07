@@ -12,6 +12,10 @@ class VideosController < ApplicationController
   end
 
   def new
+    @video = Video.new()
+
+    # The last returned operation should always be 'No Operation', or something like that so there is a catch basin for solo PVP
+    @operations = Operation.last(10).reverse
     # Returns the new video upload page
     # Needs to be async upload direct to S3
   end

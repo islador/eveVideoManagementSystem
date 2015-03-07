@@ -1,2 +1,6 @@
 <h1>Videos#new</h1>
 <p>Find me in app/views/videos/new.html.erb</p>
+<%= select_tag 'operation_id', options_for_select(@operations.collect{ |op| [op.name, op.id] }) %>
+<%= s3_uploader_form callback_url: videos_path, callback_param: "video[s3_url]", id: "s3-uploader" do %>
+  <%= file_field_tag :file, multiple: true %>
+<% end %>

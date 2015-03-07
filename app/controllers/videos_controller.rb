@@ -3,6 +3,7 @@ class VideosController < ApplicationController
 
   def show
     # Returns a given video's page
+    @video = Video.find(params[:id])
   end
 
   def index
@@ -12,12 +13,27 @@ class VideosController < ApplicationController
   end
 
   def new
-    # Returns the new video upload page
-    # Needs to be async upload direct to S3
+    @video = Video.new()
+
+    @kind_options = [["Raw", "raw"],["Edited", "edited"]]
+    @operation_id_options = []
+
+    operations = Operation.last(10).reverse
+    no_operation = Operation.find_by(name: "No Operation")
+    operations.each do |operation|
+      unless operation.name == "No Operation"
+        option = ["#{operation.name}", "#{operation.id}"]
+        @operation_id_options.push(option)
+      end
+    end
+    @operation_id_options.push(["#{no_operation.name}", "#{no_operation.id}"])
   end
 
   def create
-    # Creates a video
+    #Has no error handling
+    video = Operation.find(params[:video][:operation_id]).videos.create(create_video_params)
+
+    redirect_to video_path(video)
   end
 
   def edit
@@ -32,4 +48,9 @@ class VideosController < ApplicationController
   def destroy
     # Destroys the target
   end
+
+  private
+    def create_video_params
+      params.require(:video).permit(:filmed_on, :operation_id, :s3_url, :kind)
+    end
 end

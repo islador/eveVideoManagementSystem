@@ -8,7 +8,7 @@ class OperationsController < ApplicationController
     params[:operation][:ships] = params[:operation][:ships].split(",")
     params[:operation][:specialty_roles] = params[:operation][:specialty_roles].split(",")
 
-    @operation = Operation.create(create_params)
+    @operation = Operation.create(create_operations_params)
 
     redirect_to operation_path(@operation)
   end
@@ -35,7 +35,7 @@ class OperationsController < ApplicationController
   end
 
   private
-    def create_params
+    def create_operations_params
       params.require(:operation).permit(:name, :op_date, :op_prep_start, :op_departure, :op_completion, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, :fleet_commander, {specialty_roles: []}, {ships: []})
     end
 end

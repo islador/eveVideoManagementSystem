@@ -5,6 +5,9 @@
       <%= operation.name %> - <%= @formatted_op_date %>
     </div>
     <div class="operation__detail">
+      Fleet Commander: <%= operation.fleet_commander %>
+    </div>
+    <div class="operation__detail">
       Form Up Begins at <%= operation.op_prep_start.strftime("%H:%M") %> EVE Time
       (PST: <%= operation.pst(operation.op_prep_start).strftime("%H:%M") %>
       CST: <%= operation.cst(operation.op_prep_start).strftime("%H:%M") %>
@@ -28,9 +31,6 @@
     </div>
     <div class="operation__detail">
       Doctrine: <%= operation.doctrine %>
-    </div>
-    <div class="operation__detail">
-      FC: <%= operation.fleet_commander %>
     </div>
     <div class="operation__detail">
       Coms Server: <%= operation.voice_coms_server %>

@@ -21,6 +21,8 @@
 
 class Operation < ActiveRecord::Base
 
+  has_many :videos
+
   def format_specialty_role_list
     specialty_role_list = ""
     specialty_roles.each do | specialty_role |

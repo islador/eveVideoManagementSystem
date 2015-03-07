@@ -3,6 +3,7 @@ class OperationsController < ApplicationController
   end
 
   def create
+    # Needs error pathway
     # Ships && Specialty Roles accept CSV and turns them into arrays
     params[:operation][:ships] = params[:operation][:ships].split(",")
     params[:operation][:specialty_roles] = params[:operation][:specialty_roles].split(",")
@@ -35,6 +36,6 @@ class OperationsController < ApplicationController
 
   private
     def create_params
-      params.require(:operation).permit(:name, :op_date, :op_prep_start, :op_departure, :op_completion, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, {specialty_roles: []}, {ships: []})
+      params.require(:operation).permit(:name, :op_date, :op_prep_start, :op_departure, :op_completion, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, :fleet_commander, {specialty_roles: []}, {ships: []})
     end
 end

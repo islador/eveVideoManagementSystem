@@ -1,4 +1,6 @@
 <h1>Create a New Operation</h1>
+
+<div class="dst" data-dst="<%= @dst %>"/>
 <%= form_for(@operation) do |f| %>
   <%#= render 'shared/error_messages', object: f.object%>
   <div>All fields required</div>
@@ -8,13 +10,18 @@
   </div>
 
   <div class="form-group">
-    <div class="time-preview">
-      Time Preview
+    <%= f.label :op_date, "Operation Date" %>
+    <%= f.date_select :op_date, default: Date.today%>
+  </div>
+
+  <div class="form-group">
+    <div class="time-preview op-prep-start-time">
+      Prep Start Time Preview
       <div class="time-preview__pst-container">
         <div class="time-preview__name">
           PST:
         </div>
-        <div class="time">
+        <div class="time" data-time-hour="16" data-time-minute="00">
           16:00
         </div>
       </div>
@@ -22,7 +29,7 @@
         <div class="time-preview__name">
           CST:
         </div>
-        <div class="time">
+        <div class="time" data-time-hour="18" data-time-minute="00">
           18:00
         </div>
       </div>
@@ -30,13 +37,79 @@
         <div class="time-preview__name">
           EST:
         </div>
-        <div class="time">
+        <div class="time" data-time-hour="19" data-time-minute="00">
           19:00
         </div>
       </div>
     </div>
-    <%= f.label :eve_time, "EVE Time" %>
-    <%= f.datetime_select :eve_date, :minute_step => 15, default: Date.today%>
+    <%= f.label :op_prep_start, "Op Prep Start Time" %>
+    <%= f.time_select :op_prep_start, default: Time.now, minute_step: 15 %>
+  </div>
+
+  <div class="form-group">
+    <div class="time-preview op-departure-time">
+      <div class="time-preview__name-container">
+        Op Departure Time Preview
+      </div>
+      <div class="time-preview__pst-container">
+        <div class="time-preview__name">
+          PST:
+        </div>
+        <div class="time" data-time-hour="16" data-time-minute="00">
+          16:00
+        </div>
+      </div>
+      <div class="time-preview__cst-container">
+        <div class="time-preview__name">
+          CST:
+        </div>
+        <div class="time" data-time-hour="16" data-time-minute="00">
+          18:00
+        </div>
+      </div>
+      <div class="time-preview__est-container">
+        <div class="time-preview__name">
+          EST:
+        </div>
+        <div class="time" data-time-hour="16" data-time-minute="00">
+          19:00
+        </div>
+      </div>
+    </div>
+    <%= f.label :op_departure, "Op Departure Time" %>
+    <%= f.time_select :op_departure, default: Time.now, minute_step: 15 %>
+  </div>
+
+  <div class="form-group">
+    <div class="time-preview op-completion-time">
+      Op Completion Time Preview
+      <div class="time-preview__pst-container">
+        <div class="time-preview__name">
+          PST:
+        </div>
+        <div class="time" data-time-hour="16" data-time-minute="00">
+          16:00
+        </div>
+      </div>
+      <div class="time-preview__cst-container">
+        <div class="time-preview__name">
+          CST:
+        </div>
+        <div class="time" data-time-hour="16" data-time-minute="00">
+          18:00
+        </div>
+      </div>
+      <div class="time-preview__est-container">
+        <div class="time-preview__name">
+          EST:
+        </div>
+        <div class="time" data-time-hour="16" data-time-minute="00">
+          19:00
+        </div>
+      </div>
+    </div>
+    <%= f.label :op_completion, "Op Completion Time" %>
+    <%= f.time_select :op_completion, default: Time.now, minute_step: 15 %>
   </div>
 
   <div class="form-group">

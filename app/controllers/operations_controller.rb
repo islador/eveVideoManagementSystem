@@ -14,6 +14,7 @@ class OperationsController < ApplicationController
   end
 
   def new
+    @dst = Time.now.dst?
     @operation = Operation.new()
   end
 

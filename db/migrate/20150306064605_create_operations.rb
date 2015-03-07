@@ -2,7 +2,10 @@ class CreateOperations < ActiveRecord::Migration
   def change
     create_table :operations do |t|
       t.string :name
-      t.datetime :eve_date
+      t.date :op_date
+      t.time :op_prep_start
+      t.time :op_departure
+      t.time :op_completion
       t.text :ships, array: true, default: []
       t.string :doctrine
       t.string :fleet_commander

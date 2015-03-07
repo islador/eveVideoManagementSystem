@@ -1,14 +1,19 @@
 .time-preview {
-  display: block;
-  width: 400px;
+  //display: block;
+  //width: 400px;
   height: 20px;
+  .time-preview__name-container {
+    display: block;
+    width: 200px;
+    height: 18px;
+  }
   .time-preview__pst-container {
     display: block;
     width: 100px;
     height: 18px;
     position: relative;
     bottom: 18px;
-    left: 100px;
+    left: 200px;
   }
   .time-preview__cst-container {
     display: block;
@@ -16,7 +21,7 @@
     height: 18px;
     position: relative;
     bottom: 36px;
-    left: 200px;
+    left: 300px;
   }
   .time-preview__est-container {
     display: block;
@@ -24,7 +29,7 @@
     height: 18px;
     position: relative;
     bottom: 54px;
-    left: 300px;
+    left: 400px;
   }
   .time {
     position: relative;

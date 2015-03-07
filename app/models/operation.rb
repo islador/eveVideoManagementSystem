@@ -4,7 +4,10 @@
 #
 #  id                        :integer          not null, primary key
 #  name                      :string
-#  eve_date                  :datetime
+#  op_date                   :date
+#  op_prep_start             :time
+#  op_departure              :time
+#  op_completion             :time
 #  ships                     :text             default("{}"), is an Array
 #  doctrine                  :string
 #  fleet_commander           :string

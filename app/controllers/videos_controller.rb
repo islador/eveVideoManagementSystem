@@ -7,6 +7,23 @@ class VideosController < ApplicationController
   end
 
   def index
+    today = Date.today
+    first_date = Operation.first.op_date
+
+    @years = []
+    (today.year - first_date.year).times do |t|
+      @years.push(first_date.year + t)
+    end
+    @years.push(today.year)
+
+    @months = []
+    puts today.strftime("%B")
+    today.month.times do |t|
+      @months.push(today.prev_month(t).strftime("%B"))
+    end
+
+
+    @operations = Operation.where(op_date: today.beginning_of_month..today.end_of_month)
     # Returns the mentioned table, with years populated
     # Clicking a year should retrieve the months
     # Clicking a month should retrieve the op
@@ -51,6 +68,6 @@ class VideosController < ApplicationController
 
   private
     def create_video_params
-      params.require(:video).permit(:filmed_on, :operation_id, :s3_url, :kind)
+      params.require(:video).permit(:name, :filmed_on, :operation_id, :s3_url, :kind)
     end
 end

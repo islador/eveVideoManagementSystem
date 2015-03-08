@@ -1,15 +1,15 @@
 # == Schema Information
 #
-# Table name: months
+# Table name: years
 #
 #  id         :integer          not null, primary key
-#  year_id    :integer
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Month < ActiveRecord::Base
-  belongs_to :year
-  has_many :operations
+require 'rails_helper'
+
+RSpec.describe Year, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -1,15 +1,13 @@
 # == Schema Information
 #
-# Table name: months
+# Table name: years
 #
 #  id         :integer          not null, primary key
-#  year_id    :integer
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
-class Month < ActiveRecord::Base
-  belongs_to :year
-  has_many :operations
+class Year < ActiveRecord::Base
+  has_many :months
 end

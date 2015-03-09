@@ -84,6 +84,4 @@ test:
 #
 production:
   <<: *default
-  database: eveVideoManagementSystem_production
-  username: eveVideoManagementSystem
-  password: <%= ENV['EVEVIDEOMANAGEMENTSYSTEM_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>

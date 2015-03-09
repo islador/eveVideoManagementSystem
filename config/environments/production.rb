@@ -81,12 +81,12 @@ Rails.application.configure do
   #In production, :host should be set to the actual host of your application.
   config.action_mailer.default_url_options = { host: 'eve-vms-demo.herokuapp.com' }
 
-  #ActionMailer::Base.smtp_settings = {
-  #  :address => "smtp.mandrillapp.com",
-  #  :port => 587,
-  #  :domain => "ananke.pw",
-  #  :user_name => "luke.isla@gmail.com",
-  #  :password => "hkLx52qKlEi7pNZDOOrrgQ",
-  #  :authentication => "plain"
-  #}
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.mandrillapp.com",
+    :port => 587,
+    :domain => "ananke.pw",
+    :user_name => "luke.isla@gmail.com",
+    :password => "hkLx52qKlEi7pNZDOOrrgQ",
+    :authentication => "plain"
+  }
 end

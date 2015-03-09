@@ -1,47 +1,69 @@
 <h1><%= @operation.name %></h1>
 <div class="operation">
   <% operation = @operation %>
-    <div class="operation__detail">
-      <%= operation.name %> - <%= @formatted_op_date %>
-    </div>
-    <div class="operation__detail">
-      Fleet Commander: <%= operation.fleet_commander %>
-    </div>
-    <div class="operation__detail">
-      Form Up Begins at <%= operation.op_prep_start.strftime("%H:%M") %> EVE Time
-      (PST: <%= operation.pst(operation.op_prep_start).strftime("%H:%M") %>
-      CST: <%= operation.cst(operation.op_prep_start).strftime("%H:%M") %>
-      EST: <%= operation.est(operation.op_prep_start).strftime("%H:%M") %>)
-    </div>
-    <div class="operation__detail">
-      Fleet Departs at <%= operation.op_departure.strftime("%H:%M") %> EVE Time
-      (PST: <%= operation.pst(operation.op_departure).strftime("%H:%M") %>
-      CST: <%= operation.cst(operation.op_departure).strftime("%H:%M") %>
-      EST: <%= operation.est(operation.op_departure).strftime("%H:%M") %>)
-    </div>
-    <div class="operation__detail">
-      Fleet Returns at <%= operation.op_completion.strftime("%H:%M") %> EVE Time
-      (PST: <%= operation.pst(operation.op_completion).strftime("%H:%M") %>
-      CST: <%= operation.cst(operation.op_completion).strftime("%H:%M") %>
-      EST: <%= operation.est(operation.op_completion).strftime("%H:%M") %>)
-    </div>
-    <br/>
-    <div class="operation__detail">
-      Preferred Ships: <%= operation.format_ship_list %>
-    </div>
-    <div class="operation__detail">
-      Doctrine: <%= operation.doctrine %>
-    </div>
-    <div class="operation__detail">
-      Coms Server: <%= operation.voice_coms_server %>
-    </div>
-    <div class="operation__detail">
-      Coms Channel: <%= operation.voice_coms_server_channel %>
-    </div>
-    <div class="operation__detail">
-      Rally Point: <%= operation.rally_point %>
-    </div>
-    <div class="operation__detail">
-      Specialty Roles: <%= operation.format_specialty_role_list %>
-    </div>
+  <div class="operation__detail">
+    <%= operation.name %> - <%= @formatted_op_date %>
+  </div>
+  <div class="operation__detail">
+    Fleet Commander: <%= operation.fleet_commander %>
+  </div>
+  <div class="operation__detail">
+    Form Up Begins at <%= operation.op_prep_start.strftime("%H:%M") %> EVE Time
+    (PST: <%= operation.pst(operation.op_prep_start).strftime("%H:%M") %>
+    CST: <%= operation.cst(operation.op_prep_start).strftime("%H:%M") %>
+    EST: <%= operation.est(operation.op_prep_start).strftime("%H:%M") %>)
+  </div>
+  <div class="operation__detail">
+    Fleet Departs at <%= operation.op_departure.strftime("%H:%M") %> EVE Time
+    (PST: <%= operation.pst(operation.op_departure).strftime("%H:%M") %>
+    CST: <%= operation.cst(operation.op_departure).strftime("%H:%M") %>
+    EST: <%= operation.est(operation.op_departure).strftime("%H:%M") %>)
+  </div>
+  <div class="operation__detail">
+    Fleet Returns at <%= operation.op_completion.strftime("%H:%M") %> EVE Time
+    (PST: <%= operation.pst(operation.op_completion).strftime("%H:%M") %>
+    CST: <%= operation.cst(operation.op_completion).strftime("%H:%M") %>
+    EST: <%= operation.est(operation.op_completion).strftime("%H:%M") %>)
+  </div>
+  <br/>
+  <div class="operation__detail">
+    Preferred Ships: <%= operation.format_ship_list %>
+  </div>
+  <div class="operation__detail">
+    Doctrine: <%= operation.doctrine %>
+  </div>
+  <div class="operation__detail">
+    Coms Server: <%= operation.voice_coms_server %>
+  </div>
+  <div class="operation__detail">
+    Coms Channel: <%= operation.voice_coms_server_channel %>
+  </div>
+  <div class="operation__detail">
+    Rally Point: <%= operation.rally_point %>
+  </div>
+  <div class="operation__detail">
+    Specialty Roles: <%= operation.format_specialty_role_list %>
+  </div>
 </div>
+
+<% unless @videos.nil? %>
+  <h1>Videos</h1>
+  <table class="videos-table">
+    <thead>
+      <th> Name </th>
+      <th> Filmed On </th>
+      <th> Type </th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @videos.each do |video| %>
+      <tr>
+        <td> <%= video.name %> </td>
+        <td> <%= video.filmed_on %> </td>
+        <td> <%= video.kind %> </td>
+        <td> <%= button_to "Download Video", "#{video.s3_url}", method: :get %> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

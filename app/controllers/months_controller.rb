@@ -1,5 +1,7 @@
 class MonthsController < ApplicationController
   def index
+    @year = Year.find(params[:year_id])
+    @months = @year.months
   end
 
   def create
@@ -12,6 +14,9 @@ class MonthsController < ApplicationController
   end
 
   def show
+    @month = Month.find(params[:id])
+    @year = @month.year
+    @operations = @month.operations
   end
 
   def update

@@ -1,2 +1,13 @@
-<h1>Months#show</h1>
-<p>Find me in app/views/months/show.html.erb</p>
+<h1> Operations of <%= @month.name %> of <%= @year.name %> </h1>
+<table>
+  <thead>
+    <th> Operation Name </th>
+  </thead>
+  <tbody>
+    <% @operations.each do |operation| %>
+    <tr>
+      <td> <%=link_to "#{operation.name}", operation_path(operation) %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

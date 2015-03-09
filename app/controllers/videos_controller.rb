@@ -1,6 +1,19 @@
 class VideosController < ApplicationController
   before_action :authenticate_user!
 
+  def latest
+    # Retrieve the 20 latest videos
+    @videos = Video.last(20)
+
+    # Assemble an easy to access hash of the operation's names.
+    op_ids = Video.pluck("operation_id").last(20)
+    operation_names = Operation.where(id: op_ids).pluck("name", "id")
+    @names = {}
+    operation_names.each do |name|
+      @names.store(name[1], name[0])
+    end
+  end
+
   def show
     # Returns a given video's page
     @video = Video.find(params[:id])

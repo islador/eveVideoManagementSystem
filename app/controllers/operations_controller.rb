@@ -2,6 +2,7 @@ class OperationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @operations = Operation.all
   end
 
   def create
@@ -47,6 +48,8 @@ class OperationsController < ApplicationController
 
     date_ordinal = @operation.op_date.strftime("%-d").to_i.ordinal
     @formatted_op_date = "#{@operation.op_date.strftime("%A the #{@operation.op_date.strftime("%-d")}#{date_ordinal} of %B")}"
+
+    @videos = @operation.videos
   end
 
   def update

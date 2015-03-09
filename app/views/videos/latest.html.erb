@@ -1,0 +1,22 @@
+<h1> Latest Videos </h1>
+<table>
+  <thead>
+    <th> Name </th>
+    <th> Filmed On </th>
+    <th> Type </th>
+    <th> Operation </th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @videos.each do |video| %>
+    <tr>
+      <td> <%= video.name %> </td>
+      <td> <%= video.filmed_on %> </td>
+      <td> <%= video.kind %> </td>
+      <td> <%= @names[video.operation_id] %> </td>
+      <td> <%= button_to "Download Video", "#{video.s3_url}", method: :get %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

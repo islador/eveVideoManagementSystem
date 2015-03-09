@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307112501) do
+ActiveRecord::Schema.define(version: 20150308014033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "months", force: :cascade do |t|
+    t.integer  "year_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "operations", force: :cascade do |t|
     t.string   "name"
@@ -31,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150307112501) do
     t.text     "specialty_roles",           default: [],              array: true
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.integer  "month_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -68,6 +76,12 @@ ActiveRecord::Schema.define(version: 20150307112501) do
     t.string   "kind"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "years", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

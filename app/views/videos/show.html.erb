@@ -1,2 +1,18 @@
-<h1>Videos#show</h1>
-<p>Find me in app/views/videos/show.html.erb</p>
+<div class="video-details">
+  <div class="video-details__attribute">
+    Name: <%= @video.name %>
+  </div>
+  <div class="video-details__attribute">
+    Filmed On: <%= @video.filmed_on %>
+  </div>
+  <div class="video-details__attribute">
+    Type: <%= @video.kind %>
+  </div>
+  <div class="video-details__attribute">
+    <%= button_to "Download Video", "#{@video.s3_url}", method: :get%>
+  </div>
+</div>
+
+<div class="video-thumbnail">
+  Make this a thumbnail of the video
+</div>

@@ -1,0 +1,13 @@
+.year {
+  display: block;
+  background-color: yellow;
+
+  .month {
+    display: block;
+    background-color: orange;
+    .operation {
+      display: block;
+      background-color: #FF8C00;
+    }
+  }
+}

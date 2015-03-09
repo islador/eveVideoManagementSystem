@@ -5,11 +5,20 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'videos#index'
+  root 'videos#latest'
 
   resources :videos
+  get 'latest/videos' => 'videos#latest'
 
   resources :operations
+
+  resources :years do
+    resources :months
+  end
+  #resources :months do
+  #  resources :videos
+  #end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

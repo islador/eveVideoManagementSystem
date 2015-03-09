@@ -17,10 +17,12 @@
 #  specialty_roles           :text             default("{}"), is an Array
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  month_id                  :integer
 #
 
 class Operation < ActiveRecord::Base
 
+  belongs_to :month
   has_many :videos
 
   def format_specialty_role_list

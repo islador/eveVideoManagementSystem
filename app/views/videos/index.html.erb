@@ -1,2 +1,32 @@
 <h1>Videos#index</h1>
 <p>Find me in app/views/videos/index.html.erb</p>
+
+<% @years.each do |year| %>
+  <div class="year">
+    <div class="year-mark">
+      <%= "#{year} Footage" %>
+    </div>
+    <% @months.each do |month| %>
+      <div class="month">
+        <div class="month-mark">
+          <%= "#{month} Footage" %>
+        </div>
+        <% @operations.each do |operation| %>
+          <% if operation.op_date.strftime("%B") == month %>
+            <div class="operation">
+              <%= operation.name %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+Current Year should be open
+  Current Month should be open
+    operations should be listed, along with the video count. - add variable on operation for video count?
+    Clicking on an operation should load all the videos of it.
+Year
+  Month
+    Operation
+      videos

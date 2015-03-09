@@ -1,0 +1,13 @@
+<h1> Years </h1>
+<table>
+  <thead>
+    <th> Year </th>
+  </thead>
+  <tbody>
+    <% @years.each do |year| %>
+    <tr>
+      <td> <%=link_to "#{year.name}", year_months_path(year) %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

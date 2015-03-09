@@ -1,14 +1,12 @@
-<h1>Operation List</h1>
+<h1> Operations of <%= @month.name %> of <%= @year.name %> </h1>
 <table>
   <thead>
     <th> Operation Name </th>
-    <th> Op Date </th>
   </thead>
   <tbody>
     <% @operations.each do |operation| %>
     <tr>
       <td> <%=link_to "#{operation.name}", operation_path(operation) %> </td>
-      <td> <%= operation.op_date %> </td>
     </tr>
     <% end %>
   </tbody>

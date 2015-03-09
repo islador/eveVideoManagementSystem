@@ -17,6 +17,7 @@
 #  specialty_roles           :text             default("{}"), is an Array
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
+#  month_id                  :integer
 #
 
 require 'rails_helper'

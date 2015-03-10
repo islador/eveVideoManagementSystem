@@ -16,7 +16,7 @@ class OperationsController < ApplicationController
 
     unless year.nil?
       # If year is found, check for month
-      month = year.month.find_by(name: "#{op_date.strftime("%B")}")
+      month = year.months.find_by(name: "#{op_date.strftime("%B")}")
       unless month.nil?
         # If month is found, create the operation
         @operation = month.operations.create(create_operations_params)

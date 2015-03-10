@@ -1,19 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'recruit_contacts/index'
-
-  get 'recruit_contacts/create'
-
-  get 'recruit_contacts/new'
-
-  get 'recruit_contacts/edit'
-
-  get 'recruit_contacts/show'
-
-  get 'recruit_contacts/update'
-
-  get 'recruit_contacts/destroy'
-
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -29,6 +15,8 @@ Rails.application.routes.draw do
   resources :years do
     resources :months
   end
+
+  resources :recruit_contacts
   #resources :months do
   #  resources :videos
   #end

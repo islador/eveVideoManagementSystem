@@ -1,2 +1,28 @@
-<h1>RecruitContacts#new</h1>
-<p>Find me in app/views/recruit_contacts/new.html.erb</p>
+<%= form_for(@recruit_contact) do |f| %>
+  <div class="form-group">
+    All Fields Required
+  </div>
+  <div class="form-group">
+    <%= f.label :name, "Contact's Name" %>
+    <%= f.text_field :name, placeholder: "EG: Alexy Solette" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :found_by, "Found By" %>
+    <%= f.text_field :found_by, placeholder: "EG: islador" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :timezone, "The Contact's Timezone" %>
+    <%= f.select :timezone, @timezone_options, prompt: "What Timezone are they in?"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :conversation_type, "Conversation Type" %>
+    <%= f.select :conversation_type, @conversation_type_options, prompt: "What kind of chat?"%>
+  </div>
+  <div class="form-group">
+    <%= f.label :conclusion, "Conclusion" %>
+    <%= f.text_area :conclusion, placeholder: "Did you like them? Were they interested in joining? Were they bad at english? Would you chat with them more?" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Add new Contact" %>
+  </div>
+<% end %>

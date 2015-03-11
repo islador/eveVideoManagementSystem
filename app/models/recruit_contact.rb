@@ -17,4 +17,6 @@ class RecruitContact < ActiveRecord::Base
   #conversation_type -> Teamspeak, private convo, public convo
   #timezone -> the recruit's timezone (select option)
   #conclusion -> Text box for the recruiter's opinion of the person.
+
+  validates :name, uniqueness: true
 end

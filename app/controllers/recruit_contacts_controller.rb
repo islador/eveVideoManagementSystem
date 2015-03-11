@@ -4,7 +4,12 @@ class RecruitContactsController < ApplicationController
   end
 
   def create
-    recruit_contact = RecruitContact.create(create_recruit_contacts_params)
+    recruit_contact = RecruitContact.new(create_recruit_contacts_params)
+    if recruit_contact.save
+      redirect_to recruit_contacts_path
+    else
+      redirect_to new_recruit_contact_path
+    end
   end
 
   def new
@@ -25,6 +30,16 @@ class RecruitContactsController < ApplicationController
 
   def show
     @recruit_contact = RecruitContact.find(params[:id])
+  end
+
+  def search_name
+    recruit_contact = RecruitContact.find_by(name: params[:name])
+    if recruit_contact.nil?
+      flash[:alert] = "Contact '#{params[:name]}' not found"
+      redirect_to recruit_contacts_path
+    else
+      redirect_to recruit_contact_path(recruit_contact)
+    end
   end
 
   def update

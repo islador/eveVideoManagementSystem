@@ -1,2 +1,19 @@
-<h1>RecruitContacts#show</h1>
-<p>Find me in app/views/recruit_contacts/show.html.erb</p>
+<h1> Recruit Contact: <%= @recruit_contact.name %> </h1>
+
+<div class="recruit-contact__details">
+  <div class="recruit-contact__details-found-by">
+    Contacted By: <%= @recruit_contact.found_by %>
+  </div>
+  <div class="recruit-contact__details-conversation-type">
+    Conversation Type: <%= @recruit_contact.conversation_type %>
+  </div>
+  <div class="recruit-contact__details-timezone">
+    Timezone: <%= @recruit_contact.timezone %>
+  </div>
+  <div class="recruit-contact__details-conclusion">
+    Conclusion: <%= @recruit_contact.conclusion %>
+  </div>
+</div>
+
+
+

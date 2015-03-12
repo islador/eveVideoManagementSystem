@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  name              :string
-#  found_by          :string
+#  contacted_by      :string
 #  conversation_type :string
 #  timezone          :string
 #  conclusion        :text

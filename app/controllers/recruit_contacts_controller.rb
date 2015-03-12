@@ -4,25 +4,20 @@ class RecruitContactsController < ApplicationController
   end
 
   def create
-    recruit_contact = RecruitContact.new(create_recruit_contacts_params)
-    if recruit_contact.save
+    @recruit_contact = RecruitContact.new(create_recruit_contacts_params)
+    if @recruit_contact.save
       redirect_to recruit_contacts_path
     else
-      redirect_to new_recruit_contact_path
+      @conversation_type_options = assemble_conversation_options
+      @timezone_options = assemble_timezone_options
+      render 'new'
     end
   end
 
   def new
     @recruit_contact = RecruitContact.new()
-
-    @conversation_type_options = ["TeamSpeak", "Private Conversation", "Public Conversation"]
-    tzs = ActiveSupport::TimeZone.us_zones
-    @timezone_options = []
-    tzs.each do |tz|
-      @timezone_options.push(tz.name)
-    end
-    @timezone_options.push("Europe")
-    @timezone_options.push("Australia")
+    @timezone_options = assemble_timezone_options
+    @conversation_type_options = assemble_conversation_options
   end
 
   def edit
@@ -50,6 +45,23 @@ class RecruitContactsController < ApplicationController
 
   private
     def create_recruit_contacts_params
-      params.require(:recruit_contact).permit(:name, :found_by, :conversation_type, :timezone, :conclusion)
+      params.require(:recruit_contact).permit(:name, :contacted_by, :conversation_type, :timezone, :conclusion)
+    end
+
+    def assemble_timezone_options
+      tzs = ActiveSupport::TimeZone.us_zones
+      timezone_options = []
+      tzs.each do |tz|
+        timezone_options.push(tz.name)
+      end
+      timezone_options.push("Europe")
+      timezone_options.push("Australia")
+      timezone_options.push("Unknown")
+
+      return timezone_options
+    end
+
+    def assemble_conversation_options
+      ["TeamSpeak", "Private Conversation", "Public Conversation"]
     end
 end

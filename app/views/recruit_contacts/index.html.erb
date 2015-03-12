@@ -20,7 +20,7 @@
     <% @latest_contacts.each do |contact| %>
     <tr>
       <td> <%=link_to "#{contact.name}", recruit_contact_path(contact) %> </td>
-      <td> <%= contact.found_by %> </td>
+      <td> <%= contact.contacted_by %> </td>
       <td> <%= contact.conversation_type %> </td>
       <td> <%= contact.timezone %> </td>
     </tr>

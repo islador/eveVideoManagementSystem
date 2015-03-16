@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308014033) do
+ActiveRecord::Schema.define(version: 20150312064526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 20150308014033) do
     t.datetime "updated_at",                             null: false
     t.integer  "month_id"
   end
+
+  create_table "recruit_contacts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "contacted_by"
+    t.string   "conversation_type"
+    t.string   "timezone"
+    t.text     "conclusion"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "recruit_contacts", ["name"], name: "index_recruit_contacts_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

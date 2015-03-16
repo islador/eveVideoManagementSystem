@@ -1,0 +1,30 @@
+<h1> Latest Recruitment Contacts </h1>
+<h2> Search for Contact </h2>
+<%= form_tag search_recruit_contacts_path, :method => 'get' do %>
+  <p>
+    This searches the name exactly. So try not to typo it
+  </p>
+  <p>
+    <%= text_field_tag :name, params[:name] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+<table>
+  <thead>
+    <th> Name </th>
+    <th> Contacted By </th>
+    <th> Conversation Type </th>
+    <th> Timezone </th>
+  </thead>
+  <tbody>
+    <% @latest_contacts.each do |contact| %>
+    <tr>
+      <td> <%=link_to "#{contact.name}", recruit_contact_path(contact) %> </td>
+      <td> <%= contact.contacted_by %> </td>
+      <td> <%= contact.conversation_type %> </td>
+      <td> <%= contact.timezone %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

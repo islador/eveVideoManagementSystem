@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   resources :years do
     resources :months
   end
+
+  resources :recruit_contacts
+  get 'search/recruit_contacts' => 'recruit_contacts#search_name'
   #resources :months do
   #  resources :videos
   #end

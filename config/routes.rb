@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   # Crest Callback URL
-  get 'crest/authentication'
+  get 'crest/authentication' => 'crest#callback'
+  get 'crest/login' => 'crest#login'
+  get 'crest/authenticate' => 'crest#authenticate'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

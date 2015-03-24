@@ -72,10 +72,23 @@ jQuery ->
     $(".op-prep-start-time .time-preview__cst-container .time").data('time-minute', $("#operation_op_prep_start_5i").val())
     $(".op-prep-start-time .time-preview__est-container .time").data('time-minute', $("#operation_op_prep_start_5i").val())
 
+    # Convert the time number into a string
+    pst_time_string = $(".op-prep-start-time .time-preview__pst-container .time").data('time-hour').toString()
+    cst_time_string = $(".op-prep-start-time .time-preview__cst-container .time").data('time-hour').toString()
+    est_time_string = $(".op-prep-start-time .time-preview__est-container .time").data('time-hour').toString()
+
     # Format the time string for display
-    pst_op_prep_start_time = $(".op-prep-start-time .time-preview__pst-container .time").data('time-hour').toString() + ":" + $("#operation_op_prep_start_5i").val()
-    cst_op_prep_start_time = $(".op-prep-start-time .time-preview__cst-container .time").data('time-hour').toString() + ":" + $("#operation_op_prep_start_5i").val()
-    est_op_prep_start_time = $(".op-prep-start-time .time-preview__est-container .time").data('time-hour').toString() + ":" + $("#operation_op_prep_start_5i").val()
+    if pst_time_string.length < 2
+      pst_time_string = "0" + pst_time_string
+    if cst_time_string.length < 2
+      cst_time_string = "0" + cst_time_string
+    if est_time_string.length < 2
+      est_time_string = "0" + est_time_string
+
+    # Format the time string for display
+    pst_op_prep_start_time = pst_time_string + ":" + $("#operation_op_prep_start_5i").val()
+    cst_op_prep_start_time = cst_time_string + ":" + $("#operation_op_prep_start_5i").val()
+    est_op_prep_start_time = est_time_string + ":" + $("#operation_op_prep_start_5i").val()
 
     # Display the time string
     $(".op-prep-start-time .time-preview__pst-container .time").text(pst_op_prep_start_time)
@@ -137,10 +150,23 @@ jQuery ->
     $(".op-departure-time .time-preview__cst-container .time").data('time-minute', $("#operation_op_departure_5i").val())
     $(".op-departure-time .time-preview__est-container .time").data('time-minute', $("#operation_op_departure_5i").val())
 
+    # Convert the time number into a string
+    pst_time_string = $(".op-departure-time .time-preview__pst-container .time").data('time-hour').toString()
+    cst_time_string = $(".op-departure-time .time-preview__cst-container .time").data('time-hour').toString()
+    est_time_string = $(".op-departure-time .time-preview__est-container .time").data('time-hour').toString()
+
     # Format the time string for display
-    pst_op_departure_time = $(".op-departure-time .time-preview__pst-container .time").data('time-hour').toString() + ":" + $("#operation_op_departure_5i").val()
-    cst_op_departure_time = $(".op-departure-time .time-preview__cst-container .time").data('time-hour').toString() + ":" + $("#operation_op_departure_5i").val()
-    est_op_departure_time = $(".op-departure-time .time-preview__est-container .time").data('time-hour').toString() + ":" + $("#operation_op_departure_5i").val()
+    if pst_time_string.length < 2
+      pst_time_string = "0" + pst_time_string
+    if cst_time_string.length < 2
+      cst_time_string = "0" + cst_time_string
+    if est_time_string.length < 2
+      est_time_string = "0" + est_time_string
+
+    # Format the time string for display
+    pst_op_departure_time = pst_time_string + ":" + $("#operation_op_departure_5i").val()
+    cst_op_departure_time = cst_time_string + ":" + $("#operation_op_departure_5i").val()
+    est_op_departure_time = est_time_string + ":" + $("#operation_op_departure_5i").val()
 
     # Display the time string
     $(".op-departure-time .time-preview__pst-container .time").text(pst_op_departure_time)
@@ -202,10 +228,23 @@ jQuery ->
     $(".op-completion-time .time-preview__cst-container .time").data('time-minute', $("#operation_op_completion_5i").val())
     $(".op-completion-time .time-preview__est-container .time").data('time-minute', $("#operation_op_completion_5i").val())
 
+    # Convert the time number into a string
+    pst_time_string = $(".op-completion-time .time-preview__pst-container .time").data('time-hour').toString()
+    cst_time_string = $(".op-completion-time .time-preview__cst-container .time").data('time-hour').toString()
+    est_time_string = $(".op-completion-time .time-preview__est-container .time").data('time-hour').toString()
+
     # Format the time string for display
-    pst_op_completion_time = $(".op-completion-time .time-preview__pst-container .time").data('time-hour').toString() + ":" + $("#operation_op_completion_5i").val()
-    cst_op_completion_time = $(".op-completion-time .time-preview__cst-container .time").data('time-hour').toString() + ":" + $("#operation_op_completion_5i").val()
-    est_op_completion_time = $(".op-completion-time .time-preview__est-container .time").data('time-hour').toString() + ":" + $("#operation_op_completion_5i").val()
+    if pst_time_string.length < 2
+      pst_time_string = "0" + pst_time_string
+    if cst_time_string.length < 2
+      cst_time_string = "0" + cst_time_string
+    if est_time_string.length < 2
+      est_time_string = "0" + est_time_string
+
+    # Format the time string for display
+    pst_op_completion_time = pst_time_string + ":" + $("#operation_op_completion_5i").val()
+    cst_op_completion_time = cst_time_string + ":" + $("#operation_op_completion_5i").val()
+    est_op_completion_time = est_time_string + ":" + $("#operation_op_completion_5i").val()
 
     # Display the time string
     $(".op-completion-time .time-preview__pst-container .time").text(pst_op_completion_time)

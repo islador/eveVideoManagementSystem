@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
+  #get 'sessions/new'
 
+  #get 'sessions/create'
 
-
-  devise_for :users
-
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # Crest Callback URL
-  get 'crest/authentication' => 'crest#callback'
-  get 'crest/login' => 'crest#login'
-  get 'crest/authenticate' => 'crest#authenticate'
+  get 'crest/authentication' => 'sessions#callback'
+  #get 'crest/login' => 'sessions#login'
+  get 'crest/authenticate' => 'sessions#authenticate'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

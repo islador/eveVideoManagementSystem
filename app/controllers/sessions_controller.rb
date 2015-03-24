@@ -1,9 +1,16 @@
-require 'net/http'
-require 'net/https'
-require 'uri'
+class SessionsController < ApplicationController
+  #prepend_before_filter :require_no_authentication, only: [ :new, :create, :callback]
 
-class CrestController < ApplicationController
-  def login
+  def new
+  end
+
+  def create
+    puts "sessions create"
+    self.resource = warden.authenticate!(:eve_authenticatable)
+    #set_flash_message(:notice, :signed_in) if is_flashing_format?
+    sign_in(resource_name, resource)
+    yield resource if block_given?
+    respond_with resource, location: after_sign_in_path_for(resource)
   end
 
   def authenticate
@@ -16,7 +23,7 @@ class CrestController < ApplicationController
     # Prepend it with 'Basic' as per docs https://developers.eveonline.com/resource/single-sign-on
     authorization_header = "Basic #{authorization_header}"
 
-    authorization_code = "IsLTEhLOLI8ShMC-lGjdrkrTt89pOHQEMY3Zu0ilKk3VzklWnW9xsfgfsbdwX5go0"
+    authorization_code = "YmhpVwrcXiYi8RdRJlUt25rEihRQ7ivvo8T4XVEwvRhoCmBil85BaCBPVu3_yyXE0"
     #authorization_code = params[:code]
 
     token_query_response = HTTParty.post("https://login.eveonline.com/oauth/token", {
@@ -32,11 +39,14 @@ class CrestController < ApplicationController
 
     json_character_query_response = JSON.parse(character_query_response.body)
     puts json_character_query_response
-
-    user = warden.authenticate!({:scope => :user, recall: "devise/sessions/#new"})
+    #self.auth_options = json_character_query_response
+    #query_response = json_character_query_response
+    create
+    #user = warden.authenticate!({:scope => :user, recall: "devise/sessions/#new"})
     #user = warden.authenticate!({"user" => {"email" => "luke.isla@gmail.com", "password" => "goblin1swatuy"}})
-    sign_in(:user, user)
-    redirect_to root_path
+    #sign_in(:user, user)
+    #redirect_to root_path
+
     #authenticate_user!({"user" => json_character_query_response})
     #derp = HTTParty.post("http://localhost:3000#{user_session_path}", {
     #  body: {"user" => json_character_query_response}
@@ -50,4 +60,7 @@ class CrestController < ApplicationController
 
     #render nothing: true
   end
+
+  private
+
 end

@@ -21,9 +21,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Authentication
 gem 'devise'
+gem 'omniauth'
+gem 'faraday' #OmniAuth requires this: https://github.com/intridea/omniauth/wiki/Strategy-Contribution-Guide#fetching-external-data
 
 # CCP CREST Authorization
 gem 'httparty'
+
 
 # S3 Uploads
 gem 'aws-sdk'

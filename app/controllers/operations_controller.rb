@@ -37,6 +37,30 @@ class OperationsController < ApplicationController
 
   def new
     @dst = Time.now.dst?
+
+    # Adjust the displayed time to match the time for each TZ
+    time = Time.now
+    if @dst
+      @pst_hour = (time.hour - 7).to_s
+      @cst_hour = (time.hour - 5).to_s
+      @est_hour = (time.hour - 4).to_s
+    else
+      @pst_hour = (time.hour - 8).to_s
+      @cst_hour = (time.hour - 6).to_s
+      @est_hour = (time.hour - 5).to_s
+    end
+
+    # Pad the time by an hour
+    if @pst_hour.length == 1
+      @pst_hour = "0#{@pst_hour}"
+    end
+    if @cst_hour.length == 1
+      @cst_hour = "0#{@cst_hour}"
+    end
+    if @est_hour.length == 1
+      @est_hour = "0#{@est_hour}"
+    end
+
     @operation = Operation.new()
   end
 

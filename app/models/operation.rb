@@ -5,9 +5,6 @@
 #  id                        :integer          not null, primary key
 #  name                      :string
 #  op_date                   :date
-#  op_prep_start             :time
-#  op_departure              :time
-#  op_completion             :time
 #  ships                     :text             default("{}"), is an Array
 #  doctrine                  :string
 #  fleet_commander           :string
@@ -18,6 +15,9 @@
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  month_id                  :integer
+#  op_prep_start             :time
+#  op_departure              :time
+#  op_completion             :time
 #
 
 class Operation < ActiveRecord::Base
@@ -47,7 +47,6 @@ class Operation < ActiveRecord::Base
 
   def cst(time)
     Time.at(time).in_time_zone("Central Time (US & Canada)")
-
   end
 
   def est(time)

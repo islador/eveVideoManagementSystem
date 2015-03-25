@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312064526) do
+ActiveRecord::Schema.define(version: 20150324234520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,6 @@ ActiveRecord::Schema.define(version: 20150312064526) do
   create_table "operations", force: :cascade do |t|
     t.string   "name"
     t.date     "op_date"
-    t.time     "op_prep_start"
-    t.time     "op_departure"
-    t.time     "op_completion"
     t.text     "ships",                     default: [],              array: true
     t.string   "doctrine"
     t.string   "fleet_commander"
@@ -39,6 +36,9 @@ ActiveRecord::Schema.define(version: 20150312064526) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.integer  "month_id"
+    t.datetime "op_prep_start"
+    t.datetime "op_departure"
+    t.datetime "op_completion"
   end
 
   create_table "recruit_contacts", force: :cascade do |t|
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 20150312064526) do
     t.datetime "locked_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree

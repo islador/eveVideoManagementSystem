@@ -22,6 +22,8 @@
 #  locked_at              :datetime
 #  created_at             :datetime
 #  updated_at             :datetime
+#  provider               :string
+#  uid                    :string
 #
 
 class User < ActiveRecord::Base

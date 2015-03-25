@@ -48,20 +48,43 @@ class OperationsController < ApplicationController
   end
 
   def new
-    # Determine if it's DST in the states
-    Time.zone = "Pacific Time (US & Canada)"
-    @dst = Time.zone.now.dst?
+    @dst = dst_in_usa
 
     # Adjust the displayed time to match the time for each TZ
+    # Inner If's ensure times wrap around the 24 hour clock properly
     time = Time.now
     if @dst
-      @pst_hour = (time.hour - 7).to_s
-      @cst_hour = (time.hour - 5).to_s
-      @est_hour = (time.hour - 4).to_s
+      if time.hour - pst_offset < 0
+        @pst_hour = (time.hour + 24 - pst_offset).to_s
+      else
+        @pst_hour = (time.hour - pst_offset).to_s
+      end
+      if time.hour - cst_offset < 0
+        @cst_hour = (time.hour + 24 - cst_offset).to_s
+      else
+        @cst_hour = (time.hour - cst_offset).to_s
+      end
+      if time.hour - est_offset < 0
+        @est_hour = (time.hour + 24 - est_offset).to_s
+      else
+        @est_hour = (time.hour - est_offset).to_s
+      end
     else
-      @pst_hour = (time.hour - 8).to_s
-      @cst_hour = (time.hour - 6).to_s
-      @est_hour = (time.hour - 5).to_s
+      if time.hour - pst_offset < 0
+        @pst_hour = (time.hour + 24 - pst_offset).to_s
+      else
+        @pst_hour = (time.hour - pst_offset).to_s
+      end
+      if time.hour - cst_offset < 0
+        @cst_hour = (time.hour + 24 - cst_offset).to_s
+      else
+        @cst_hour = (time.hour - cst_offset).to_s
+      end
+      if time.hour - est_offset < 0
+        @est_hour = (time.hour + 24 - est_offset).to_s
+      else
+        @est_hour = (time.hour - est_offset).to_s
+      end
     end
 
     # Pad the time by an hour
@@ -100,5 +123,32 @@ class OperationsController < ApplicationController
     def create_operations_params
      #params.require(:operation).permit(:name, :op_date, :op_prep_start, :op_departure, :op_completion, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, :fleet_commander, {specialty_roles: []}, {ships: []})
      params.require(:operation).permit(:name, :doctrine, :eve_time, :voice_coms_server, :voice_coms_server_channel, :rally_point, :fleet_commander, {specialty_roles: []}, {ships: []})
+    end
+
+    def dst_in_usa
+      # Determine if it's DST in the states
+      Time.zone = "Pacific Time (US & Canada)"
+      Time.zone.now.dst?
+    end
+
+    def pst_offset
+      if dst_in_usa
+        7
+      else
+        8
+    end
+
+    def cst_offset
+      if dst_in_usa
+        5
+      else
+        6
+    end
+
+    def est_offset
+      if dst_in_usa
+        4
+      else
+        5
     end
 end

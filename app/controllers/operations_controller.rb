@@ -136,6 +136,7 @@ class OperationsController < ApplicationController
         7
       else
         8
+      end
     end
 
     def cst_offset
@@ -143,6 +144,7 @@ class OperationsController < ApplicationController
         5
       else
         6
+      end
     end
 
     def est_offset
@@ -150,5 +152,6 @@ class OperationsController < ApplicationController
         4
       else
         5
+      end
     end
 end

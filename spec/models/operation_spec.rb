@@ -15,9 +15,9 @@
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  month_id                  :integer
-#  op_prep_start             :time
-#  op_departure              :time
-#  op_completion             :time
+#  op_prep_start             :datetime
+#  op_departure              :datetime
+#  op_completion             :datetime
 #
 
 require 'rails_helper'

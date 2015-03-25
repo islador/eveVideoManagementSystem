@@ -18,6 +18,7 @@ class RecruitContactsController < ApplicationController
     @recruit_contact = RecruitContact.new()
     @timezone_options = assemble_timezone_options
     @conversation_type_options = assemble_conversation_options
+    @requirements = RecruitRequirement.all
   end
 
   def edit

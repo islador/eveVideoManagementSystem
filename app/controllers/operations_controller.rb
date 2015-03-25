@@ -48,7 +48,9 @@ class OperationsController < ApplicationController
   end
 
   def new
-    @dst = Time.now.dst?
+    # Determine if it's DST in the states
+    Time.zone = "Pacific Time (US & Canada)"
+    @dst = Time.zone.now.dst?
 
     # Adjust the displayed time to match the time for each TZ
     time = Time.now

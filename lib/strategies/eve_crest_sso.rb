@@ -7,10 +7,27 @@ module OmniAuth
 
       provider = "eve"
 
-      uid { 1 }
+      def uid
+        "#{options["character"]["CharacterID"]}"
+      end
 
       def info
-        {"name" => "islador"}
+        {
+          "CharacterID" => options["character"]["CharacterID"],
+          "name" => options["character"]["CharacterName"],
+          "ExpiresOn" => options["character"]["ExpiresOn"],
+          "Scopes" => options["character"]["Scopes"],
+          "TokenType" => options["character"]["TokenType"],
+          "CharacterOwnerHash" => options["character"]["CharacterOwnerHash"]
+        }
+      end
+
+      def credentials
+        {"access_token" => options["credentials"][:access_token],
+          "token_type" => options["credentials"][:token_type],
+          "expires_in" => options["credentials"][:expires_in],
+          "refresh_token" => options["credentials"][:refresh_token]
+        }
       end
 
       def request_phase
@@ -38,13 +55,28 @@ module OmniAuth
 
         json_token_query_response = JSON.parse(token_query_response.body)
 
+        options.store("credentials", {
+          access_token: json_token_query_response["access_token"],
+          token_type: json_token_query_response["token_type"],
+          expires_in: json_token_query_response["expires_in"],
+          refresh_token: json_token_query_response["refresh_token"]
+        })
+
         character_query_response = conn.get do |req|
           req.url "/oauth/verify"
           req.headers["Authorization"] = "Bearer #{json_token_query_response["access_token"]}"
         end
 
         json_character_query_response = JSON.parse(character_query_response.body)
-        puts json_character_query_response
+
+        options.store("character", {
+          "CharacterID" => json_character_query_response["CharacterID"],
+          "CharacterName" => json_character_query_response["CharacterName"],
+          "ExpiresOn" => json_character_query_response["ExpiresOn"],
+          "Scopes" => json_character_query_response["Scopes"],
+          "TokenType" => json_character_query_response["TokenType"],
+          "CharacterOwnerHash" => json_character_query_response["CharacterOwnerHash"]
+          })
 
         env['omniauth.auth'] = auth_hash
         #puts request.env["omniauth.auth"].to_yaml

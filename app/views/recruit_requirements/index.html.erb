@@ -1,0 +1,24 @@
+<h1> Recruit Requirement List </h1>
+<div class="recruit-requirement-list__nav-links">
+  <%= link_to "Add New Requirement", new_recruit_requirement_path %>
+</div>
+<table>
+  <thead>
+    <th> Requirement </th>
+    <th> Added On </th>
+    <th> Added By </th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @recruit_requirements.each do |requirement| %>
+    <tr>
+      <td> <%= link_to "#{requirement.detail}", recruit_requirement_path(requirement) %> </td>
+      <td> <%= "#{requirement.created_at.strftime("%A the #{requirement.created_at.strftime("%-d")}#{requirement.created_at.strftime("%-d").to_i.ordinal} of %B")}" %> </td>
+      <td> <%#= requirement.created_by %> </td>
+      <td> <%= link_to "Edit", edit_recruit_requirement_path(requirement) %> </td>
+      <td> <%= link_to "Delete", recruit_requirement_path(requirement), confirm: "Are you sure?", method: :delete %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

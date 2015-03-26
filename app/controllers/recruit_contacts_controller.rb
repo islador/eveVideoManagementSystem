@@ -18,6 +18,7 @@ class RecruitContactsController < ApplicationController
     @recruit_contact = RecruitContact.new()
     @timezone_options = assemble_timezone_options
     @conversation_type_options = assemble_conversation_options
+    @requirements = RecruitRequirement.all
   end
 
   def edit
@@ -56,6 +57,7 @@ class RecruitContactsController < ApplicationController
       end
       timezone_options.push("Europe")
       timezone_options.push("Australia")
+      timezone_options.push("Asia")
       timezone_options.push("Unknown")
 
       return timezone_options

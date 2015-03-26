@@ -1,0 +1,10 @@
+<%= form_for(@recruit_requirement) do |f| %>
+  <%= render "shared/error_messages", :target => @recruit_requirement %>
+  <div class="form-group">
+    <%= f.label :detail, "Requirement Detail" %>
+    <%= f.text_area :detail, size: "50x5", placeholder: "Recruits must have Teamspeak, microphone optional, but required for specialized duty." %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Edit Requirement" %>
+  </div>
+<% end %>

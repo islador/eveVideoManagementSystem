@@ -27,3 +27,12 @@
     <%= f.submit "Add new Contact" %>
   </div>
 <% end %>
+
+<h2> Recruitment Requirements </h2>
+<div class="recruit-requirement-list">
+  <% @requirements.each do |requirement| %>
+  <div class="recruit-requirement-list__requirement-detail">
+    <%= requirement.detail %>
+  </div>
+  <% end %>
+</div>

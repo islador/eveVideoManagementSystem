@@ -28,14 +28,11 @@
   </div>
 <% end %>
 
-<div class="qualified-recruit">
+<h2> Recruitment Requirements </h2>
+<div class="recruit-requirement-list">
   <% @requirements.each do |requirement| %>
-  <div class="qualified-recruit__requirement">
+  <div class="recruit-requirement-list__requirement-detail">
     <%= requirement.detail %>
   </div>
   <% end %>
-  <div class="qualified-recruit__requirement">
-    A recruit must be in the continental US Timezones, -8 to -5 on <a href="http://www.statsagogo.com/timezone/timezone16.gif">this map.</a>
-    A recruit must have positive or neutral Caldari State Standings BEFORE diplomacy
-  </div>
 </div>

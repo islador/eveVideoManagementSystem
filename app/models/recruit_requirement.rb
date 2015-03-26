@@ -9,4 +9,5 @@
 #
 
 class RecruitRequirement < ActiveRecord::Base
+  validates :detail, presence: true
 end

@@ -57,6 +57,7 @@ class RecruitContactsController < ApplicationController
       end
       timezone_options.push("Europe")
       timezone_options.push("Australia")
+      timezone_options.push("Asia")
       timezone_options.push("Unknown")
 
       return timezone_options

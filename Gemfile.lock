@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/martin-schmidt/eve
+  revision: 2f77f52fc8d61a9a1e2773047fe08f523f8806e0
+  specs:
+    eve (2.0.1)
+      activesupport (~> 4)
+      nokogiri (~> 1)
+      sc-core-ext
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -185,6 +194,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    sc-core-ext (1.2.1)
+      activesupport (>= 2.3.5)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -224,6 +235,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  eve!
   faraday
   httparty
   jbuilder (~> 2.0)

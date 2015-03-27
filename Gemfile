@@ -27,6 +27,9 @@ gem 'faraday' #OmniAuth requires this: https://github.com/intridea/omniauth/wiki
 # CCP CREST Authorization
 gem 'httparty'
 
+# CCP XML API
+# Gem from Icras
+gem 'eve',      :git => "https://github.com/martin-schmidt/eve"
 
 # S3 Uploads
 gem 'aws-sdk'

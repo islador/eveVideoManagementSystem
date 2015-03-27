@@ -31,6 +31,11 @@ Rails.application.routes.draw do
   #  resources :videos
   #end
 
+  resources :members, only: [:index, :show]
+  get 'members/add_new_api'
+  get 'members/add_temporary_member'
+  get 'members/refresh_member_list'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

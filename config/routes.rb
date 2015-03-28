@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  #get 'sessions/new'
-
-  #get 'sessions/create'
-
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   devise_scope :user do

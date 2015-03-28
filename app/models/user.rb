@@ -32,13 +32,14 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :lockable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :lockable, :omniauthable, :omniauth_providers => [:eve]
+  #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :lockable, :omniauthable, :omniauth_providers => [:eve]
+  devise :omniauthable, :omniauth_providers => [:eve]
 
   has_many :members
 
   def self.from_omniauth(auth_hash)
     # Query for the characterID in the member table.
-    member = Member.where("\"characterID\" = ?", auth.info["characterID"])
+    member = Member.where("\"characterID\" = ?", auth_hash.info["CharacterID"])
 
     if member.present?
       # If the member exists
@@ -49,7 +50,7 @@ class User < ActiveRecord::Base
         user = member.user
       else
         # Else, create a new user
-        user = User.create(provider: auth.provider, main_character_name: auth.info["name"], main_character_id: auth.info["characterID"])
+        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"], email: "luke.isla@gmail.com", password: Devise.friendly_token[0,20])
         # and update the member appropriately
         member.taken = true
         member.user_id = user.id

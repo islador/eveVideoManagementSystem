@@ -24,6 +24,8 @@
 #  updated_at             :datetime
 #  provider               :string
 #  uid                    :string
+#  main_character_name    :string
+#  main_character_id      :integer
 #
 
 class User < ActiveRecord::Base
@@ -31,6 +33,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   #devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :lockable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :lockable, :omniauthable, :omniauth_providers => [:eve]
+
+  has_many :members
 
   def self.from_omniauth(auth_hash)
     # Query for the characterID in the member table.

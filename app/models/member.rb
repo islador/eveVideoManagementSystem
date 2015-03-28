@@ -13,7 +13,10 @@
 #  logoffDateTime :datetime
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  taken          :boolean
+#  user_id        :integer
 #
 
 class Member < ActiveRecord::Base
+  belongs_to :user
 end

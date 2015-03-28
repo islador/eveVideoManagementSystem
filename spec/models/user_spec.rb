@@ -24,6 +24,8 @@
 #  updated_at             :datetime
 #  provider               :string
 #  uid                    :string
+#  main_character_name    :string
+#  main_character_id      :integer
 #
 
 require 'rails_helper'

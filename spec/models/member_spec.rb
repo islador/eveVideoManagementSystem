@@ -13,6 +13,8 @@
 #  logoffDateTime :datetime
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  taken          :boolean
+#  user_id        :integer
 #
 
 require 'rails_helper'

@@ -19,3 +19,13 @@
 .alert {
   background-color: red;
 }
+
+body {
+  color: white;
+  background: #4c4c4c; /* Old browsers */
+  background: -moz-linear-gradient(left, #131313, #131313, #1c1c1c, #1c1c1c, #1c1c1c, #1c1c1c, #1c1c1c, #131313, #131313); /* FF3.6+ */
+
+  background: -webkit-linear-gradient(left, #131313, #131313, #1c1c1c, #1c1c1c, #1c1c1c, #1c1c1c, #1c1c1c, #131313, #131313);
+
+  background: linear-gradient(to right, #131313, #131313, #1c1c1c, #1c1c1c, #1c1c1c, #1c1c1c, #1c1c1c, #131313, #131313); /* W3C */
+}

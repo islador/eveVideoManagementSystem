@@ -31,7 +31,7 @@ module OmniAuth
       end
 
       def request_phase
-        redirect "#{Rails.application.secrets.crest_base_url}?response_type=code&redirect_uri=http://www.antigen.space/users/auth/eve/callback&client_id=#{Rails.application.secrets.crest_client_id}&scope=publicData&state=test_data"
+        redirect "#{Rails.application.secrets.crest_base_url}?response_type=code&redirect_uri=#{Rails.application.secrets.crest_callback_url}&client_id=#{Rails.application.secrets.crest_client_id}&scope=publicData&state=test_data"
       end
 
       def callback_phase

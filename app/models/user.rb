@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
         user = member.user
       else
         # Else, create a new user
-        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"], email: "luke.isla@gmail.com", password: Devise.friendly_token[0,20])
+        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"])
         # and update the member appropriately
         member.taken = true
         member.user_id = user.id

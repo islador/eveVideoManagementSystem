@@ -1,10 +1,14 @@
 <h1>Roles</h1>
-
+<div class="role-list__nav-links">
+  <%= link_to "Add Role", new_role_path %>
+</div>
 <table>
   <thead>
     <th> Name </th>
     <th> Description </th>
     <th> Hierarchy Ranking </th>
+    <th></th>
+    <th></th>
   </thead>
   <tbody>
     <% @roles.each do |role| %>
@@ -12,6 +16,8 @@
       <td> <%=link_to "#{role.name}", role_path(role) %> </td>
       <td> <%= role.description %> </td>
       <td> <%= role.hierarchy_ranking %> </td>
+      <td> <%= link_to "Edit", edit_role_path(role) %> </td>
+      <td> <%= link_to "Delete", role_path(role), confirm: "Are you sure?", method: :delete %> </td>
     </tr>
     <% end %>
   </tbody>

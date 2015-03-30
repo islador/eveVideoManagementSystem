@@ -22,8 +22,6 @@
 #  locked_at              :datetime
 #  created_at             :datetime
 #  updated_at             :datetime
-#  provider               :string
-#  uid                    :string
 #
 
 require 'rails_helper'

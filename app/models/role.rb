@@ -6,7 +6,6 @@
 #  name              :string
 #  description       :text
 #  hierarchy_ranking :integer
-#  user_id           :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

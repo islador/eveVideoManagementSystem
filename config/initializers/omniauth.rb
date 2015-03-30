@@ -1,5 +1,5 @@
 module OmniAuth
   module Strategies
-    autoload :Eve, Rails.root.join('lib', 'strategies', 'eve_crest_sso')
+    autoload :Eveonline, Rails.root.join('lib', 'strategies', 'eve_online')
   end
 end

@@ -17,7 +17,7 @@
 #
 
 class User < ActiveRecord::Base
-  devise :trackable, :omniauthable, :omniauth_providers => [:eve]
+  devise :trackable, :omniauthable, :omniauth_providers => [:eveonline]
 
   has_many :members
 

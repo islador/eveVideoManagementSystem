@@ -21,6 +21,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Authentication
 gem 'devise'
+gem 'omniauth'
+gem 'faraday' #OmniAuth requires this: https://github.com/intridea/omniauth/wiki/Strategy-Contribution-Guide#fetching-external-data
+
+# CCP CREST Authorization
+gem 'httparty'
+
+# CCP XML API
+# Gem from Icras
+gem 'eve',      :git => "https://github.com/martin-schmidt/eve"
 
 # Authorization
 gem 'pundit'

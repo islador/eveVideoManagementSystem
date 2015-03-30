@@ -22,6 +22,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Authentication
 gem 'devise'
 
+# Authorization
+gem 'pundit'
+
 # S3 Uploads
 gem 'aws-sdk'
 gem 's3_direct_upload'

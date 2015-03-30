@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/martin-schmidt/eve
+  revision: 2f77f52fc8d61a9a1e2773047fe08f523f8806e0
+  specs:
+    eve (2.0.1)
+      activesupport (~> 4)
+      nokogiri (~> 1)
+      sc-core-ext
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -77,9 +86,15 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.3.0)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
+    hashie (3.4.0)
     hike (1.2.3)
+    httparty (0.13.3)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.2.9)
       activesupport (>= 3.0.0, < 5)
@@ -106,8 +121,12 @@ GEM
     minitest (5.5.1)
     multi_json (1.11.0)
     multi_xml (0.5.5)
+    multipart-post (2.0.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
     rack (1.6.0)
@@ -175,6 +194,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    sc-core-ext (1.2.1)
+      activesupport (>= 2.3.5)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -214,9 +235,13 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  eve!
+  faraday
+  httparty
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  omniauth
   pg
   rails (= 4.2.0)
   rails_12factor

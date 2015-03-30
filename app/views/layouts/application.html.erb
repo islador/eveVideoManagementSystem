@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>EveVideoManagementSystem</title>
+  <title>Antigen</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -16,7 +16,7 @@
     <%= link_to "Latest Contacts", recruit_contacts_path %>
     <%= link_to "Add new Contact", new_recruit_contact_path %>
     <%= link_to "Recruitment Requirements", recruit_requirements_path %>
-    <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+    <%= link_to('Logout', destroy_user_session_path) %>
   <% end %>
 </head>
 <body>

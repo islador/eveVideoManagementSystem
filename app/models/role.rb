@@ -12,5 +12,8 @@
 #
 
 class Role < ActiveRecord::Base
-  belongs_to :user
+
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :hierarchy_ranking, presence: true
 end

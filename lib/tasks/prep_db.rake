@@ -9,5 +9,7 @@ namespace :prep_db do
     Role.create(name: "Militia Member", description: "A member of the friendly militia", hierarchy_ranking: 3)
     Role.create(name: "Alliance Member", description: "A member of the alliance", hierarchy_ranking: 4)
     Role.create(name: "Corp Member", description: "A member of the corporation", hierarchy_ranking: 5)
+    Role.create(name: "Corp Director", description: "A director in the corporation", hierarchy_ranking: 6)
+    Role.create(name: "Corp CEO", description: "CEO of the corporation", hierarchy_ranking: 7)
   end
 end

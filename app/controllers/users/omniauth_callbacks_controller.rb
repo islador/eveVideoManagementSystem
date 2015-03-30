@@ -1,5 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def eve_online
+  def eveonline
     puts "eve_crest_sso called"
     puts request.env["omniauth.auth"]
     @user = User.from_omniauth(request.env["omniauth.auth"])

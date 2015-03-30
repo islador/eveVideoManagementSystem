@@ -1,5 +1,10 @@
 == README
 
+Deploy Instructions
+
+sudo apt-get install postgresql (DB)
+sudo apt-get install postgresql-contrib (hstores)
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

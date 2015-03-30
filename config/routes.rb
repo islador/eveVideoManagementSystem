@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'search/recruit_contacts' => 'recruit_contacts#search_name'
 
   resources :recruit_requirements
+  resources :roles
 
   resources :members, only: [:index, :show]
   get 'members/add_new_api'

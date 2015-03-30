@@ -31,6 +31,9 @@ gem 'httparty'
 # Gem from Icras
 gem 'eve',      :git => "https://github.com/martin-schmidt/eve"
 
+# Authorization
+gem 'pundit'
+
 # S3 Uploads
 gem 'aws-sdk'
 gem 's3_direct_upload'

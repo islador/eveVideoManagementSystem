@@ -1,2 +1,27 @@
-<h1>Members#index</h1>
-<p>Find me in app/views/members/index.html.erb</p>
+<h1>Member List</h1>
+<div class="member-list__nav-links">
+  <%= link_to "Refresh Member List", refresh_member_list_path %>
+</div>
+<table>
+  <thead>
+    <th> Name </th>
+    <th> Start Date </th>
+    <th> Title </th>
+    <th> Authed </th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @members.each do |member| %>
+    <tr>
+      <td> <%= member.name %> </td>
+      <td> <%= member.startDateTime.strftime("%m-%e-%y %H:%M") %> </td>
+      <% if member.title == "f" %>
+        <td></td>
+      <% else %>
+        <td> <%= member.title %> </td>
+      <% end %>
+      <td> <%= member.taken %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

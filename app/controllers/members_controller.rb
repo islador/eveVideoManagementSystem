@@ -41,12 +41,15 @@ class MembersController < ApplicationController
         member.destroy
       end
 
+      redirect_to members_path
     rescue EVE::Errors::AuthenticationError => e
-      puts "your API is fucked dude"
+      flash[:alert] = "Member Pull Failed, check logs"
+      redirect_to members_path
     end
   end
 
   def index
+    @members = Member.all
   end
 
   def show

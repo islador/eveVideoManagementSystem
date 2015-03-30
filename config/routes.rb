@@ -30,6 +30,6 @@ Rails.application.routes.draw do
   resources :members, only: [:index, :show]
   get 'members/add_new_api'
   get 'members/add_temporary_member'
-  get 'members/refresh_member_list'
+  get 'refresh_member_list' => 'members#refresh_member_list'
 
 end

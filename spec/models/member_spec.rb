@@ -15,7 +15,6 @@
 #  updated_at     :datetime         not null
 #  taken          :boolean
 #  user_id        :integer
-#  roles          :hstore
 #
 
 require 'rails_helper'

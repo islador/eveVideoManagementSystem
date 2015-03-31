@@ -14,7 +14,6 @@
 #  uid                 :string
 #  main_character_name :string
 #  main_character_id   :integer
-#  roles               :hstore
 #
 
 class User < ActiveRecord::Base

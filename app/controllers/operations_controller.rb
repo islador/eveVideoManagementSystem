@@ -1,5 +1,4 @@
 class OperationsController < ApplicationController
-  #before_action :authenticate_user!
 
   def index
     @operations = Operation.all

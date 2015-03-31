@@ -49,9 +49,17 @@ class User < ActiveRecord::Base
     else
       user = User.where("main_character_id = ?", auth_hash.info["CharacterID"])
       unless user.present?
-        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"], roles: {})
-        # Set the user's role
-        user.roles.store(user.determine_role(auth_hash.info["CharacterID"]), true)
+        # Determine the user's role (and thus access level)
+        role = determine_role(auth_hash.info["CharacterID"])
+
+        # If the user's role is unknown, return nil, otherwise
+        unless role == "Unknown"
+          # Create a new user
+          user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"], roles: {})
+
+          # Set the user's role
+          user.roles.store(role, true)
+        end
       end
 
       # Return the user
@@ -59,7 +67,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def determine_role(character_id)
+  def self.determine_role(character_id)
     # Generate an EVE API object without vCode && keyID
     public_query_api = Eve::API.new()
 

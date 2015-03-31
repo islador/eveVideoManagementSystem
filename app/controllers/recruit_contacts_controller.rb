@@ -1,6 +1,8 @@
 class RecruitContactsController < ApplicationController
   def index
     @latest_contacts = RecruitContact.last(20)
+
+    authorize RecruitContact
   end
 
   def create

@@ -62,7 +62,7 @@ class MembersController < ApplicationController
       update_user_roles
 
       redirect_to members_path
-    rescue EVE::Errors::AuthenticationError => e
+    rescue Eve::Errors::AuthenticationError => e
       flash[:alert] = "Member Pull Failed, check logs"
       redirect_to members_path
     end
@@ -83,13 +83,21 @@ class MembersController < ApplicationController
     # Ideally it will be shuttled into a sidekiq worker once we migrate off heroku.
     # update_user_roles must be run AFTER refresh_member_list
     def update_user_roles
+      #
+      # Note: this method suports multiple roles, but relies on User.determine_role,
+      # which does not support multiple roles
+      #
       users = User.all
       users.each do |user|
-        member = user.member
+        members = user.members
         # Check if the user has a member
-        if member.present?
-          # If so, copy the member's roles over the user's
-          user.roles = member.roles
+        if members.present?
+          # If so, clear the user's roles hash
+          user.roles = {}
+          members.each do |member|
+            # and copy the user's current roles into the newly cleared hash
+            user.roles.merge(member.roles)
+          end
         else
           # otherwise, determine the user's roles
           user_role = User.determine_role(user.main_character_id)

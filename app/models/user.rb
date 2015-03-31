@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Determine_role does not yet support multiple role returns. This will need to be a feature later.
   def self.determine_role(character_id)
     # Generate an EVE API object without vCode && keyID
     public_query_api = Eve::API.new()

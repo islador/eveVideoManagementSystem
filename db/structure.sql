@@ -60,7 +60,8 @@ CREATE TABLE members (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     taken boolean,
-    user_id integer
+    user_id integer,
+    roles hstore
 );
 
 
@@ -562,4 +563,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150328105225');
 INSERT INTO schema_migrations (version) VALUES ('20150330064123');
 
 INSERT INTO schema_migrations (version) VALUES ('20150330072004');
+
+INSERT INTO schema_migrations (version) VALUES ('20150331010530');
 

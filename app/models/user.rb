@@ -35,7 +35,10 @@ class User < ActiveRecord::Base
         user = member.user
       else
         # Else, create a new user
-        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"])
+        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"], roles: {})
+        # Set the user's role
+        user.roles.store("Corp Member", true)
+
         # and update the member appropriately
         member.taken = true
         member.user_id = user.id
@@ -43,6 +46,34 @@ class User < ActiveRecord::Base
       end
       # Return the user
       return user
+    else
+      user = User.where("main_character_id = ?", auth_hash.info["CharacterID"])
+      unless user.present?
+        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"], roles: {})
+        # Set the user's role
+        user.roles.store(user.determine_role(auth_hash.info["CharacterID"]), true)
+      end
+
+      # Return the user
+      return user
+    end
+  end
+
+  def determine_role(character_id)
+    # Generate an EVE API object without vCode && keyID
+    public_query_api = Eve::API.new()
+
+    # Query character info
+    character_info = public_query_api.eve.character_info(character_id)
+
+    # Query for the character's corporation's info
+    corporation_info = public_query_api.corporation.corporation_sheet(character_info.result["corporationID"])
+
+    # If the corporation is in the Caldari Militia
+    if corporation_info.result["factionID"] == 500001
+      role = "Militia Member"
+    else
+      role = "Unknown"
     end
   end
 end

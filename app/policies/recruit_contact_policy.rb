@@ -13,4 +13,60 @@ class RecruitContactPolicy
       return false
     end
   end
+
+  def create?
+    if user.roles["Corp Director"] || user.roles["Corp CEO"]
+      return true
+    else
+      return false
+    end
+  end
+
+  def new?
+    if user.roles["Corp Director"] || user.roles["Corp CEO"]
+      return true
+    else
+      return false
+    end
+  end
+
+  def edit?
+    if user.roles["Corp Director"] || user.roles["Corp CEO"]
+      return true
+    else
+      return false
+    end
+  end
+
+  def show?
+    if user.roles["Corp Director"] || user.roles["Corp CEO"]
+      return true
+    else
+      return false
+    end
+  end
+
+  def search_name?
+    if user.roles["Corp Director"] || user.roles["Corp CEO"]
+      return true
+    else
+      return false
+    end
+  end
+
+  def update?
+    if user.roles["Corp Director"] || user.roles["Corp CEO"]
+      return true
+    else
+      return false
+    end
+  end
+
+  def destroy?
+    if user.roles["Corp Director"] || user.roles["Corp CEO"]
+      return true
+    else
+      return false
+    end
+  end
 end

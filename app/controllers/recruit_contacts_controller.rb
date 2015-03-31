@@ -6,6 +6,8 @@ class RecruitContactsController < ApplicationController
   end
 
   def create
+    authorize RecruitContact
+
     @recruit_contact = RecruitContact.new(create_recruit_contacts_params)
     if @recruit_contact.save
       redirect_to recruit_contacts_path
@@ -17,6 +19,8 @@ class RecruitContactsController < ApplicationController
   end
 
   def new
+    authorize RecruitContact
+
     @recruit_contact = RecruitContact.new()
     @timezone_options = assemble_timezone_options
     @conversation_type_options = assemble_conversation_options
@@ -24,13 +28,16 @@ class RecruitContactsController < ApplicationController
   end
 
   def edit
+    authorize RecruitContact
   end
 
   def show
+    authorize RecruitContact
     @recruit_contact = RecruitContact.find(params[:id])
   end
 
   def search_name
+    authorize RecruitContact
     recruit_contact = RecruitContact.find_by(name: params[:name])
     if recruit_contact.nil?
       flash[:alert] = "Contact '#{params[:name]}' not found"
@@ -41,9 +48,11 @@ class RecruitContactsController < ApplicationController
   end
 
   def update
+    authorize RecruitContact
   end
 
   def destroy
+    authorize RecruitContact
   end
 
   private

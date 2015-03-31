@@ -58,6 +58,9 @@ class MembersController < ApplicationController
         member.destroy
       end
 
+      # Update the roles of all users to match changes in members and game state.
+      update_user_roles
+
       redirect_to members_path
     rescue EVE::Errors::AuthenticationError => e
       flash[:alert] = "Member Pull Failed, check logs"
@@ -74,4 +77,33 @@ class MembersController < ApplicationController
 
   def create
   end
+
+  private
+    # update_user_roles ensures that a user does not have any roles they shouldn't have.
+    # Ideally it will be shuttled into a sidekiq worker once we migrate off heroku.
+    # update_user_roles must be run AFTER refresh_member_list
+    def update_user_roles
+      users = User.all
+      users.each do |user|
+        member = user.member
+        # Check if the user has a member
+        if member.present?
+          # If so, copy the member's roles over the user's
+          user.roles = member.roles
+        else
+          # otherwise, determine the user's roles
+          user_role = User.determine_role(user.main_character_id)
+          # If the user has no known roles, destroy that user.
+          if user_role == "Unknown"
+            user.destroy
+          else
+            # Otherwise, compare the user's existing roles
+            unless user.roles == {"#{user_role}" => true}
+              # If they don't match, set the user's roles to the returned role.
+              user.roles = {"#{user_role}" => true}
+            end
+          end
+        end
+      end
+    end
 end

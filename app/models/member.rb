@@ -15,6 +15,7 @@
 #  updated_at     :datetime         not null
 #  taken          :boolean
 #  user_id        :integer
+#  roles          :hstore
 #
 
 class Member < ActiveRecord::Base

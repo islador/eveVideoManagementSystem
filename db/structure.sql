@@ -60,8 +60,7 @@ CREATE TABLE members (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     taken boolean,
-    user_id integer,
-    roles hstore
+    user_id integer
 );
 
 
@@ -259,6 +258,70 @@ ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
 
 
 --
+-- Name: roles_members; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE roles_members (
+    id integer NOT NULL,
+    role_id integer,
+    member_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: roles_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE roles_members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: roles_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE roles_members_id_seq OWNED BY roles_members.id;
+
+
+--
+-- Name: roles_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE roles_users (
+    id integer NOT NULL,
+    role_id integer,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: roles_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE roles_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: roles_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE roles_users_id_seq OWNED BY roles_users.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -283,8 +346,7 @@ CREATE TABLE users (
     provider character varying,
     uid character varying,
     main_character_name character varying,
-    main_character_id integer,
-    roles hstore
+    main_character_id integer
 );
 
 
@@ -419,6 +481,20 @@ ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY roles_members ALTER COLUMN id SET DEFAULT nextval('roles_members_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY roles_users ALTER COLUMN id SET DEFAULT nextval('roles_users_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -477,11 +553,27 @@ ALTER TABLE ONLY recruit_requirements
 
 
 --
+-- Name: roles_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY roles_members
+    ADD CONSTRAINT roles_members_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY roles
     ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: roles_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY roles_users
+    ADD CONSTRAINT roles_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -513,6 +605,20 @@ ALTER TABLE ONLY years
 --
 
 CREATE UNIQUE INDEX index_recruit_contacts_on_name ON recruit_contacts USING btree (name);
+
+
+--
+-- Name: index_roles_users_on_role_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_roles_users_on_role_id ON roles_users USING btree (role_id);
+
+
+--
+-- Name: index_roles_users_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_roles_users_on_user_id ON roles_users USING btree (user_id);
 
 
 --
@@ -565,4 +671,8 @@ INSERT INTO schema_migrations (version) VALUES ('20150330064123');
 INSERT INTO schema_migrations (version) VALUES ('20150330072004');
 
 INSERT INTO schema_migrations (version) VALUES ('20150331010530');
+
+INSERT INTO schema_migrations (version) VALUES ('20150331230752');
+
+INSERT INTO schema_migrations (version) VALUES ('20150331231201');
 

@@ -1,6 +1,7 @@
 GIT
-  remote: https://github.com/martin-schmidt/eve
-  revision: 2f77f52fc8d61a9a1e2773047fe08f523f8806e0
+  remote: https://github.com/islador/eve
+  revision: 06d759750b9796f2ca2076cd0d65828e013f3acc
+  branch: addEVECharacterInfoQuery
   specs:
     eve (2.0.1)
       activesupport (~> 4)

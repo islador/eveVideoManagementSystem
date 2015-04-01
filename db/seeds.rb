@@ -16,3 +16,9 @@ Role.create(name: "Blue +10", description: "A blue with +10 standings", hierarch
 Role.create(name: "Militia Member", description: "A member of the friendly militia", hierarchy_ranking: 3)
 Role.create(name: "Alliance Member", description: "A member of the alliance", hierarchy_ranking: 4)
 Role.create(name: "Corp Member", description: "A member of the corporation", hierarchy_ranking: 5)
+Role.create(name: "Corp Director", description: "A director in the corporation", hierarchy_ranking: 6)
+ceo = Role.create(name: "Corp CEO", description: "CEO of the corporation", hierarchy_ranking: 7)
+
+islador = Member.create(name: "islador", characterID: 601261354)
+
+MembersRole.create(member_id: islador.id, role_id: ceo.id)

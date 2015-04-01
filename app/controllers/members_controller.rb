@@ -59,6 +59,25 @@ class MembersController < ApplicationController
 
   def index
     @members = Member.all
+
+    # Assemble a hash comprising the name of each role a member has. This is DB and
+    # time intensive and likely not worth it
+    role_names = Role.all.pluck(:id, :name)
+    role_hash = {}
+    role_names.each do |role|
+      role_hash.store("#{role[0]}", "#{role[1]}")
+    end
+
+    @members_roles_hash = {}
+
+    @members.each do |member|
+      role_ids = member.roles.pluck(:id)
+      member_role_names = []
+      role_ids.each do |role_id|
+        member_role_names << role_hash["#{role_id}"]
+      end
+      @members_roles_hash.store("#{member.characterID}", member_role_names)
+    end
   end
 
   def show

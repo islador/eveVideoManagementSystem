@@ -15,8 +15,10 @@
     <% @members.each do |member| %>
     <tr>
       <% member_roles = "" %>
-      <% member.roles.keys.each do |role| %>
-        <% member_roles = member_roles + "#{role}," %>
+      <% if @members_roles_hash["member.characterID"].present? %>
+        <% @members_roles_hash["member.characterID"].each do |role| %>
+          <% member_roles = member_roles + "#{role}," %>
+        <% end %>
       <% end %>
       <td> <%= member.name %> </td>
       <td> <%= member.startDateTime.strftime("%m-%e-%y %H:%M") %> </td>

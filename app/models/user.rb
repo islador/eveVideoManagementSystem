@@ -36,9 +36,15 @@ class User < ActiveRecord::Base
         user = member.user
       else
         # Else, create a new user
-        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"], roles: {})
-        # Set the user's role
-        user.roles.store("Corp Member", true)
+        user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"])
+
+        # Set the user's role via batch insertion
+        roles_user_array = []
+        member_roles = member.roles.pluck(:id)
+        member_roles.each do |role_id|
+          roles_user_array << {user_id: user.id, role_id: role_id}
+        end
+        RolesUser.create(roles_user_array)
 
         # and update the member appropriately
         member.taken = true
@@ -51,15 +57,19 @@ class User < ActiveRecord::Base
       user = User.where("main_character_id = ?", auth_hash.info["CharacterID"])
       unless user.present?
         # Determine the user's role (and thus access level)
-        role = determine_role(auth_hash.info["CharacterID"])
+        role_ids = determine_role(auth_hash.info["CharacterID"])
 
-        # If the user's role is unknown, return nil, otherwise
-        unless role == "Unknown"
-          # Create a new user
-          user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"], roles: {})
+        # If a role cannot be found for the user, return nil
+        if role_ids.present?
+          # otherwise, create a new user
+          user = User.create(provider: auth_hash.provider, main_character_name: auth_hash.info["name"], main_character_id: auth_hash.info["CharacterID"])
 
-          # Set the user's role
-          user.roles.store(role, true)
+          # Set the user's role(s)
+          roles_user_array = []
+          role_ids.each do |role_id|
+            roles_user_array << {user_id: user.id, role_id: role_id}
+          end
+          RolesUser.create(roles_user_array)
         end
       end
 
@@ -81,9 +91,7 @@ class User < ActiveRecord::Base
 
     # If the corporation is in the Caldari Militia
     if corporation_info.result["factionID"] == 500001
-      role = "Militia Member"
-    else
-      role = "Unknown"
+      role_id = Role.where("name = ?", "Militia Member")[0].id
     end
   end
 end

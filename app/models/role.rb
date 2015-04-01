@@ -16,6 +16,9 @@ class Role < ActiveRecord::Base
   validates :description, presence: true
   validates :hierarchy_ranking, presence: true
 
-  has_many_and_belongs_to_many :users
-  has_many_and_belongs_to_many :members
+  belongs_to :users
+  has_and_belongs_to_many :users
+
+  belongs_to :members
+  has_and_belongs_to_many :members
 end

@@ -19,5 +19,7 @@
 
 class Member < ActiveRecord::Base
   belongs_to :user
-  has_many_and_belongs_to_many :roles
+
+  has_many :roles
+  has_and_belongs_to_many :roles
 end

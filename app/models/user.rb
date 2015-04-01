@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
   devise :trackable, :omniauthable, :omniauth_providers => [:eveonline]
 
   has_many :members
-  has_many_and_belongs_to_many :roles
+  has_many :roles
+  has_and_belongs_to_many :roles
 
   def self.from_omniauth(auth_hash)
     # Query for the characterID in the member table.

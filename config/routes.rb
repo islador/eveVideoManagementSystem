@@ -45,4 +45,5 @@ Rails.application.routes.draw do
 
   end
   get 'accessible_agents' => 'missions#accessible_agents'
+  resources :doctrines
 end

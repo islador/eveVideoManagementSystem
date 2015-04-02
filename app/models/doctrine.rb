@@ -9,6 +9,7 @@
 #  access_by_hierarchy :boolean
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  abbreviation        :string
 #
 
 class Doctrine < ActiveRecord::Base

@@ -15,8 +15,8 @@
     <% @members.each do |member| %>
     <tr>
       <% member_roles = "" %>
-      <% if @members_roles_hash["member.characterID"].present? %>
-        <% @members_roles_hash["member.characterID"].each do |role| %>
+      <% if @members_roles_hash["#{member.characterID}"].present? %>
+        <% @members_roles_hash["#{member.characterID}"].each do |role| %>
           <% member_roles = member_roles + "#{role}," %>
         <% end %>
       <% end %>

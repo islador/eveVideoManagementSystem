@@ -8,6 +8,6 @@ class CreateRolesUsers < ActiveRecord::Migration
     end
 
     # Remove this column as it conflicts with the call to roles.
-    remove_column :users, :roles
+    #remove_column :users, :roles
   end
 end

@@ -8,7 +8,7 @@ class CreateRolesMembers < ActiveRecord::Migration
     end
 
     # Remove this column as it conflicts with the call to roles.
-    remove_column :members, :roles
-    disable_extension "hstore"
+    #remove_column :members, :roles
+    #disable_extension "hstore"
   end
 end

@@ -1,9 +1,9 @@
-class RecruitContactPolicy
-  attr_reader :user, :recruit_contact
+class RolesControllerPolicy
+  attr_reader :user, :controller
 
-  def initialize(user, recruit_contact)
+  def initialize(user, controller)
     @user = user
-    @recruit_contact = recruit_contact
+    @controller = controller
   end
 
   def index?
@@ -33,15 +33,6 @@ class RecruitContactPolicy
     end
   end
 
-  def edit?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
-
   def show?
     roles = user.roles.pluck(:name)
     if roles.include?("Corp Director") || roles.include?("Corp CEO")
@@ -51,7 +42,7 @@ class RecruitContactPolicy
     end
   end
 
-  def search_name?
+  def edit?
     roles = user.roles.pluck(:name)
     if roles.include?("Corp Director") || roles.include?("Corp CEO")
       return true

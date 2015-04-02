@@ -1,39 +1,12 @@
-class RecruitContactPolicy
-  attr_reader :user, :recruit_contact
+class VideosControllerPolicy
+  attr_reader :user, :controller
 
-  def initialize(user, recruit_contact)
+  def initialize(user, controller)
     @user = user
-    @recruit_contact = recruit_contact
+    @controller = controller
   end
 
-  def index?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
-
-  def create?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
-
-  def new?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
-
-  def edit?
+  def latest?
     roles = user.roles.pluck(:name)
     if roles.include?("Corp Director") || roles.include?("Corp CEO")
       return true
@@ -51,7 +24,34 @@ class RecruitContactPolicy
     end
   end
 
-  def search_name?
+  def index?
+    roles = user.roles.pluck(:name)
+    if roles.include?("Corp Director") || roles.include?("Corp CEO")
+      return true
+    else
+      return false
+    end
+  end
+
+  def new?
+    roles = user.roles.pluck(:name)
+    if roles.include?("Corp Director") || roles.include?("Corp CEO")
+      return true
+    else
+      return false
+    end
+  end
+
+  def create?
+    roles = user.roles.pluck(:name)
+    if roles.include?("Corp Director") || roles.include?("Corp CEO")
+      return true
+    else
+      return false
+    end
+  end
+
+  def edit?
     roles = user.roles.pluck(:name)
     if roles.include?("Corp Director") || roles.include?("Corp CEO")
       return true

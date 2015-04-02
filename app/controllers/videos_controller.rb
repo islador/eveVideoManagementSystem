@@ -15,11 +15,13 @@ class VideosController < ApplicationController
   end
 
   def show
+    authorize self
     # Returns a given video's page
     @video = Video.find(params[:id])
   end
 
   def index
+    authorize self
     today = Date.today
     first_date = Operation.first.op_date
 
@@ -43,6 +45,7 @@ class VideosController < ApplicationController
   end
 
   def new
+    authorize self
     @video = Video.new()
 
     @kind_options = [["Raw", "raw"],["Edited", "edited"]]
@@ -60,6 +63,7 @@ class VideosController < ApplicationController
   end
 
   def create
+    authorize self
     #Has no error handling
     video = Operation.find(params[:video][:operation_id]).videos.create(create_video_params)
 
@@ -67,15 +71,18 @@ class VideosController < ApplicationController
   end
 
   def edit
+    authorize self
     # Returns the video edit page
     # Video's should have owners, such that owners can edit the video
   end
 
   def update
+    authorize self
     # Does the action of updating the target video
   end
 
   def destroy
+    authorize self
     # Destroys the target
   end
 

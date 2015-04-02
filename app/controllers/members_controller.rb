@@ -1,11 +1,15 @@
 class MembersController < ApplicationController
   def add_new_api
+    authorize self
   end
 
   def add_temporary_member
+    authorize self
   end
 
   def refresh_member_list
+    authorize self
+
     begin
       eve_api = Eve::API.new(key_id: "4233755", v_code: "1fu1tvYX38Ub5GE6K6W7zc1DWAd5UMpNzebSX32ZSapWmRBOMk00duZKDSDhLaKf")
       result = eve_api.account.apikeyinfo
@@ -58,6 +62,7 @@ class MembersController < ApplicationController
   end
 
   def index
+    authorize self
     @members = Member.all
 
     # Assemble a hash comprising the name of each role a member has. This is DB and
@@ -82,9 +87,11 @@ class MembersController < ApplicationController
   end
 
   def show
+    authorize self
   end
 
   def create
+    authorize self
   end
 
   private

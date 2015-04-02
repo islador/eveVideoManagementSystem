@@ -1,39 +1,39 @@
-class RecruitContactPolicy
-  attr_reader :user, :recruit_contact
+class MembersControllerPolicy
+  attr_reader :user, :controller
 
-  def initialize(user, recruit_contact)
+  def initialize(user, controller)
     @user = user
-    @recruit_contact = recruit_contact
+    @controller = controller
+  end
+
+  def add_new_api?
+    roles = user.roles.pluck(:name)
+    if roles.include?("Corp Director") || roles.include?("Corp CEO")
+      return true
+    else
+      return false
+    end
+  end
+
+  def add_temporary_member?
+    roles = user.roles.pluck(:name)
+    if roles.include?("Corp Director") || roles.include?("Corp CEO")
+      return true
+    else
+      return false
+    end
+  end
+
+  def refresh_member_list?
+    roles = user.roles.pluck(:name)
+    if roles.include?("Corp Director") || roles.include?("Corp CEO")
+      return true
+    else
+      return false
+    end
   end
 
   def index?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
-
-  def create?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
-
-  def new?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
-
-  def edit?
     roles = user.roles.pluck(:name)
     if roles.include?("Corp Director") || roles.include?("Corp CEO")
       return true
@@ -51,7 +51,7 @@ class RecruitContactPolicy
     end
   end
 
-  def search_name?
+  def create?
     roles = user.roles.pluck(:name)
     if roles.include?("Corp Director") || roles.include?("Corp CEO")
       return true
@@ -60,21 +60,5 @@ class RecruitContactPolicy
     end
   end
 
-  def update?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
 
-  def destroy?
-    roles = user.roles.pluck(:name)
-    if roles.include?("Corp Director") || roles.include?("Corp CEO")
-      return true
-    else
-      return false
-    end
-  end
 end

@@ -13,7 +13,7 @@ class MembersController < ApplicationController
       # Query EVE for the list of members in the corporation
       member_list = eve_api.corporation.member_tracking
       # Query EVE for their roles
-      member_security = eve_api.corporation.member_security
+      #member_security = eve_api.corporation.member_security
 
       member_hash = {}
       # Construct a hash containing the value returned from the member_list query.
@@ -70,8 +70,9 @@ class MembersController < ApplicationController
 
     @members_roles_hash = {}
 
+    # broken
     @members.each do |member|
-      role_ids = member.roles.pluck(:id)
+      role_ids = member.roles.pluck(:role_id)
       member_role_names = []
       role_ids.each do |role_id|
         member_role_names << role_hash["#{role_id}"]
@@ -101,7 +102,7 @@ class MembersController < ApplicationController
       # Iterate over each returned member
       member_security.members.each do |member|
         # Build a hash of each member's roles, keyed by character_id
-        members.store("#{member.character_id}" => [])
+        members.store("#{member.character_id}", [])
         # Retrieve the member's roles from the returned API data
         member["roles"].each do |role|
           # Since member's roles appear to start with 'role', slice it off
@@ -124,6 +125,7 @@ class MembersController < ApplicationController
             # if the member should have the role
             if value.include?(role[1])
               # delete that role from the hash value
+              value.delete(role[1])
             else
               # otherwise, delete the role from the member
               MembersRole.where("member_id = ? AND role_id = ?", member.id, role[0])[0].destroy
@@ -156,24 +158,47 @@ class MembersController < ApplicationController
         members = user.members
         # Check if the user has a member
         if members.present?
-          # If so, clear the user's roles hash
-          user.roles = {}
-          members.each do |member|
-            # and copy the user's current roles into the newly cleared hash
-            user.roles.merge(member.roles)
+          member_ids = members.pluck(:id)
+          # Retrieve the IDs of all existing MembersRoles & RolesUsers
+          member_role_ids = MembersRole.where(member_id: member_ids).pluck(:role_id).uniq
+          user_role_ids = RolesUser.where(user_id: user.id).pluck(:role_id)
+
+          # Strip out the common ids between user_role_ids & member_role_ids
+          kept_ids = []
+          user_role_ids.each do |role_id|
+            if member_role_ids.include?(role_id)
+              kept_ids << role_id
+              member_role_ids.delete(role_id)
+            end
           end
+          user_role_ids.delete_if { |role_id| kept_ids.include?(role_id) }
+
+          # user_role_ids should only contain the role_ids for roles the user should no longer have
+          # Delete all RolesUsers left in the user_role_ids
+          # NOTE: delete_all does not trigger callbacks.
+          RolesUser.where(user_id: user.id, role_id: user_role_ids).delete_all
+
+          # member_role_ids should only contain the role_ids for roles the user doesn't already have.
+          # Create new RolesUser records for each id left in member_role_ids
+          create_roles_users = []
+          member_role_ids.each do |role_id|
+            create_roles_users << {user_id: user.id, role_id: role_id}
+          end
+          RolesUser.create(create_roles_users)
         else
           # otherwise, determine the user's roles
-          user_role = User.determine_role(user.main_character_id)
+          role_ids = []
+          role_ids << User.determine_role(user.main_character_id)
           # If the user has no known roles, destroy that user.
-          if user_role == "Unknown"
+          if role_ids.empty?
             user.destroy
           else
-            # Otherwise, compare the user's existing roles
-            unless user.roles == {"#{user_role}" => true}
-              # If they don't match, set the user's roles to the returned role.
-              user.roles = {"#{user_role}" => true}
+            # Otherwise, give them the roles
+            create_roles_users = []
+            role_ids.each do |role_id|
+              create_roles_users << {user_id: user.id, role_id: role_id}
             end
+            RolesUser.create(create_roles_users)
           end
         end
       end

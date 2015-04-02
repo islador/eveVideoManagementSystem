@@ -29,7 +29,8 @@ gem 'httparty'
 
 # CCP XML API
 # Gem from Icras
-gem 'eve',      :git => "https://github.com/martin-schmidt/eve"
+#gem 'eve',      :git => "https://github.com/martin-schmidt/eve"
+gem 'eve', :git => "https://github.com/islador/eve", :branch => "addEVECharacterInfoQuery"
 
 # Authorization
 gem 'pundit'

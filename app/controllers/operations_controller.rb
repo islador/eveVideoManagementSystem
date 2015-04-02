@@ -1,11 +1,12 @@
 class OperationsController < ApplicationController
-  before_action :authenticate_user!
 
   def index
+    authorize self
     @operations = Operation.all
   end
 
   def create
+    authorize self
     # Needs error pathway
     # Ships && Specialty Roles accept CSV and turns them into arrays
     params[:operation][:ships] = params[:operation][:ships].split(",")
@@ -48,6 +49,7 @@ class OperationsController < ApplicationController
   end
 
   def new
+    authorize self
     @dst = dst_in_usa
 
     # Adjust the displayed time to match the time for each TZ
@@ -102,9 +104,11 @@ class OperationsController < ApplicationController
   end
 
   def edit
+    authorize self
   end
 
   def show
+    authorize self
     @operation = Operation.find(params[:id])
 
     date_ordinal = @operation.op_date.strftime("%-d").to_i.ordinal
@@ -114,9 +118,11 @@ class OperationsController < ApplicationController
   end
 
   def update
+    authorize self
   end
 
   def destroy
+    authorize self
   end
 
   private

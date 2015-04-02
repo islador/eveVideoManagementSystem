@@ -19,4 +19,12 @@
 
 class Member < ActiveRecord::Base
   belongs_to :user
+
+  has_many :roles
+  has_and_belongs_to_many :roles
+
+  validates :characterID, presence: true
+  validates :name, presence: true
+  validates :startDateTime, presence: true
+
 end

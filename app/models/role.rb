@@ -6,7 +6,6 @@
 #  name              :string
 #  description       :text
 #  hierarchy_ranking :integer
-#  user_id           :integer
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
@@ -16,4 +15,10 @@ class Role < ActiveRecord::Base
   validates :name, presence: true
   validates :description, presence: true
   validates :hierarchy_ranking, presence: true
+
+  belongs_to :users
+  has_and_belongs_to_many :users
+
+  belongs_to :members
+  has_and_belongs_to_many :members
 end

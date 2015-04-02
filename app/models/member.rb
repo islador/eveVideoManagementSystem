@@ -22,4 +22,9 @@ class Member < ActiveRecord::Base
 
   has_many :roles
   has_and_belongs_to_many :roles
+
+  validates :characterID, presence: true
+  validates :name, presence: true
+  validates :startDateTime, presence: true
+
 end

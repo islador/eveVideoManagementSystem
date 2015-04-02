@@ -15,4 +15,8 @@ class Doctrine < ActiveRecord::Base
 
   has_many :roles
   has_and_belongs_to_many :roles
+
+  validates :name, presence: true
+  validates :short_description, presence: true
+  validates :access_by_hierarchy, presence: true
 end

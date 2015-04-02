@@ -1,4 +1,4 @@
-class DoctrineController < ApplicationController
+class DoctrinesController < ApplicationController
   def index
   end
 

@@ -94,4 +94,8 @@ class User < ActiveRecord::Base
       role_id = Role.where("name = ?", "Militia Member")[0].id
     end
   end
+
+  def director
+    Role.where(name: ["Corp Director", "Corp CEO"])[0].users.where("user_id = ?", self.id)[0].present?
+  end
 end

@@ -6,20 +6,8 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <p class="notice"><%= notice %></p>
+  <%= render "shared/nav_links" %>
   <p class="alert"><%= alert %></p>
-  <% if current_user %>
-    <%= link_to "Latest Uploads", latest_videos_path %>
-    <%= link_to "Upload Video", new_video_path %>
-    <%= link_to "Operation List", operations_path %>
-    <%= link_to "Create Op", new_operation_path %>
-    <%= link_to "Year List", years_path %>
-    <%= link_to "Latest Contacts", recruit_contacts_path %>
-    <%= link_to "Add new Contact", new_recruit_contact_path %>
-    <%= link_to "Recruitment Requirements", recruit_requirements_path %>
-    <%= link_to "Roles", roles_path %>
-    <%= link_to "Members", members_path %>
-    <%= link_to('Logout', destroy_user_session_path) %>
-  <% end %>
 </head>
 <body>
 

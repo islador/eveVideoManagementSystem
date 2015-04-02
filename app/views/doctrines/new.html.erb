@@ -1,2 +1,27 @@
-<h1>Doctrine#new</h1>
-<p>Find me in app/views/doctrine/new.html.erb</p>
+<h1>Add new Doctrine</h1>
+<%= form_for(@doctrine) do |f| %>
+  <%= render "shared/error_messages", :target => @doctrine %>
+  <div class="form-group">
+    <%= f.label :name, "Doctrine Name" %>
+    <%= f.text_field :name, placeholder: "Shield Nano Brawlers" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :abbreviation, "Doctrine Abbreviation" %>
+    <%= f.text_field :abbreviation, placeholder: "SNB" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :short_description, "Short Description" %>
+    <%= f.text_area :short_description, size: "50x5", placeholder: "This description will display on the doctrine list page." %>
+  </div>
+  <div class ="form-group">
+    <%= f.label :long_description, "Long Description" %>
+    <%= f.text_area :long_description, size: "50x10", placeholder: "This description will display on this doctrine's page." %>
+  </div>
+  <div class="form-group">
+    <%= f.label :access_by_hierarchy, "Access by Hierarchy?" %>
+    <%= f.check_box :access_by_hierarchy %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "Add new Doctrine" %>
+  </div>
+<% end %>

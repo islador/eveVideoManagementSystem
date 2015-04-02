@@ -19,5 +19,5 @@ class Doctrine < ActiveRecord::Base
 
   validates :name, presence: true
   validates :short_description, presence: true
-  validates :access_by_hierarchy, presence: true
+  validates :abbreviation, presence: true
 end

@@ -103,6 +103,7 @@ class MembersController < ApplicationController
       member_security.members.each do |member|
         # Build a hash of each member's roles, keyed by character_id
         members.store("#{member.character_id}", [])
+        members["#{member.character_id}"] << "Corp Member"
         # Retrieve the member's roles from the returned API data
         member["roles"].each do |role|
           # Since member's roles appear to start with 'role', slice it off

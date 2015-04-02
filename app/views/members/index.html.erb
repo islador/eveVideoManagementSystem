@@ -17,7 +17,7 @@
       <% member_roles = "" %>
       <% if @members_roles_hash["#{member.characterID}"].present? %>
         <% @members_roles_hash["#{member.characterID}"].each do |role| %>
-          <% member_roles = member_roles + "#{role}," %>
+          <% member_roles = member_roles + "#{role}, " %>
         <% end %>
       <% end %>
       <td> <%= member.name %> </td>
@@ -27,7 +27,7 @@
       <% else %>
         <td> <%= member.title %> </td>
       <% end %>
-      <td> <%= member_roles.chomp(",") %> </td>
+      <td> <%= member_roles.chomp(", ") %> </td>
       <td> <%= member.taken %> </td>
     </tr>
     <% end %>

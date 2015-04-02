@@ -21,4 +21,7 @@ class Role < ActiveRecord::Base
 
   belongs_to :members
   has_and_belongs_to_many :members
+
+  belongs_to :doctrines
+  has_and_belongs_to_many :doctrines
 end

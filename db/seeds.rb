@@ -19,6 +19,6 @@ Role.create(name: "Corp Member", description: "A member of the corporation", hie
 Role.create(name: "Corp Director", description: "A director in the corporation", hierarchy_ranking: 6)
 ceo = Role.create(name: "Corp CEO", description: "CEO of the corporation", hierarchy_ranking: 7)
 
-islador = Member.create(name: "islador", characterID: 601261354)
+islador = Member.create(name: "islador", characterID: 601261354, startDateTime: DateTime.now)
 
 MembersRole.create(member_id: islador.id, role_id: ceo.id)

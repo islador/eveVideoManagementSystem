@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330064123) do
+ActiveRecord::Schema.define(version: 20150401000856) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "members", force: :cascade do |t|
     t.integer  "characterID"
@@ -27,6 +30,16 @@ ActiveRecord::Schema.define(version: 20150330064123) do
     t.boolean  "taken"
     t.integer  "user_id"
   end
+
+  create_table "members_roles", force: :cascade do |t|
+    t.integer  "member_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "members_roles", ["member_id"], name: "index_members_roles_on_member_id", using: :btree
+  add_index "members_roles", ["role_id"], name: "index_members_roles_on_role_id", using: :btree
 
   create_table "months", force: :cascade do |t|
     t.integer  "year_id"
@@ -75,10 +88,26 @@ ActiveRecord::Schema.define(version: 20150330064123) do
     t.string   "name"
     t.text     "description"
     t.integer  "hierarchy_ranking"
-    t.integer  "user_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  create_table "roles_members", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles_users", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id", using: :btree
+  add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.integer  "sign_in_count",       default: 0, null: false

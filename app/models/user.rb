@@ -96,6 +96,10 @@ class User < ActiveRecord::Base
   end
 
   def director
-    Role.where(name: ["Corp Director", "Corp CEO"])[0].users.where("user_id = ?", self.id)[0].present?
+    # Retrieve the director and ceo role IDs from the database
+    director_ceo_role_ids = Role.where(name: ["Corp Director", "Corp CEO"]).pluck(:id)
+
+    # See if the user has those roles.
+    RolesUser.where(role_id: director_ceo_role_ids, user_id: self.id)[0].present?
   end
 end

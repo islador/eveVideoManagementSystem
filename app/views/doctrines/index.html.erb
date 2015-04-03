@@ -1,2 +1,19 @@
-<h1>Doctrine#index</h1>
-<p>Find me in app/views/doctrine/index.html.erb</p>
+<h1>Doctrines</h1>
+<table>
+  <thead>
+    <th> Name </th>
+    <th> Abbreviation </th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @doctrines.each do |doctrine| %>
+    <tr>
+      <td> <%= link_to "#{doctrine.name}", doctrine_path(doctrine) %> </td>
+      <td> <%= doctrine.abbreviation %> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

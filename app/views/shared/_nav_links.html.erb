@@ -1,4 +1,5 @@
 <% if current_user %>
+  <%= link_to('Doctrines', doctrines_path) %>
     <% if current_user.member %>
       <%= link_to('Missions', mission_groups_path) %>
     <% end %>

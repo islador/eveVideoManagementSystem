@@ -97,6 +97,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Return the roles of less then or equal hierarchy ranking to that of the user's
+  def less_or_equal_roles
+    # Retrieve the hierarchy_ranking of the user's roles
+    self_ranking = self.roles.pluck(:hierarchy_ranking)
+    # Sort them so that the highest is at the end of the returned array
+    self_ranking_sorted = self_ranking.sort
+    # Retrieve the roles with ranking equal or below that
+    roles = Role.where("hierarchy_ranking <= ?", self_ranking_sorted.last)
+  end
+
+
   def director
     # Retrieve the director and ceo role IDs from the database
     director_ceo_role_ids = Role.where(name: ["Corp Director", "Corp CEO"]).pluck(:id)

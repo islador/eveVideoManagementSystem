@@ -1,4 +1,9 @@
 <h1>Doctrines</h1>
+<div class="doctrine-list__nav-links">
+  <% if current_user.director %>
+    <%= link_to "Add New Doctrine", new_doctrine_path %>
+  <% end %>
+</div>
 <table>
   <thead>
     <th> Name </th>
@@ -11,8 +16,13 @@
     <tr>
       <td> <%= link_to "#{doctrine.name}", doctrine_path(doctrine) %> </td>
       <td> <%= doctrine.abbreviation %> </td>
-      <td> </td>
-      <td> </td>
+      <% if doctrine.editable_by_user?(current_user) %>
+        <td> <%= link_to "Edit", edit_doctrine_path(doctrine) %> </td>
+        <td> <%= link_to "Delete", doctrine_path(doctrine), confirm: "Are you sure?", method: :delete %> </td>
+      <% else %>
+        <td> </td>
+        <td> </td>
+      <% end %>
     </tr>
     <% end %>
   </tbody>

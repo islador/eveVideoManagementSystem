@@ -1,2 +1,9 @@
-<h1>Doctrine#show</h1>
-<p>Find me in app/views/doctrine/show.html.erb</p>
+<h1><%= @doctrine.name %></h1>
+<div class="doctrine__nav-links">
+  <% if current_user.director %>
+    <%= link_to "Add New Fitting", new_doctrine_path %>
+  <% end %>
+</div>
+<div class="doctrine-description">
+  <%= @doctrine.long_description %>
+</div>

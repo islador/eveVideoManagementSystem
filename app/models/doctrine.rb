@@ -50,10 +50,11 @@ class Doctrine < ActiveRecord::Base
   end
 
   def editable_by_user?(user)
-
+    user.director
   end
 
   def creatable_by_user?(user)
+    user.director
   end
 
   private

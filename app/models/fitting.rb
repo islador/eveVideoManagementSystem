@@ -14,6 +14,7 @@
 #  ship_dna             :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  doctrine_id          :integer
 #
 
 class Fitting < ActiveRecord::Base

@@ -1,2 +1,32 @@
-<h1>Fittings#new</h1>
-<p>Find me in app/views/fittings/new.html.erb</p>
+<h1> Add new Fit to <%= @doctrine.name %> </h1>
+
+<%= form_tag(doctrine_fittings_path(@doctrine, @fitting)) do %>
+  <%= render "shared/error_messages", :target => @fitting %>
+  <div class="form-group">
+    <%= label_tag 'fleet_role', "Fleet Role" %>
+    <%= text_field_tag :fleet_role, nil, :placeholder => "Scram Ceptor" %>
+  </div>
+  <div class="form-group">
+    <div class="form-group__label">
+      <%= label_tag 'description', "Fit Description" %>
+    </div>
+    <%= text_area_tag :description, nil, size: "50x5", :placeholder => "This description will display on the fit's page. The description should describe in detail the manner in which the ship is to be flown." %>
+  </div>
+  <div class="form-group">
+    <%= label_tag 'progression', "Skill Progression" %>
+    <%= text_field_tag :progression, nil, :placeholder => "Hybrids" %>
+  </div>
+  <div class="form-group">
+    <%= label_tag 'progression_position', "Skill Progression Position" %>
+    <%= text_field_tag :progression_position, nil, :placeholder => "1" %>
+  </div>
+  <div class="form-group">
+    <div class="form-group__label">
+      <%= label_tag 'eft_string', "Paste EFT Fit" %>
+    </div>
+    <%= text_area_tag :eft_string, nil, size: "75x50", :placeholder => "Seriously? Just fucking paste it noob." %>
+  </div>
+  <div class="form-group">
+    <%= submit_tag "Add new Fit to #{@doctrine.name}" %>
+  </div>
+<% end %>

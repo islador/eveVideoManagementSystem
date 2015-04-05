@@ -7,3 +7,15 @@
 <div class="doctrine-description">
   <%= @doctrine.long_description %>
 </div>
+<%= @fittings_hash.each do |key, race| %>
+  Race: <%= key %>
+  <br/>
+  <%= race.each do |key, progression | %>
+    Progression: <%= key %>
+    <br/>
+    <%= progression.each do |fit| %>
+      Fit: <%= fit.name %>
+      <br/>
+    <% end %>
+  <% end %>
+<% end %>

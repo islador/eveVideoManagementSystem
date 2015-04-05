@@ -1,11 +1,11 @@
 class CreateChrRaces < ActiveRecord::Migration
   def change
-    create_table :chr_races do |t|
+    create_table :chrRaces, id: false do |t|
       t.primary_key :raceID
       t.text :raceName
       t.text :description
       t.bigint :iconID
-      t.shortDescription :text
+      t.text :shortDescription
       t.timestamps null: false
     end
   end

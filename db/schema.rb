@@ -16,10 +16,12 @@ ActiveRecord::Schema.define(version: 20150421234917) do
   enable_extension "plpgsql"
 
   create_table "chrRaces", primary_key: "raceID", force: :cascade do |t|
-    t.text    "raceName"
-    t.text    "description"
-    t.integer "iconID",           limit: 8
-    t.text    "shortDescription"
+    t.text     "raceName"
+    t.text     "description"
+    t.integer  "iconID",           limit: 8
+    t.text     "shortDescription"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "doctrines", force: :cascade do |t|

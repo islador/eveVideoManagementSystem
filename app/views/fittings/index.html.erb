@@ -1,2 +1,31 @@
-<h1>Fittings#index</h1>
-<p>Find me in app/views/fittings/index.html.erb</p>
+<h1> <%= @doctrine.name %> Fittings List </h1>
+
+<table>
+  <thead>
+    <th> Name </th>
+    <th> Ship </th>
+    <th> Race </th>
+    <th> Fleet Role </th>
+    <th> Progression </th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @fittings.each do |fitting| %>
+    <tr>
+     <th> <%= fitting.name %> </th>
+     <th> <%= fitting.hull %> </th>
+     <th> <%= fitting.race %> </th>
+     <th> <%= fitting.fleet_role %> </th>
+     <th> <%= fitting.progression %> </th>
+     <% if @doctrine.editable_by_user?(current_user) %>
+      <td> <%= link_to "Edit", edit_doctrine_fitting_path(@doctrine, fitting) %> </td>
+      <td> <%= link_to "Delete", doctrine_fitting_path(@doctrine, fitting), confirm: "Are you sure?", method: :delete %> </td>
+    <% else %>
+      <td> </td>
+      <td> </td>
+    <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

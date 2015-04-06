@@ -5,17 +5,36 @@
   <% end %>
 </div>
 <div class="doctrine-description">
+  Description:
   <%= @doctrine.long_description %>
 </div>
-<%= @fittings_hash.each do |key, race| %>
-  Race: <%= key %>
-  <br/>
-  <%= race.each do |key, progression | %>
-    Progression: <%= key %>
-    <br/>
-    <%= progression.each do |fit| %>
-      Fit: <%= fit.name %>
-      <br/>
-    <% end %>
+<div class="doctrine-progressions">
+  <% @fittings_hash.each do |key, race| %>
+    <div class="doctrine-progressions__race">
+      <div class= "doctrine-progressions__race-title">
+        Race: <%= key %>
+      </div>
+      <% race.each do |key, progression | %>
+        <div class="doctrine-progressions__progression">
+          <div class="doctrine-progressions__progression-title">
+            Progression: <%= key %>
+          </div>
+          <% progression.each do |fit| %>
+            <div class="doctrine-progressions__fit">
+              Fit: <%= fit.name %>
+              <div class="doctrine-progressions__fit-fleet-role">
+                <%= fit.fleet_role %>
+              </div>
+              <div class="doctrine-progressions__fit-description">
+                <%= fit.description %>
+              </div>
+              <div class="doctrine-progressions__fit-icon">
+                Icon
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
-<% end %>
+</div>

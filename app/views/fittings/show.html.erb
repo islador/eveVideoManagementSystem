@@ -1,2 +1,37 @@
-<h1>Fittings#show</h1>
-<p>Find me in app/views/fittings/show.html.erb</p>
+<div class="fitting">
+  <div class="fitting__traits">
+    <div class="fitting__race">
+      <%= @fitting.race %>
+    </div>
+    <div class="fitting__progression">
+      <%= @fitting.progression %>
+    </div>
+    <div class="fitting__hull">
+      <%= @fitting.hull %>
+    </div>
+  </div>
+  <div class="clear"/>
+  <div class="fitting__details">
+    <div class="fitting__name">
+      Name: <%= @fitting.name %>
+    </div>
+    <div class="fitting__fleet-role">
+      Role: <%= @fitting.fleet_role %>
+    </div>
+  </div>
+  <div class="clear"/>
+  <div class="fitting__description">
+    <div class="fitting__description-title">
+      Description
+    </div>
+    <%= @fitting.description %>
+  </div>
+  <div class="fitting__types">
+    <div class="fitting__ship-dna">
+      <%= @fitting.ship_dna %>
+    </div>
+    <div class="fitting__eft-string">
+      <pre><%= @fitting.eft_string %></pre>
+    </div>
+  </div>
+</div>

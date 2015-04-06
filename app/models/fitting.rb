@@ -20,9 +20,9 @@
 class Fitting < ActiveRecord::Base
   belongs_to :doctrine
 
-  #validates :name, presence: true
-  #validates :hull, presence: true
-  #validates :race, presence: true
+  validates :name, presence: true
+  validates :hull, presence: true
+  validates :race, presence: true
   validates :fleet_role, presence: true
   #validates :description, presence: true
   validates :progression, presence: true

@@ -1,5 +1,10 @@
 <h1> <%= @doctrine.name %> Fittings List </h1>
-
+<div class="doctrine__nav-links">
+  <%= link_to "Doctrine Progressions", doctrine_path(@doctrine) %>
+  <% if current_user.director %>
+    <%= link_to "Add New Fitting", new_doctrine_fitting_path(@doctrine) %>
+  <% end %>
+</div>
 <table>
   <thead>
     <th> Name </th>

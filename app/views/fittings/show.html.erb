@@ -12,6 +12,10 @@
   </div>
   <div class="clear"/>
   <div class="fitting__details">
+    <div class="fitting__render">
+      <% ship_type_id = @fitting.ship_dna.split(":")[0] %>
+      <img src="http://image.eveonline.com/render/<%= ship_type_id %>_256.png">
+    </div>
     <div class="fitting__name">
       Name: <%= @fitting.name %>
     </div>

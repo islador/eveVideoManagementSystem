@@ -28,10 +28,11 @@
   </div>
   <div class="fitting__types">
     <div class="fitting__ship-dna">
-      <%= @fitting.ship_dna %>
+      <a class="fitting__ship-dna__ig-link" href="\javascript:CCPEVE.showFitting('<%= @fitting.ship_dna %>');\">Show In Game Fitting</a>
     </div>
     <div class="fitting__eft-string">
-      <pre><%= @fitting.eft_string %></pre>
+      <pre><%= @fitting.eft_string %>
+      </pre>
     </div>
   </div>
 </div>

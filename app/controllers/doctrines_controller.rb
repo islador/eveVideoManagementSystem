@@ -43,9 +43,9 @@ class DoctrinesController < ApplicationController
         # Check if the fit's progression exists as well
         if @fittings_hash["#{fit.race}"]["#{fit.progression}"].present?
           # If it it does, add the fit to the progression
-          @fittings.hash["#{fit.race}"]["#{fit.progression}"] << fit
+          @fittings_hash["#{fit.race}"]["#{fit.progression}"] << fit
           # and sort the fit array by progression_position
-          @fittings.hash["#{fit.race}"]["#{fit.progression}"].sort_by! {|a,b| a.progression_position < b.progression_position}
+          @fittings_hash["#{fit.race}"]["#{fit.progression}"].sort_by! {|a| a.progression_position}
         # Otherwise,
         else
           # store a new key value pair containing the progression & the fit into the race hash

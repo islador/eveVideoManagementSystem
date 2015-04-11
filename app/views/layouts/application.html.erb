@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Antigen</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
-  <p class="notice"><%= notice %></p>
-  <%= render "shared/nav_links" %>
-  <p class="alert"><%= alert %></p>
-</head>
-<body>
+  <head>
+    <title>Antigen</title>
+    <link href='http://fonts.googleapis.com/css?family=Orbitron:500,700,900,400' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= yield %>
+    <%= render "shared/nav_links" %>
+    <p class="notice"><%= notice %></p>
+    <%#= render "shared/nav_links" %>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
 
-</body>
+  </body>
 </html>

@@ -17,7 +17,7 @@ class FittingsController < ApplicationController
     info_bracket = clean_info_bracket.slice(1..clean_info_bracket.length-2).split(", ")
     @fitting.hull = info_bracket[0]
     @fitting.name = info_bracket[1]
-    @fitting.race = ChrRace.where(raceID: InvType.where("\"typeName\" = ?", "Drake").pluck("\"raceID\""))[0].raceName
+    @fitting.race = ChrRace.where(raceID: InvType.where("\"typeName\" = ?", @fitting.hull).pluck("\"raceID\""))[0].raceName
     @fitting.ship_dna = create_ship_dna(@fitting)
     if @fitting.save
       doctrine = @fitting.doctrine

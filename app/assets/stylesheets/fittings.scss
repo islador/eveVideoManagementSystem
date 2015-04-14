@@ -1,11 +1,12 @@
 // Place all the styles related to the Fittings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.clear {
-    clear: both;
-}
+//.clear {
+//    clear: both;
+//}
 
 .fitting {
+  width: 80%;
   position: absolute;
   left: 50%;
   margin-right: -50%;
@@ -41,7 +42,8 @@
 .fitting__details {
   font-size: 125%;
   position: relative;
-  float: left;
+  clear: both;
+  //float: left;
 }
 
 .fitting__description {

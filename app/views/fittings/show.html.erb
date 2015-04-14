@@ -10,6 +10,9 @@
       <%= @fitting.hull %>
     </div>
   </div>
+  <div class="doctrine__nav-links">
+    <%= link_to "#{@fitting.doctrine.name} Progressions", doctrine_path(@fitting.doctrine) %>
+  </div>
   <div class="clear"/>
   <div class="fitting__details">
     <div class="fitting__render">

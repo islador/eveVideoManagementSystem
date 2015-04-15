@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   devise_scope :user do
@@ -32,4 +34,6 @@ Rails.application.routes.draw do
   get 'members/add_temporary_member'
   get 'refresh_member_list' => 'members#refresh_member_list'
 
+  resources :fac_war_systems, only: [:index]
+  get 'refresh_fac_war_systems' => 'fac_war_systems#refresh_fac_war_systems'
 end

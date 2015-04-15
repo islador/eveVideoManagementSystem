@@ -1,0 +1,32 @@
+<div class="fac-war-system__nav-links">
+  <%= link_to "Refresh Fac War Systems", refresh_fac_war_systems_path %>
+</div>
+
+<table>
+  <thead>
+    <th> ID </th>
+    <th> Name </th>
+    <th> Occupier </th>
+    <th> Owner </th>
+    <th> Contested </th>
+    <th> VPs </th>
+    <th> VP Threshold </th>
+  </thead>
+  <tbody>
+    <% @fac_war_systems.each do |system| %>
+    <tr>
+      <td> <%= system.solarSystemID %> </td>
+      <td> <%= system.solarSystemName %> </td>
+      <% if system.occupyingFactionName == "f" %>
+        <td> <%= system.owningFactionName %> </td>
+      <% else %>
+        <td> <%= system.occupyingFactionName %> </td>
+      <% end %>
+      <td> <%= system.owningFactionName %> </td>
+      <td> <%= system.contested %> </td>
+      <td> <%= system.victoryPoints %> </td>
+      <td> <%= system.victoryPointThreshold %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

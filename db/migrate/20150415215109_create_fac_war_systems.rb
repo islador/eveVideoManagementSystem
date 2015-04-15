@@ -5,11 +5,11 @@ class CreateFacWarSystems < ActiveRecord::Migration
       t.string :solarSystemName
       t.integer :occupyingFactionID
       t.integer :owningFactionID
-      t.string :occupyingFactionname
+      t.string :occupyingFactionName
       t.string :owningFactionName
       t.boolean :contested
       t.integer :victoryPoints
-      t.integer :victoryPointThreashold
+      t.integer :victoryPointThreshold
 
       t.timestamps null: false
     end

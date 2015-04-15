@@ -11,10 +11,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401000856) do
+ActiveRecord::Schema.define(version: 20150415210239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chrRaces", primary_key: "raceID", force: :cascade do |t|
+    t.text    "raceName"
+    t.text    "description"
+    t.integer "iconID",           limit: 8
+    t.text    "shortDescription"
+  end
+
+  create_table "doctrines", force: :cascade do |t|
+    t.string   "name"
+    t.string   "short_description"
+    t.text     "long_description"
+    t.boolean  "access_by_hierarchy"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "abbreviation"
+  end
+
+  create_table "doctrines_roles", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "doctrine_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "fittings", force: :cascade do |t|
+    t.string   "name"
+    t.string   "hull"
+    t.string   "race"
+    t.string   "fleet_role"
+    t.text     "description"
+    t.string   "progression"
+    t.integer  "progression_position"
+    t.string   "eft_string"
+    t.string   "ship_dna"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "doctrine_id"
+  end
+
+  create_table "invTypes", primary_key: "typeID", force: :cascade do |t|
+    t.integer "groupID",             limit: 8
+    t.text    "typeName"
+    t.text    "description"
+    t.float   "mass"
+    t.float   "volume"
+    t.float   "capacity"
+    t.integer "portionSize",         limit: 8
+    t.integer "raceID",              limit: 2
+    t.decimal "basePrice",                     precision: 19, scale: 4
+    t.boolean "published"
+    t.integer "marketGroupID",       limit: 8
+    t.float   "chanceOfDuplicating"
+  end
+
+  add_index "invTypes", ["groupID"], name: "idx_149637_invTypes_IX_Group", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.integer  "characterID"
@@ -131,6 +187,12 @@ ActiveRecord::Schema.define(version: 20150401000856) do
     t.string   "kind"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "warCombatZoneSystems", primary_key: "solarSystemID", force: :cascade do |t|
+    t.integer  "combatZoneID", limit: 8
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "years", force: :cascade do |t|

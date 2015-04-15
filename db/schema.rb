@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415210239) do
+ActiveRecord::Schema.define(version: 20150415215109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,20 @@ ActiveRecord::Schema.define(version: 20150415210239) do
     t.integer  "doctrine_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "fac_war_systems", force: :cascade do |t|
+    t.integer  "solarSystemID"
+    t.string   "solarSystemName"
+    t.integer  "occupyingFactionID"
+    t.integer  "owningFactionID"
+    t.string   "occupyingFactionName"
+    t.string   "owningFactionName"
+    t.boolean  "contested"
+    t.integer  "victoryPoints"
+    t.integer  "victoryPointThreshold"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "fittings", force: :cascade do |t|

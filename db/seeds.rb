@@ -30,3 +30,11 @@ csv = CSV.parse(csv_text, :headers => true)
 csv.each do |row|
   WarCombatZoneSystem.create(row.to_hash)
 end
+
+# Populate the SolarSystems table with all State Protectorate mission Systems
+csv_text = File.read("#{Rails.root.join("db","sde_exports","stateProtectorateMissionSystems.csv")}")
+
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  SolarSystem.create(row.to_hash)
+end

@@ -22,4 +22,14 @@ namespace :prep_db do
       WarCombatZoneSystem.create(row.to_hash)
     end
   end
+
+  desc "Load the SolarSystem's table with known systems of interest."
+  task populate_solar_systems: :environment do
+    csv_text = File.read("#{Rails.root.join("db","sde_exports","stateProtectorateMissionSystems.csv")}")
+
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      SolarSystem.create(row.to_hash)
+    end
+  end
 end

@@ -1,6 +1,6 @@
 class AddMissionTextArrayRemoveOfferedAcceptedDetails < ActiveRecord::Migration
   def up
-    add_column :missions, :mission_text, array: true, default: []
+    add_column :missions, :mission_text,  :text, array: true, default: []
     remove_column :missions, :offered_text
     remove_column :missions, :accepted_text
     remove_column :missions, :read_details_text

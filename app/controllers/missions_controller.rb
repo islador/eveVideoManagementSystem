@@ -8,11 +8,29 @@ class MissionsController < ApplicationController
   end
 
   def create
-    @mission = Mission.new(offered_text: params["Mission Description"])
-    @mission.user_id = current_user.id
-    if @mission.save
+    mission_text = params["Mission Description"].split("\t")
+    puts "Mission Text: #{mission_text}"
+    puts "Mission Text[0] #{mission_text[0]}"
+    puts "Mission Text[7] #{mission_text[7]}"
+    puts "Mission Text[3] #{mission_text[3]}"
+
+    @mission = Mission.new(mission_text: mission_text)
+    if @mission.valid?
+      @mission.user_id = current_user.id
+      @mission.name = @mission.mission_text[0].split("Objectives")[0].chomp(" ")
+      @mission.loyalty_points = @mission.mission_text[7].split("Loyalty")[0].to_i
+
+      # Extract the mission system name from the mission_text
+      mission_system = @mission.mission_text[3].split(" ")[0]
+      mission_system_name = mission_system.slice(4, mission_system.length)
+      # Retrieve and store the solarSystemID
+      @mission.fac_war_system_id = FacWarSystem.where(solarSystemName: mission_system_name).pluck(:solarSystemID)[0]
+
+      # Save and redirect
+      @mission.save
       redirect_to missions_path
     else
+      flash[:alert] = "Missions cannot be indexed unless the text being submitted is from the offer or accepted stage. You submitted a copy of the read details stage."
       render 'new'
     end
   end

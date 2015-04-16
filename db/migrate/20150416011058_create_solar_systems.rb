@@ -3,7 +3,8 @@ class CreateSolarSystems < ActiveRecord::Migration
     create_table :solar_systems do |t|
       t.string :solarSystemName
       t.integer :solarSystemID
-      t.String :missions
+      t.float :security
+      t.string :missions
 
       t.timestamps null: false
     end

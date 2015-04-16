@@ -36,6 +36,6 @@ Rails.application.routes.draw do
   resources :fac_war_systems, only: [:index]
   get 'refresh_fac_war_systems' => 'fac_war_systems#refresh_fac_war_systems'
 
-  #resources :missions
+  resources :missions, only: [:index, :show, :new, :create, :destroy]
   get 'missions/accessible_agents'
 end

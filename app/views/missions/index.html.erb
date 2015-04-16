@@ -1,0 +1,25 @@
+<div class="mission__nav-links">
+  <%= link_to "Add New Mission", new_mission_path %>
+</div>
+<table>
+  <thead>
+    <th> Name </th>
+    <th> Posted By </th>
+    <th> Destination </th>
+    <th> Loyalty Points </th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @missions.each do |mission| %>
+    <tr>
+      <td> <%= mission.name %> </td>
+      <td> <%= mission.user.main_character_name %> </td>
+      <td> <%#= mission.fac_war_system.solarSystemName %> </td>
+      <td> <%= mission.loyalty_points %> </td>
+      <td> <%= link_to "View", mission_path(mission) %> </td>
+      <td></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

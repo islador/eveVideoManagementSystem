@@ -1,0 +1,5 @@
+<%= form_tag missions_path do %>
+  <%= render "shared/error_messages", :target => @mission %>
+  <%= text_area_tag 'Mission Description', nil, size: "50x25" %>
+  <%= submit_tag "Add Mission" %>
+<% end %>

@@ -10,6 +10,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  mission_text      :text             default("{}"), is an Array
+#  mission_group_id  :integer
 #
 
 class Mission < ActiveRecord::Base

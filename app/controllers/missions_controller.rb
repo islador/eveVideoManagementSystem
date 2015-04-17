@@ -26,7 +26,7 @@ class MissionsController < ApplicationController
 
       # Save and redirect
       @mission.save
-      redirect_to missions_path
+      redirect_to mission_group_missions_path(params[:mission_group_id])
     else
       flash[:alert] = "Missions cannot be indexed unless the text being submitted is from the offer or accepted stage. You submitted a copy of the read details stage."
       render 'new'

@@ -8,11 +8,8 @@ class MissionsController < ApplicationController
   end
 
   def create
+    # Cut the mission description into a tab delimited array
     mission_text = params["Mission Description"].split("\t")
-    puts "Mission Text: #{mission_text}"
-    puts "Mission Text[0] #{mission_text[0]}"
-    puts "Mission Text[7] #{mission_text[7]}"
-    puts "Mission Text[3] #{mission_text[3]}"
 
     @mission = Mission.new(mission_text: mission_text)
     if @mission.valid?
@@ -37,6 +34,7 @@ class MissionsController < ApplicationController
 
   def index
     @missions = Mission.all
+
   end
 
   def destroy

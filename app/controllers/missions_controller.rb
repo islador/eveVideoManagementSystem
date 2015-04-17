@@ -14,10 +14,11 @@ class MissionsController < ApplicationController
 
     @mission = Mission.new(mission_text: mission_text)
     if @mission.valid?
+      params.permit(:mission_group_id)
       @mission.user_id = current_user.id
       @mission.name = @mission.mission_text[0].split("Objectives")[0].chomp(" ")
       @mission.loyalty_points = @mission.mission_text[7].split("Loyalty")[0].to_i
-
+      @mission.mission_group_id = params[:mission_group_id]
       # Extract the mission system name from the mission_text
       mission_system = @mission.mission_text[3].split(" ")[0]
       mission_system_name = mission_system.slice(4, mission_system.length)

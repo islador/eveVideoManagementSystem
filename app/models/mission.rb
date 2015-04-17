@@ -15,6 +15,7 @@
 
 class Mission < ActiveRecord::Base
   belongs_to :user
+  belongs_to :mission_group
 
   validate :mission_text_cant_be_read_details
 

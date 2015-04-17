@@ -4,6 +4,7 @@ class MissionsController < ApplicationController
   end
 
   def new
+    @mission_group_id = params[:mission_group_id]
     @mission = Mission.new()
   end
 
@@ -33,8 +34,25 @@ class MissionsController < ApplicationController
   end
 
   def index
-    @missions = Mission.all
+    @mission_group_id = params[:mission_group_id]
+    @mission_group = MissionGroup.find(params[:mission_group_id])
+    @missions = Mission.where(mission_group_id: params[:mission_group_id])
 
+    @total_loyalty_points = @missions.sum(:loyalty_points)
+    if @total_loyalty_points > 0
+      @loyalty_points_per_user = @total_loyalty_points / @missions.pluck(:user_id).uniq.count
+    else
+      @loyalty_points_per_user = 0
+    end
+
+    # Build a list of all the unique mission destinations for use in linking to dotlan
+    @mission_system_list = ""
+    uniq_mission_system_ids = @missions.pluck(:fac_war_system_id).uniq
+    system_names = FacWarSystem.where(solarSystemID: uniq_mission_system_ids).pluck(:solarSystemName)
+    system_names.each do |system|
+      @mission_system_list = @mission_system_list + "#{system},"
+    end
+    @mission_system_list.chomp!(",")
   end
 
   def destroy

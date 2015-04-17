@@ -1,5 +1,5 @@
 <% if current_user %>
-  <%= link_to('Missions', missions_path) %>
+  <%= link_to('Missions', mission_groups_path) %>
     <% if current_user.director %>
       <%= link_to "Latest Uploads", latest_videos_path %>
       <%= link_to "Upload Video", new_video_path %>

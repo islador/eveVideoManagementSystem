@@ -1,24 +1,27 @@
 class MissionsController < ApplicationController
   def show
     @mission = Mission.find(params[:id])
+    authorize @mission
   end
 
   def new
     @mission_group_id = params[:mission_group_id]
-    @mission = Mission.new()
+    @mission = Mission.new(mission_group_id: @mission_group_id)
+    authorize @mission
   end
 
   def create
     # Cut the mission description into a tab delimited array
     mission_text = params["Mission Description"].split("\t")
 
-    @mission = Mission.new(mission_text: mission_text)
+    @mission = Mission.new(mission_text: mission_text, mission_group_id: params[:mission_group_id])
+    authorize @mission
     if @mission.valid?
       params.permit(:mission_group_id)
       @mission.user_id = current_user.id
       @mission.name = @mission.mission_text[0].split("Objectives")[0].chomp(" ")
       @mission.loyalty_points = @mission.mission_text[7].split("Loyalty")[0].to_i
-      @mission.mission_group_id = params[:mission_group_id]
+      #@mission.mission_group_id = params[:mission_group_id]
       # Extract the mission system name from the mission_text
       mission_system = @mission.mission_text[3].split(" ")[0]
       mission_system_name = mission_system.slice(4, mission_system.length)
@@ -39,6 +42,13 @@ class MissionsController < ApplicationController
     @mission_group = MissionGroup.find(params[:mission_group_id])
     @missions = Mission.where(mission_group_id: params[:mission_group_id])
 
+    # Authorize the user to view the index.
+    if @missions.empty?
+      authorize @mission_group.missions.new()
+    else
+      authorize @missions.first
+    end
+
     @total_loyalty_points = @missions.sum(:loyalty_points)
     if @total_loyalty_points > 0
       @loyalty_points_per_user = @total_loyalty_points / @missions.pluck(:user_id).uniq.count
@@ -57,7 +67,9 @@ class MissionsController < ApplicationController
   end
 
   def destroy
-    Mission.find(params[:id]).destroy
+    @mission = Mission.find(params[:id])
+    authorize @mission
+    @mission.destroy
   end
 
   def accessible_agents

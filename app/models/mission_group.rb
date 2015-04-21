@@ -13,6 +13,10 @@
 class MissionGroup < ActiveRecord::Base
   has_many :missions
 
+  def accessible_to_user?(user)
+    participants.include?(user.id.to_s)
+  end
+
   def creatable_by_user?(user)
     # Allow the user to create a mission group if they're a member
     Member.where("user_id = ?", user.id).length >= 1
@@ -25,6 +29,10 @@ class MissionGroup < ActiveRecord::Base
 
   # Check if the passed in user is the creator of the mission group
   def creator?(user)
-    user.id == user_id
+    self.user_id == user_id
+  end
+
+  def participant?(user)
+    self.participants.include?(user.id.to_s)
   end
 end

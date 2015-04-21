@@ -19,6 +19,25 @@ class Mission < ActiveRecord::Base
 
   validate :mission_text_cant_be_read_details
 
+  def accessible_to_user?(user)
+    # Check if the user is part of the mission group.
+    self.mission_group.participant?(user)
+  end
+
+  def creatable_by_user?(user)
+    # Allow the user to create a mission if they're a participant in the mission group
+    self.mission_group.participant?(user)
+  end
+
+  def editable_by_user?(user)
+    # Allow the user to edit a mission if they're the group or the mission's creator
+    if self.mission_group.creator?(user) || self.user.id == current_user.id
+      return true
+    else
+      false
+    end
+  end
+
   private
     def mission_text_cant_be_read_details
       if mission_text[3].blank? || mission_text[7].blank?

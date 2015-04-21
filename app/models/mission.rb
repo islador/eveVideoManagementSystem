@@ -11,6 +11,9 @@
 #  updated_at        :datetime         not null
 #  mission_text      :text             default("{}"), is an Array
 #  mission_group_id  :integer
+#  incomplete        :boolean
+#  complete          :boolean
+#  obstructed        :boolean
 #
 
 class Mission < ActiveRecord::Base

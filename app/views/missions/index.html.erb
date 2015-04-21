@@ -30,6 +30,8 @@
       <td> <%= mission.user.main_character_name %> </td>
       <td> <%#= mission.fac_war_system.solarSystemName %> </td>
       <td> <%= mission.loyalty_points %> </td>
+      <td> <%= link_to "Mark Obstructed", %> </td>
+      <td> <%= link_to "Mark Completed", %> </td>
       <td> <%= link_to "View", mission_group_mission_path(@mission_group_id, mission) %> </td>
       <td></td>
     </tr>

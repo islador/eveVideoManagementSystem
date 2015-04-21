@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150421011820) do
+ActiveRecord::Schema.define(version: 20150421234917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,9 @@ ActiveRecord::Schema.define(version: 20150421011820) do
     t.datetime "updated_at",                     null: false
     t.text     "mission_text",      default: [],              array: true
     t.integer  "mission_group_id"
+    t.boolean  "incomplete"
+    t.boolean  "complete"
+    t.boolean  "obstructed"
   end
 
   create_table "months", force: :cascade do |t|

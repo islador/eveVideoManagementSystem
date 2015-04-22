@@ -41,6 +41,11 @@ class Mission < ActiveRecord::Base
     end
   end
 
+  # Check if the passed in user is the creator of the mission group
+  def creator?(user)
+    self.user_id == user_id
+  end
+
   private
     def mission_text_cant_be_read_details
       if mission_text[3].blank? || mission_text[7].blank?

@@ -26,6 +26,18 @@ class MissionPolicy
     @mission.editable_by_user?(@user)
   end
 
+  def mark_obstructed?
+    @mission.editable_by_user?(@user)
+  end
+
+  def mark_complete?
+    @mission.editable_by_user?(@user)
+  end
+
+  def mark_incomplete?
+    @mission.editable_by_user?(@user)
+  end
+
   def update?
     @mission.editable_by_user?(@user)
   end

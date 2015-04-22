@@ -37,7 +37,12 @@ Rails.application.routes.draw do
   get 'refresh_fac_war_systems' => 'fac_war_systems#refresh_fac_war_systems'
 
   resources :mission_groups do
-    resources :missions, only: [:index, :show, :new, :create, :destroy]
+    resources :missions do
+      put 'obstructed' => 'missions#mark_obstructed'
+      put 'complete' => 'missions#mark_complete'
+      put 'incomplete' => 'missions#mark_incomplete'
+    end
+
   end
   get 'accessible_agents' => 'missions#accessible_agents'
 end

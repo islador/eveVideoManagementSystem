@@ -1,3 +1,19 @@
 // Place all the styles related to the Missions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.mission__potential-lp {
+  float: left;
+  padding-right: 5px;
+}
+.mission__earned-lp {
+  float: left;
+  padding-right: 5px;
+}
+.mission__obstructed-lp {
+  float: left;
+}
+
+.mission__listing {
+  clear: both;
+}

@@ -71,7 +71,7 @@
       <tr>
         <td> <%= mission.name %> </td>
         <td> <%= mission.user.main_character_name %> </td>
-        <td> <%= link_to @system_names_hash[mission.fac_war_system_id] %> </td>
+        <td><button type"button" onclick="CCPEVE.setDestination(<%= mission.fac_war_system_id %>)"> <%= @system_names_hash[mission.fac_war_system_id] %></button></td>
         <td> <%= mission.loyalty_points %> </td>
         <% if mission.creator?(current_user) || mission.mission_group.creator?(current_user) %>
           <% if mission.incomplete %>

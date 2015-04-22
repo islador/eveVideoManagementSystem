@@ -18,7 +18,7 @@
       <% formatted_date = "#{group.created_at.strftime("%A the #{group.created_at.strftime("%-d")}#{date_ordinal} of %B")}" %>
       <td> <%= formatted_date %> </td>
       <td> <%= link_to "View Group", mission_group_path(group) %> </td>
-      <td></td>
+      <td> <%= link_to "Delete", mission_group_path(group), data: { confirm: "Are you sure?" }, method: :delete  %> </td>
     </tr>
     <% end %>
   </tbody>

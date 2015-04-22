@@ -49,6 +49,7 @@ class MissionGroupsController < ApplicationController
     @mission_group = MissionGroup.find(params[:id])
     authorize @mission_group
     @mission_group.destroy
+    redirect_to mission_groups_path
   end
 
   private

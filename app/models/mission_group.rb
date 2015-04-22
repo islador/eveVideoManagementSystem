@@ -36,6 +36,6 @@ class MissionGroup < ActiveRecord::Base
   # regardless of whether the member has been claimed or not.
   def participant?(user)
     member_id = Member.where("name = ?", user.main_character_name)[0].id
-    self.participants.include?(member_id)
+    self.participants.include?(member_id.to_s)
   end
 end

@@ -29,10 +29,13 @@ class MissionGroup < ActiveRecord::Base
 
   # Check if the passed in user is the creator of the mission group
   def creator?(user)
-    self.user_id == user_id
+    self.user_id == user.id
   end
 
+  # Participants is an array of member IDs that are used to determine who can and can't join
+  # regardless of whether the member has been claimed or not.
   def participant?(user)
-    self.participants.include?(user.id.to_s)
+    member_id = Member.where("name = ?", user.main_character_name)[0].id
+    self.participants.include?(member_id)
   end
 end

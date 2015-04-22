@@ -6,15 +6,16 @@ class MissionGroupsController < ApplicationController
 
   def create
     authorize MissionGroup.new
-    @mission_group = MissionGroup.create(create_mission_group_params)
+    @mission_group = MissionGroup.new(create_mission_group_params)
     # Set the mission group's creator
     @mission_group.user_id = current_user.id
     # Add the creator the group's participants for easy querying
-    @mission_group.participants << current_user.id
+    @mission_group.participants << Member.where("name = ?", current_user.main_character_name)[0].id
+    @mission_group.participants.uniq!
     if @mission_group.save
       redirect_to mission_group_missions_path(@mission_group)
     else
-      flash[:alert] = "You shouldn't ever see this. Take a screenshot and email it to issy"
+      @members = Member.all
       render 'new'
     end
   end
@@ -22,11 +23,14 @@ class MissionGroupsController < ApplicationController
   def new
     @mission_group = MissionGroup.new
     authorize @mission_group
+    @members = Member.all
   end
 
   def edit
     @mission_group = MissionGroup.find(params[:id])
     authorize @mission_group
+    @members = Member.all
+    @selected_members = @mission_group.participants
   end
 
   def show
@@ -37,6 +41,7 @@ class MissionGroupsController < ApplicationController
   def update
     @mission_group = MissionGroup.find(params[:id])
     authorize @mission_group
+    # Allows the user to remove themselves from the participants list. Must fix.
     @mission_group.update_attributes(create_mission_group_params)
   end
 
@@ -48,6 +53,6 @@ class MissionGroupsController < ApplicationController
 
   private
     def create_mission_group_params
-      params.permit(:name)
+      params.permit(:name, :participants => [])
     end
 end

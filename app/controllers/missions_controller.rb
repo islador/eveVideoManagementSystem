@@ -55,6 +55,7 @@ class MissionsController < ApplicationController
       authorize @missions.first
     end
 
+    @participants = Member.where(id: @mission_group.participants).pluck(:name)
     @total_potential_loyalty_points = @missions.where("incomplete = ?", true).sum(:loyalty_points)
     @total_earned_loyalty_points = @missions.where("complete = ?", true).sum(:loyalty_points)
     @total_obstructed_loyalty_points = @missions.where("obstructed = ?", true).sum(:loyalty_points)

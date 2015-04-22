@@ -34,7 +34,7 @@ class Mission < ActiveRecord::Base
 
   def editable_by_user?(user)
     # Allow the user to edit a mission if they're the group or the mission's creator
-    if self.mission_group.creator?(user) || self.user.id == current_user.id
+    if self.mission_group.creator?(user) || self.user_id == current_user.id
       return true
     else
       false
@@ -43,7 +43,7 @@ class Mission < ActiveRecord::Base
 
   # Check if the passed in user is the creator of the mission group
   def creator?(user)
-    self.user_id == user_id
+    self.user_id == user.id
   end
 
   private

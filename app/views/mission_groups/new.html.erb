@@ -2,6 +2,10 @@
   <%= form_tag mission_groups_path do %>
     <%= render "shared/error_messages", :target => @mission_group %>
     <%= text_field_tag 'name', nil, placeholder: "Name" %>
+    <div class="mission-group__participants">
+      <%= label_tag :participants, "Participants" %>
+      <%= select_tag "participants", options_from_collection_for_select(@members, "id", "name"), multiple: true %>
+    </div>
     <%= submit_tag "Create Mission Group" %>
   <% end %>
 </div>

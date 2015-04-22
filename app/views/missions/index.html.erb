@@ -62,8 +62,8 @@
         <th> Posted By </th>
         <th> Destination </th>
         <th> Loyalty Points </th>
-        <th></th>
-        <th></th>
+        <th> </th>
+        <th> </th>
       </tr>
     </thead>
     <tbody>
@@ -71,24 +71,24 @@
       <tr>
         <td> <%= mission.name %> </td>
         <td> <%= mission.user.main_character_name %> </td>
-        <td> <%= button_to @system_names_hash[mission.fac_war_system_id] %> </td>
+        <td> <%= link_to @system_names_hash[mission.fac_war_system_id] %> </td>
         <td> <%= mission.loyalty_points %> </td>
         <% if mission.creator?(current_user) || mission.mission_group.creator?(current_user) %>
           <% if mission.incomplete %>
-            <td> <%= link_to "Mark Complete", mission_group_mission_complete_path(@mission_group_id, mission), method: :put %> <td>
-            <td> <%= link_to "Mark Obstructed", mission_group_mission_obstructed_path(@mission_group_id, mission), method: :put %> <td>
+            <td> <%= link_to "Mark Complete", mission_group_mission_complete_path(@mission_group_id, mission), method: :put %> </td>
+            <td> <%= link_to "Mark Obstructed", mission_group_mission_obstructed_path(@mission_group_id, mission), method: :put %> </td>
           <% end %>
           <% if mission.complete %>
-            <td> <%= link_to "Mark Incomplete", mission_group_mission_incomplete_path(@mission_group_id, mission), method: :put %> <td>
-            <td> <%= link_to "Mark Obstructed", mission_group_mission_obstructed_path(@mission_group_id, mission), method: :put %> <td>
+            <td> <%= link_to "Mark Incomplete", mission_group_mission_incomplete_path(@mission_group_id, mission), method: :put %> </td>
+            <td> <%= link_to "Mark Obstructed", mission_group_mission_obstructed_path(@mission_group_id, mission), method: :put %> </td>
           <% end %>
           <% if mission.obstructed %>
-            <td> <%= link_to "Mark Complete", mission_group_mission_complete_path(@mission_group_id, mission), method: :put %> <td>
-            <td> <%= link_to "Mark Incomplete", mission_group_mission_incomplete_path(@mission_group_id, mission), method: :put %> <td>
+            <td> <%= link_to "Mark Complete", mission_group_mission_complete_path(@mission_group_id, mission), method: :put %> </td>
+            <td> <%= link_to "Mark Incomplete", mission_group_mission_incomplete_path(@mission_group_id, mission), method: :put %> </td>
           <% end %>
         <% else %>
-          <td></td>
-          <td></td>
+          <td>Fuck</td>
+          <td>Ass</td>
         <% end %>
       </tr>
       <% end %>

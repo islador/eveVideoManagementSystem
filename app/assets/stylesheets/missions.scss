@@ -17,3 +17,24 @@
 .mission__listing {
   clear: both;
 }
+
+label {
+  color: white;
+}
+
+tbody {
+  td {
+    background-color: #2A2A2A;
+    text-align:center;
+  }
+}
+
+
+.dataTables_info {
+  color: white !important;
+}
+
+
+.paginate_button {
+  color: white;
+}

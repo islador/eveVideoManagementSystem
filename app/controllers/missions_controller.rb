@@ -60,7 +60,7 @@ class MissionsController < ApplicationController
     @total_earned_loyalty_points = @missions.where("complete = ?", true).sum(:loyalty_points)
     @total_obstructed_loyalty_points = @missions.where("obstructed = ?", true).sum(:loyalty_points)
 
-    unique_user_count = @missions.pluck(:user_id).count
+    unique_user_count = @missions.pluck(:user_id).uniq.count
     if @total_potential_loyalty_points > 0
       @potential_loyalty_points_per_user = @total_potential_loyalty_points / unique_user_count
     else

@@ -14,7 +14,7 @@ class MissionGroup < ActiveRecord::Base
   has_many :missions
 
   def accessible_to_user?(user)
-    participants.include?(user.id.to_s)
+    self.participant?(user)
   end
 
   def creatable_by_user?(user)

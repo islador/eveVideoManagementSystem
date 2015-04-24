@@ -43,6 +43,7 @@ class MissionGroupsController < ApplicationController
     authorize @mission_group
     # Allows the user to remove themselves from the participants list. Must fix.
     @mission_group.update_attributes(create_mission_group_params)
+    redirect_to mission_group_path(@mission_group)
   end
 
   def destroy

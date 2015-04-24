@@ -1,11 +1,11 @@
 <div class="mission-group">
-  <%= form_tag mission_groups_path do %>
+  <%= form_tag(mission_group_path(@mission_group), method: "put") do %>
     <%= render "shared/error_messages", :target => @mission_group %>
     <%= text_field_tag 'name', @mission_group.name, placeholder: "Name" %>
     <div class="mission-group__participants">
       <%= label_tag :participants, "Participants" %>
       <%= select_tag "participants", options_from_collection_for_select(@members, "id", "name", @selected_members), multiple: true %>
     </div>
-    <%= submit_tag "Create Mission Group" %>
+    <%= submit_tag "Update Mission Group" %>
   <% end %>
 </div>

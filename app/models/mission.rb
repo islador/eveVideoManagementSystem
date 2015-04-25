@@ -46,6 +46,16 @@ class Mission < ActiveRecord::Base
     self.user_id == user.id
   end
 
+  def status
+    if self.incomplete
+      return "Incomplete"
+    elsif self.complete
+      return "Complete"
+    else
+      return "Obstructed"
+    end
+  end
+
   private
     def mission_text_cant_be_read_details
       if mission_text[3].blank? || mission_text[7].blank?

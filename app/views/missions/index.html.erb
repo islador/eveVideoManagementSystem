@@ -62,6 +62,7 @@
         <th> Posted By </th>
         <th> Destination </th>
         <th> Loyalty Points </th>
+        <th> Status </th>
         <th> </th>
         <th> </th>
       </tr>
@@ -73,6 +74,7 @@
         <td> <%= mission.user.main_character_name %> </td>
         <td><button type"button" onclick="CCPEVE.setDestination(<%= mission.fac_war_system_id %>)"> <%= @system_names_hash[mission.fac_war_system_id] %></button></td>
         <td> <%= mission.loyalty_points %> </td>
+        <td> <%= mission.status %> </td>
         <% if mission.creator?(current_user) || mission.mission_group.creator?(current_user) %>
           <% if mission.incomplete %>
             <td> <%= link_to "Mark Complete", mission_group_mission_complete_path(@mission_group_id, mission), method: :put %> </td>

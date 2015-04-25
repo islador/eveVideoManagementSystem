@@ -12,6 +12,7 @@
 
 class MissionGroup < ActiveRecord::Base
   has_many :missions
+  belongs_to :user
 
   def accessible_to_user?(user)
     self.participant?(user)

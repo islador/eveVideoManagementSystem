@@ -29,7 +29,8 @@ class MissionGroupsController < ApplicationController
   def edit
     @mission_group = MissionGroup.find(params[:id])
     authorize @mission_group
-    @members = Member.all
+    owners_members = current_user.members.pluck(:name)
+    @members = Member.where("name NOT IN (?)", owners_members)
     @selected_members = @mission_group.participants
   end
 
@@ -39,10 +40,25 @@ class MissionGroupsController < ApplicationController
   end
 
   def update
+    # Authorize the update of the group
     @mission_group = MissionGroup.find(params[:id])
     authorize @mission_group
-    # Allows the user to remove themselves from the participants list. Must fix.
-    @mission_group.update_attributes(create_mission_group_params)
+
+    # Extract out the required params and update them
+    @mission_group.name = params[:name]
+    # Ensure that a user sending an empty participants array clears participants as desired.
+    unless params[:participants].nil?
+      @mission_group.participants = params[:participants]
+    else
+      @mission_group.participants = []
+    end
+
+    # Ensure the owning user is always added to the participants array
+    @mission_group.participants << Member.where(name: @mission_group.user.main_character_name).pluck(:id)
+    @mission_group.participants.flatten!
+
+    # Save and redirect
+    @mission_group.save
     redirect_to mission_group_path(@mission_group)
   end
 

@@ -11,7 +11,7 @@
 #
 
 class MissionGroup < ActiveRecord::Base
-  has_many :missions
+  has_many :missions, dependent: :destroy
   belongs_to :user
 
   def accessible_to_user?(user)

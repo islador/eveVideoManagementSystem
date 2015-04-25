@@ -3,7 +3,7 @@
   <%= link_to "Add New Mission to Group", new_mission_group_mission_path(@mission_group_id) %>
   <% if @mission_group.creator?(current_user) %>
     <%= link_to "Edit Participants", edit_mission_group_path(@mission_group_id) %>
-    <%= link_to "Delete", mission_group_path(@mission_group_id), data: { confirm: "Are you sure?" }, method: :delete %>
+    <%= link_to "Delete Group", mission_group_path(@mission_group_id), data: { confirm: "Are you sure?" }, method: :delete %>
   <% end %>
 </div>
 <div class="mission__group-name">

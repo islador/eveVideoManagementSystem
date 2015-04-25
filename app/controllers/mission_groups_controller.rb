@@ -43,7 +43,8 @@ class MissionGroupsController < ApplicationController
     # Authorize the update of the group
     @mission_group = MissionGroup.find(params[:id])
     authorize @mission_group
-
+    # Copy the participants array before updating it.
+    old_participants = Array.new(@mission_group.participants)
     # Extract out the required params and update them
     @mission_group.name = params[:name]
     # Ensure that a user sending an empty participants array clears participants as desired.
@@ -54,8 +55,23 @@ class MissionGroupsController < ApplicationController
     end
 
     # Ensure the owning user is always added to the participants array
-    @mission_group.participants << Member.where(name: @mission_group.user.main_character_name).pluck(:id)
-    @mission_group.participants.flatten!
+    # Extract it from the database, turn it into a string and push it into the participants array.
+    owner_member_id = Member.where(name: @mission_group.user.main_character_name).pluck(:id)
+    owner_member_id = owner_member_id[0].to_s
+    @mission_group.participants << owner_member_id
+
+    # Compare the old and new participants array
+    old_participants.each do |old_participant|
+      # If an old participant isn't in the new array
+      if !@mission_group.participants.include?(old_participant)
+        # Remove its missions from the group.
+        old_participant_user = Member.find(old_participant).user
+        if old_participant_user
+          # Note: This bulk delete does not fire active record callbacks.
+          @mission_group.missions.where("user_id = ?", Member.find(old_participant).user.id).destroy_all
+        end
+      end
+    end
 
     # Save and redirect
     @mission_group.save

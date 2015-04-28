@@ -22,3 +22,19 @@ ceo = Role.create(name: "Corp CEO", description: "CEO of the corporation", hiera
 islador = Member.create(name: "islador", characterID: 601261354, startDateTime: DateTime.now)
 
 MembersRole.create(member_id: islador.id, role_id: ceo.id)
+
+# Load the WarCombatZoneSystem table with data from the static export.
+csv_text = File.read("#{Rails.root.join("db","sde_exports","warCombatZoneSystems.csv")}")
+
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  WarCombatZoneSystem.create(row.to_hash)
+end
+
+# Populate the SolarSystems table with all State Protectorate mission Systems
+csv_text = File.read("#{Rails.root.join("db","sde_exports","stateProtectorateMissionSystems.csv")}")
+
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  SolarSystem.create(row.to_hash)
+end

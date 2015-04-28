@@ -11,10 +11,80 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401000856) do
+ActiveRecord::Schema.define(version: 20150421234917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chrRaces", primary_key: "raceID", force: :cascade do |t|
+    t.text    "raceName"
+    t.text    "description"
+    t.integer "iconID",           limit: 8
+    t.text    "shortDescription"
+  end
+
+  create_table "doctrines", force: :cascade do |t|
+    t.string   "name"
+    t.string   "short_description"
+    t.text     "long_description"
+    t.boolean  "access_by_hierarchy"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "abbreviation"
+  end
+
+  create_table "doctrines_roles", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "doctrine_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "fac_war_systems", force: :cascade do |t|
+    t.integer  "solarSystemID"
+    t.string   "solarSystemName"
+    t.integer  "occupyingFactionID"
+    t.integer  "owningFactionID"
+    t.string   "occupyingFactionName"
+    t.string   "owningFactionName"
+    t.boolean  "contested"
+    t.integer  "victoryPoints"
+    t.integer  "victoryPointThreshold"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "fittings", force: :cascade do |t|
+    t.string   "name"
+    t.string   "hull"
+    t.string   "race"
+    t.string   "fleet_role"
+    t.text     "description"
+    t.string   "progression"
+    t.integer  "progression_position"
+    t.string   "eft_string"
+    t.string   "ship_dna"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "doctrine_id"
+  end
+
+  create_table "invTypes", primary_key: "typeID", force: :cascade do |t|
+    t.integer "groupID",             limit: 8
+    t.text    "typeName"
+    t.text    "description"
+    t.float   "mass"
+    t.float   "volume"
+    t.float   "capacity"
+    t.integer "portionSize",         limit: 8
+    t.integer "raceID",              limit: 2
+    t.decimal "basePrice",                     precision: 19, scale: 4
+    t.boolean "published"
+    t.integer "marketGroupID",       limit: 8
+    t.float   "chanceOfDuplicating"
+  end
+
+  add_index "invTypes", ["groupID"], name: "idx_149637_invTypes_IX_Group", using: :btree
 
   create_table "members", force: :cascade do |t|
     t.integer  "characterID"
@@ -40,6 +110,28 @@ ActiveRecord::Schema.define(version: 20150401000856) do
 
   add_index "members_roles", ["member_id"], name: "index_members_roles_on_member_id", using: :btree
   add_index "members_roles", ["role_id"], name: "index_members_roles_on_role_id", using: :btree
+
+  create_table "mission_groups", force: :cascade do |t|
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "name"
+    t.integer  "user_id"
+    t.text     "participants", default: [],              array: true
+  end
+
+  create_table "missions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "fac_war_system_id"
+    t.integer  "loyalty_points"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.text     "mission_text",      default: [],              array: true
+    t.integer  "mission_group_id"
+    t.boolean  "incomplete"
+    t.boolean  "complete"
+    t.boolean  "obstructed"
+  end
 
   create_table "months", force: :cascade do |t|
     t.integer  "year_id"
@@ -109,6 +201,15 @@ ActiveRecord::Schema.define(version: 20150401000856) do
   add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id", using: :btree
   add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id", using: :btree
 
+  create_table "solar_systems", force: :cascade do |t|
+    t.string   "solarSystemName"
+    t.integer  "solarSystemID"
+    t.float    "security"
+    t.string   "missions"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.integer  "sign_in_count",       default: 0, null: false
     t.datetime "current_sign_in_at"
@@ -131,6 +232,12 @@ ActiveRecord::Schema.define(version: 20150401000856) do
     t.string   "kind"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "warCombatZoneSystems", primary_key: "solarSystemID", force: :cascade do |t|
+    t.integer  "combatZoneID", limit: 8
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "years", force: :cascade do |t|

@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   has_many :members
   has_many :roles
   has_and_belongs_to_many :roles
+  has_many :missions
+  has_many :mission_groups
 
   def self.from_omniauth(auth_hash)
     # Query for the characterID in the member table.
@@ -101,5 +103,13 @@ class User < ActiveRecord::Base
 
     # See if the user has those roles.
     RolesUser.where(role_id: director_ceo_role_ids, user_id: self.id)[0].present?
+  end
+
+  def member
+    # Retrieve the role ids a corp member might have.
+    member_role_ids = Role.where(name: ["Corp Member", "Corp Director", "Corp CEO"]).pluck(:id)
+
+    # See if the user has those roles.
+    RolesUser.where(role_id: member_role_ids, user_id: self.id).length > 0
   end
 end

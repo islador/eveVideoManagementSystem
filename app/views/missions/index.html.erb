@@ -1,0 +1,99 @@
+<div class="mission__nav-links">
+  <%= link_to "Accessible Agents", accessible_agents_path %>
+  <%= link_to "Add New Mission to Group", new_mission_group_mission_path(@mission_group_id) %>
+  <% if @mission_group.creator?(current_user) %>
+    <%= link_to "Edit Participants", edit_mission_group_path(@mission_group_id) %>
+    <%= link_to "Delete Group", mission_group_path(@mission_group_id), data: { confirm: "Are you sure?" }, method: :delete %>
+  <% end %>
+</div>
+<div class="mission__group-name">
+  <h1> <%= @mission_group.name %> </h1>
+</div>
+<div class="mission__lp-stats">
+  <div class="mission__potential-lp">
+    <div class="mission__potential-loyalty-points">
+      <h2> Potential LP: <%= @total_potential_loyalty_points %> </h2>
+    </div>
+    <div class="mission__potential-loyalty-points-per-user">
+      <h2> Potential LP/User: <%= @potential_loyalty_points_per_user %> </h2>
+    </div>
+  </div>
+
+  <div class="mission__earned-lp">
+    <div class="mission__earned-loyalty-points">
+      <h2> Earned LP: <%= @total_earned_loyalty_points %> </h2>
+    </div>
+    <div class="mission__earned-loyalty-points-per-user">
+      <h2> Earned LP/User: <%= @earned_loyalty_points_per_user %> </h2>
+    </div>
+  </div>
+
+  <div class="mission__obstructed-lp">
+    <div class="mission__obstructed-loyalty-points">
+      <h2> Obstructed LP: <%= @total_obstructed_loyalty_points %> </h2>
+    </div>
+    <div class="mission__obstructed-loyalty-points-per-user">
+      <h2> Obstructed LP/User: <%= @obstructed_loyalty_points_per_user %> </h2>
+    </div>
+  </div>
+</div>
+
+<div class="mission__listing" >
+  <div class="mission__mission-map">
+    <%= link_to "Mission Map", "http://evemaps.dotlan.net/map/Caldari_VS_Gallente/#{@mission_system_list}" %>
+  </div>
+  <div class="mission__obstructed-mission-map">
+    <% if !@obstructed_system_list.blank? %>
+      <%= link_to "Obstructed Systems", "http://evemaps.dotlan.net/map/Caldari_VS_Gallente/#{@obstructed_system_list}" %>
+    <% end %>
+  </div>
+  <div class="mission__participants">
+    Participants:
+    <% @participants.each do |participant| %>
+      <div class="mission__participant-name">
+        <%= participant %>
+      </div>
+    <% end %>
+  </div>
+  <table class="mission__mission-table">
+    <thead>
+      <tr>
+        <th> Name </th>
+        <th> Posted By </th>
+        <th> Destination </th>
+        <th> Loyalty Points </th>
+        <th> Status </th>
+        <th> </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @missions.each do |mission| %>
+      <tr>
+        <td> <%= mission.name %> </td>
+        <td> <%= mission.user.main_character_name %> </td>
+        <td><button type"button" onclick="CCPEVE.setDestination(<%= mission.fac_war_system_id %>)"> <%= @system_names_hash[mission.fac_war_system_id] %></button></td>
+        <td> <%= mission.loyalty_points %> </td>
+        <td> <%= mission.status %> </td>
+        <% if mission.creator?(current_user) || mission.mission_group.creator?(current_user) %>
+          <% if mission.incomplete %>
+            <td> <%= link_to "Mark Complete", mission_group_mission_complete_path(@mission_group_id, mission), method: :put %> </td>
+            <td> <%= link_to "Mark Obstructed", mission_group_mission_obstructed_path(@mission_group_id, mission), method: :put %> </td>
+          <% end %>
+          <% if mission.complete %>
+            <td> <%= link_to "Mark Incomplete", mission_group_mission_incomplete_path(@mission_group_id, mission), method: :put %> </td>
+            <td> <%= link_to "Mark Obstructed", mission_group_mission_obstructed_path(@mission_group_id, mission), method: :put %> </td>
+          <% end %>
+          <% if mission.obstructed %>
+            <td> <%= link_to "Mark Complete", mission_group_mission_complete_path(@mission_group_id, mission), method: :put %> </td>
+            <td> <%= link_to "Mark Incomplete", mission_group_mission_incomplete_path(@mission_group_id, mission), method: :put %> </td>
+          <% end %>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

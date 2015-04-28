@@ -42,6 +42,7 @@ gem 's3_direct_upload'
 # UI/UX/Styles
 gem 'jquery-ui-rails'
 gem 'sass-rails', '~> 5.0'
+gem 'jquery-datatables-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

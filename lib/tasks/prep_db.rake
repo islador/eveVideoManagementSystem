@@ -12,4 +12,24 @@ namespace :prep_db do
     Role.create(name: "Corp Director", description: "A director in the corporation", hierarchy_ranking: 6)
     Role.create(name: "Corp CEO", description: "CEO of the corporation", hierarchy_ranking: 7)
   end
+
+  desc "Load the WarZoneCombatSystem table."
+  task populate_war_zone_combat_system: :environment do
+    csv_text = File.read("#{Rails.root.join("db","sde_exports","warCombatZoneSystems.csv")}")
+
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      WarCombatZoneSystem.create(row.to_hash)
+    end
+  end
+
+  desc "Load the SolarSystem's table with known systems of interest."
+  task populate_solar_systems: :environment do
+    csv_text = File.read("#{Rails.root.join("db","sde_exports","stateProtectorateMissionSystems.csv")}")
+
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      SolarSystem.create(row.to_hash)
+    end
+  end
 end

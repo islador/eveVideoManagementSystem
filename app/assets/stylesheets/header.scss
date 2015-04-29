@@ -28,9 +28,6 @@
 }
 
 .header__nav-links {
-  //border-style: solid;
-  //border-width: 1px;
-  //border-color: white;
   height: 40px;
   .header__nav-link {
     float: left;
@@ -44,23 +41,12 @@
     border-color: #1c1c1c;
 
     a {
-      color: #B8ADAD;
+      color: #FFA500;
       text-decoration: none;
     }
 
     a:hover {
-      color: #827171;
+      text-decoration: underline;
     }
-
-    a:visited {
-      color: #616060;
-      &:hover {
-        color: #827171;
-      }
-    }
-  }
-
-  .header__nav-link:hover {
-    //background-color: red;
   }
 }

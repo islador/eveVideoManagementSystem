@@ -1,29 +1,32 @@
-<div class="mission__nav-links">
-  <%= link_to "Accessible Agents", accessible_agents_path %>
-  <%= link_to "Add New Mission Group", new_mission_group_path %>
-</div>
-<table>
-  <thead>
-    <th> Name </th>
-    <th> Posted By </th>
-    <th> Date </th>
-    <th></th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% @mission_groups.each do |group| %>
-    <tr>
-      <td> <%= group.name %> </td>
-      <% date_ordinal = group.created_at.strftime("%-d").to_i.ordinal %>
-      <% formatted_date = "#{group.created_at.strftime("%A the #{group.created_at.strftime("%-d")}#{date_ordinal} of %B")}" %>
-      <td> <%= formatted_date %> </td>
-      <td> <%= link_to "View Group", mission_group_path(group) %> </td>
-      <% if group.creator?(current_user) %>
-        <td> <%= link_to "Delete", mission_group_path(group), data: { confirm: "Are you sure?" }, method: :delete  %> </td>
-      <% else %>
-        <td></td>
+<div class="mission-group-list">
+  <div class="mission__nav-links">
+    <%= link_to "Accessible Agents", accessible_agents_path %>
+    <%= link_to "Add New Mission Group", new_mission_group_path %>
+  </div>
+  <table>
+    <thead>
+      <th> Group Name </th>
+      <th> Posted By </th>
+      <th> Date </th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @mission_groups.each do |group| %>
+      <tr>
+        <td> <%= group.name %> </td>
+        <% date_ordinal = group.created_at.strftime("%-d").to_i.ordinal %>
+        <% formatted_date = "#{group.created_at.strftime("%A the #{group.created_at.strftime("%-d")}#{date_ordinal} of %B")}" %>
+        <td> <%= group.user.main_character_name %> </td>
+        <td> <%= formatted_date %> </td>
+        <td> <%= link_to "View Group", mission_group_path(group) %> </td>
+        <% if group.creator?(current_user) %>
+          <td> <%= link_to "Delete", mission_group_path(group), data: { confirm: "Are you sure?" }, method: :delete  %> </td>
+        <% else %>
+          <td></td>
+        <% end %>
+      </tr>
       <% end %>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>

@@ -1,6 +1,7 @@
 class MissionGroupsController < ApplicationController
   def index
-    authorize MissionGroup.new #current_user #MissionGroup.new()
+    authorize MissionGroup.new
+    member_ids = current_user.members.pluck(:id)
     @mission_groups = MissionGroup.where("'#{current_user.id}' = ANY (participants)")
   end
 

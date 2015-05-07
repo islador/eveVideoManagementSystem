@@ -20,5 +20,18 @@
 require 'rails_helper'
 
 RSpec.describe Member, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  #let(:member) {Member.create()}
+  let(:member) {FactoryGirl.create(:member)}
+
+  it "should have a characterID" do
+    expect(member.characterID).to_not be_nil
+  end
+
+  it "should have a name" do
+    expect(member.name).to_not be_nil
+  end
+
+  it "should have a startDateTime" do
+    expect(member.startDateTime).to_not be_nil
+  end
 end

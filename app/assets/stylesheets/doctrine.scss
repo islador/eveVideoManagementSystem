@@ -1,0 +1,111 @@
+// Place all the styles related to the Doctrine controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.doctrine {
+  width: 80%;
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%);
+  border-top: 1px solid #333333;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #333333;
+}
+
+.doctrine__name {
+  //display: block;
+  float: left;
+  //height: 50px;
+  font-size: 200%;
+  //line-height: 50px;
+  padding-left: 5px;
+  padding-right: 5px;
+  //border-right: 1px solid #333333;
+  //border-bottom: 1px solid #333333;
+}
+
+.doctrine__description {
+  float: left;
+  //width: 700px;
+  //padding: 5px;
+  border-top: 1px solid #333333;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #333333;
+  .doctrine__description-text {
+    padding: 5px;
+  }
+}
+
+.doctrine__nav-links {
+  clear:both;
+  border-bottom: 1px solid #333333;
+}
+
+.doctrine-progressions__race {
+  padding: 5px;
+  border: 1px solid #333333;
+  clear: both;
+  padding-top: 20px;
+  .doctrine-progressions__race-title {
+    font-size: 170%;
+  }
+
+  .doctrine-progressions__progression {
+    border: 1px solid #333333;
+    clear: both;
+    .doctrine-progressions__progression-title {
+      padding: 5px;
+      font-size: 160%;
+    }
+
+    .doctrine-progressions__fit {
+      padding-left: 15px;
+      border: 1px solid #333333;
+      clear: both;
+      height: 300px;
+      .doctrine-progressions__fit-name {
+        font-size: 150%;
+        //float: left;
+      }
+      .doctrine-progressions__fit-icon {
+        float: left;
+        padding-right: 5px;
+      }
+      .doctrine-progressions__fit-fleet-role {
+        //float: left;
+      }
+      .doctrine-progressions__fit-description {
+        padding: 5px;
+      }
+    }
+  }
+}
+
+
+.doctrine-list {
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%);
+  border-top: 1px solid #333333;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #333333;
+}
+
+.doctrine__fitting-index {
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%);
+  border-top: 1px solid #333333;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #333333;
+}
+
+
+

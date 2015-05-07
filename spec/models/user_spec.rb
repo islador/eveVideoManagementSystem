@@ -19,5 +19,19 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) {User.create(provider: "eve", uid: "1", main_character_name: "User", main_character_id: 1)}
+
+  it "should respond to provider" do
+    expect(user.provider).to match "eve"
+  end
+
+  describe "less_or_equal_roles" do
+  end
+
+  describe "director" do
+  end
+
+  describe "member" do
+    let(:member) {Member.create()}
+  end
 end

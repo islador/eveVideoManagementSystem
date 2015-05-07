@@ -1,17 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe MissionGroupsController, type: :controller do
+RSpec.describe FittingsController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
       get :index
       expect(response).to have_http_status(:success)
-    end
-
-    it "does not return mission groups the user is not a participant of" do
-    end
-
-    it "returns mission groups the user is a participant of" do
     end
   end
 

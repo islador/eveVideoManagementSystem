@@ -1,0 +1,45 @@
+<div class="fitting">
+  <div class="fitting__traits">
+    <div class="fitting__race">
+      <%= @fitting.race %>
+    </div>
+    <div class="fitting__progression">
+      <%= @fitting.progression %>
+    </div>
+    <div class="fitting__hull">
+      <%= @fitting.hull %>
+    </div>
+  </div>
+  <div class="doctrine__nav-links">
+    <%= link_to "#{@fitting.doctrine.name} Progressions", doctrine_path(@fitting.doctrine) %>
+  </div>
+  <div class="clear"/>
+  <div class="fitting__details">
+    <div class="fitting__render">
+      <% ship_type_id = @fitting.ship_dna.split(":")[0] %>
+      <img src="http://image.eveonline.com/render/<%= ship_type_id %>_256.png">
+    </div>
+    <div class="fitting__name">
+      Name: <%= @fitting.name %>
+    </div>
+    <div class="fitting__fleet-role">
+      Role: <%= @fitting.fleet_role %>
+    </div>
+  </div>
+  <div class="clear"/>
+  <div class="fitting__description">
+    <div class="fitting__description-title">
+      Description
+    </div>
+    <%= @fitting.description %>
+  </div>
+  <div class="fitting__types">
+    <div class="fitting__ship-dna">
+      <a class="fitting__ship-dna__ig-link" href="\javascript:CCPEVE.showFitting('<%= @fitting.ship_dna %>');\">Show In Game Fitting</a>
+    </div>
+    <div class="fitting__eft-string">
+      <pre><%= @fitting.eft_string %>
+      </pre>
+    </div>
+  </div>
+</div>

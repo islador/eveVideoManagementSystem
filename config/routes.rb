@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   authenticated :user do
-    root to: "videos#latest", as: :authenticated_root
+    root to: "doctrines#index", as: :authenticated_root
   end
 
   root to: redirect('/sign_in')
@@ -45,4 +45,8 @@ Rails.application.routes.draw do
 
   end
   get 'accessible_agents' => 'missions#accessible_agents'
+
+  resources :doctrines do
+    resources :fittings
+  end
 end

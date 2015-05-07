@@ -12,7 +12,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20150421234917) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,21 +69,29 @@ ActiveRecord::Schema.define(version: 20150421234917) do
   end
 
   create_table "invTypes", primary_key: "typeID", force: :cascade do |t|
-    t.integer "groupID",             limit: 8
-    t.text    "typeName"
-    t.text    "description"
-    t.float   "mass"
-    t.float   "volume"
-    t.float   "capacity"
-    t.integer "portionSize",         limit: 8
-    t.integer "raceID",              limit: 2
-    t.decimal "basePrice",                     precision: 19, scale: 4
-    t.boolean "published"
-    t.integer "marketGroupID",       limit: 8
-    t.float   "chanceOfDuplicating"
+    t.integer  "groupID",             limit: 8
+    t.text     "typeName"
+    t.text     "description"
+    t.decimal  "mass",                          precision: 64, scale: 12
+    t.decimal  "volume",                        precision: 64, scale: 12
+    t.decimal  "capacity",                      precision: 64, scale: 12
+    t.integer  "portionSize",         limit: 8
+    t.decimal  "basePrice",                     precision: 19, scale: 4
+    t.boolean  "published"
+    t.integer  "marketGroupID",       limit: 8
+    t.integer  "chanceofDuplicating", limit: 8
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   add_index "invTypes", ["groupID"], name: "idx_149637_invTypes_IX_Group", using: :btree
+
+  create_table "doctrines_roles", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "doctrine_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "members", force: :cascade do |t|
     t.integer  "characterID"

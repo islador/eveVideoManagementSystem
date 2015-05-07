@@ -1,0 +1,54 @@
+<div class="doctrine">
+
+  <div class="doctrine__description">
+    <div class="doctrine__name">
+      <%= @doctrine.name %>
+    </div>
+    <div class="doctrine__description-text">
+      At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+      <%= @doctrine.long_description %>
+    </div>
+  </div>
+  <div class="doctrine__nav-links">
+    <%= link_to "Fitting Index", doctrine_fittings_path(@doctrine) %>
+    <% if current_user.director %>
+      <%= link_to "Add New Fitting", new_doctrine_fitting_path(@doctrine) %>
+    <% end %>
+  </div>
+  <div class="doctrine-progressions">
+    <% @fittings_hash.each do |key, race| %>
+      <div class="doctrine-progressions__race">
+        <div class= "doctrine-progressions__race-title">
+          <%= key %> Progressions
+        </div>
+        <% race.each do |key, progression | %>
+          <div class="doctrine-progressions__progression">
+            <div class="doctrine-progressions__progression-title">
+              <%= key %> Progression
+            </div>
+            <% progression.each do |fit| %>
+              <div class="doctrine-progressions__fit">
+                <div class="doctrine-progressions__fit-name">
+                  <%= fit.name %>
+                </div>
+                <div class="doctrine-progressions__fit-icon">
+                  <% ship_type_id = fit.ship_dna.split(":")[0] %>
+                  <img src="http://image.eveonline.com/render/<%= ship_type_id %>_256.png">
+                </div>
+                <div class="doctrine-progressions__fit-fleet-role">
+                  Role: <%= fit.fleet_role %>
+                </div>
+                <div class="doctrine-progressions__fit-description">
+                  <%= fit.description %>
+                </div>
+                <div class="doctrine-progressions__fit-link">
+                  <%= link_to "#{fit.name} Details", doctrine_fitting_path(@doctrine, fit) %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,4 +1,13 @@
 FactoryGirl.define do
+  factory :fleet_commander do
+    overall_rating ""
+    fun_rating ""
+    communication_clarity_rating ""
+    noob_friendly_rating ""
+    target_selection_rating ""
+    friendly_rating ""
+  end
+
   factory :mission_group do
     sequence(:name) {|n| "Group #{n}"}
   end

@@ -1,12 +1,12 @@
 class CreateFleetCommanders < ActiveRecord::Migration
   def change
     create_table :fleet_commanders do |t|
-      t.fixnum :overall_rating
-      t.fixnum :fun_rating
-      t.fixnum :communication_clarity_rating
-      t.fixnum :noob_friendly_rating
-      t.fixnum :target_selection_rating
-      t.fixnum :friendly_rating
+      t.integer :overall_rating
+      t.integer :fun_rating
+      t.integer :communication_clarity_rating
+      t.integer :noob_friendly_rating
+      t.integer :target_selection_rating
+      t.integer :friendly_rating
 
       t.timestamps null: false
     end

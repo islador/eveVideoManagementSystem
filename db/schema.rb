@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512231913) do
+ActiveRecord::Schema.define(version: 20150512232412) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20150512231913) do
     t.integer  "friendly_rating",              default: 0
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.string   "name"
+    t.string   "language"
   end
 
   create_table "invTypes", primary_key: "typeID", force: :cascade do |t|

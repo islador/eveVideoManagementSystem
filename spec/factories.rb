@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :fleet_commander do
+    sequence(:name) {|n| "Fleet Commander #{n}"}
+    language "English"
     overall_rating 0
     fun_rating 0
     communication_clarity_rating 0

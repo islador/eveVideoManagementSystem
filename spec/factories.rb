@@ -1,4 +1,10 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :rating do
+    name "MyString"
+user_id 1
+fleet_commander_id 1
+score 1
+  end
+
   factory :fleet_commander do
     sequence(:name) {|n| "Fleet Commander #{n}"}
     language "English"

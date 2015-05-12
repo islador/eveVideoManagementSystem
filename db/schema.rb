@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512224742) do
+ActiveRecord::Schema.define(version: 20150512231913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,14 +70,14 @@ ActiveRecord::Schema.define(version: 20150512224742) do
   end
 
   create_table "fleet_commanders", force: :cascade do |t|
-    t.integer  "overall_rating"
-    t.integer  "fun_rating"
-    t.integer  "communication_clarity_rating"
-    t.integer  "noob_friendly_rating"
-    t.integer  "target_selection_rating"
-    t.integer  "friendly_rating"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "overall_rating",               default: 0
+    t.integer  "fun_rating",                   default: 0
+    t.integer  "communication_clarity_rating", default: 0
+    t.integer  "noob_friendly_rating",         default: 0
+    t.integer  "target_selection_rating",      default: 0
+    t.integer  "friendly_rating",              default: 0
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "invTypes", primary_key: "typeID", force: :cascade do |t|

@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :fleet_commander do
-    overall_rating ""
-    fun_rating ""
-    communication_clarity_rating ""
-    noob_friendly_rating ""
-    target_selection_rating ""
-    friendly_rating ""
+    overall_rating 0
+    fun_rating 0
+    communication_clarity_rating 0
+    noob_friendly_rating 0
+    target_selection_rating 0
+    friendly_rating 0
   end
 
   factory :mission_group do

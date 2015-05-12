@@ -3,12 +3,12 @@
 # Table name: fleet_commanders
 #
 #  id                           :integer          not null, primary key
-#  overall_rating               :integer
-#  fun_rating                   :integer
-#  communication_clarity_rating :integer
-#  noob_friendly_rating         :integer
-#  target_selection_rating      :integer
-#  friendly_rating              :integer
+#  overall_rating               :integer          default("0")
+#  fun_rating                   :integer          default("0")
+#  communication_clarity_rating :integer          default("0")
+#  noob_friendly_rating         :integer          default("0")
+#  target_selection_rating      :integer          default("0")
+#  friendly_rating              :integer          default("0")
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
 #

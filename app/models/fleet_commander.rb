@@ -16,4 +16,7 @@
 #
 
 class FleetCommander < ActiveRecord::Base
+  has_many :ratings
+  # Create FC: https://gist.github.com/kyletcarlson/7911188
+  # Headers: http://stackoverflow.com/questions/7478841/how-to-specify-http-request-header-in-open-uri
 end

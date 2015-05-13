@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_many :missions
   has_many :mission_groups
+  has_many :ratings
 
   def self.from_omniauth(auth_hash)
     # Query for the characterID in the member table.

@@ -1,8 +1,9 @@
-FactoryGirl.define do  factory :rating do
-    name "MyString"
-user_id 1
-fleet_commander_id 1
-score 1
+FactoryGirl.define do
+  factory :rating do
+    name "Fun"
+    user_id 1
+    fleet_commander_id 1
+    score 0
   end
 
   factory :fleet_commander do

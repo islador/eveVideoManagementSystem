@@ -49,4 +49,6 @@ Rails.application.routes.draw do
   resources :doctrines do
     resources :fittings
   end
+
+  resources :fleet_commanders
 end

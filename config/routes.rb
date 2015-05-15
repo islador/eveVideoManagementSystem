@@ -50,5 +50,7 @@ Rails.application.routes.draw do
     resources :fittings
   end
 
-  resources :fleet_commanders
+  resources :fleet_commanders do
+    resources :ratings
+  end
 end

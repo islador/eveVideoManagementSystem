@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe FleetCommandersController, type: :controller do
+  before(:each) do
+    user = FactoryGirl.create(:user)
+    sign_in user
+  end
+  let(:fleet_commander) {FactoryGirl.create(:fleet_commander)}
 
   describe "GET #index" do
     it "returns http success" do
@@ -11,7 +16,7 @@ RSpec.describe FleetCommandersController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show
+      get :show, id: fleet_commander.id
       expect(response).to have_http_status(:success)
     end
   end
@@ -24,7 +29,7 @@ RSpec.describe FleetCommandersController, type: :controller do
   end
 
   describe "GET #create" do
-    it "returns http success" do
+    xit "returns http success" do
       get :create
       expect(response).to have_http_status(:success)
     end
@@ -32,22 +37,46 @@ RSpec.describe FleetCommandersController, type: :controller do
 
   describe "GET #edit" do
     it "returns http success" do
-      get :edit
+      get :edit, id:  fleet_commander.id
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #update" do
-    it "returns http success" do
-      get :update
+    xit "returns http success" do
+      put :update, id: fleet_commander.id
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
+    context "fleet commander is found" do
+      it "deletes the fleet commander" do
+        delete :destroy, id: fleet_commander.id
+        expect(FleetCommander.where(id: fleet_commander.id).empty?).to be == true
+      end
+
+      it "sets the flash to inform the user the FC was deleted." do
+        delete :destroy, id: fleet_commander.id
+        expect(flash[:notice]).to_not be_nil
+      end
+
+      it "redirects the user" do
+        post :destroy, id: fleet_commander.id
+        expect(response).to have_http_status(:redirect)
+      end
+    end
+
+    context "fleet commander is not found" do
+      it "sets the flash to inform the user the FC was not found." do
+        delete :destroy, id: 22
+        expect(flash[:alert]).to_not be_nil
+      end
+
+      it "redirects the user" do
+        post :destroy, id: 22
+        expect(response).to have_http_status(:redirect)
+      end
     end
   end
 

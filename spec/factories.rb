@@ -24,6 +24,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:main_character_name) {|n| "User #{n}"}
     sequence(:main_character_id) {|n| n}
+    provider "eveonline"
   end
 
   factory :member do

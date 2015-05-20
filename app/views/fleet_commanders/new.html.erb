@@ -1,2 +1,9 @@
-<h1>FleetCommanders#new</h1>
-<p>Find me in app/views/fleet_commanders/new.html.erb</p>
+<div class="fleet-commander">
+  <div class="fleet-commander_killboard-link_description">
+    To submit a fleet commander, you must link a kill in which you and the commander are both attackers.
+  </div>
+  <div class="fleet-commander_killboard-link" >
+    <%= label_tag :killboard_link, "Killboard Link" %>
+    <%= text_field_tag 'Killboard Link', nil, placeholder: "https://zkillboard.com/kill/46737415/" %>
+  </div>
+</div>

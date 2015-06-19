@@ -3,6 +3,7 @@ class FleetCommandersController < ApplicationController
   end
 
   def show
+    @fleet_commander = FleetCommander.find(params[:id])
   end
 
   def new

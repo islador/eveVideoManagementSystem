@@ -19,12 +19,23 @@ RSpec.describe FleetCommandersController, type: :controller do
       get :show, id: fleet_commander.id
       expect(response).to have_http_status(:success)
     end
+
+    it "returns the fleet commander" do
+      get :show, id: fleet_commander.id
+      expect(assigns(:fleet_commander)).to eq(fleet_commander)
+    end
   end
 
   describe "GET #new" do
     it "returns http success" do
       get :new
       expect(response).to have_http_status(:success)
+    end
+
+    it "creates a new fleet commander object" do
+    end
+
+    it "creates a character object tuple from the user's data" do
     end
   end
 
